@@ -140,7 +140,7 @@ const Login = () => {
                 >              
                 <div>
                   <p className="text-center uppercase text-accent text-3xl text-black fs-bold">
-                    sign in with {toggleProvider ? 'EMAIL' : 'OTP'}
+                    sign in with {toggleProvider ? 'EMAIL' : 'EMAIL'}
                   </p> 
                 </div> 
           

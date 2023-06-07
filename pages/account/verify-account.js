@@ -48,7 +48,7 @@ const VerifyAccount = () => {
     e.preventDefault();
     setButtonText("Wait...");
     axios
-      .post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/account-verification`, {
+      .post("/api/auth/account-verification", {
         token,
         number,
       })
@@ -64,7 +64,7 @@ const VerifyAccount = () => {
         //   console.log('error', error.response.data);
         setButtonText("Submit Verification Code");
 
-        toast.error(error.response.data.error);
+        toast.error(error?.response?.data?.error);
       });
   };
 
