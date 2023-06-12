@@ -1,4 +1,4 @@
-import { fetchDataFromApi, getData } from "@/utils/api";
+import { getData } from "@/utils/api";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MainSwiper from "./MainSwiper";
@@ -9,7 +9,7 @@ const Hero = ({mainSlider}) => {
   const [categories, setCategories] = useState(null);
 
   const fetchCategories = async () => {
-    const {data} = await axios.get("https://front-end-msajiba.vercel.app/api/admin/category/getAll");
+    const {data} = await axios.get("/api/admin/category/getAll");
     setCategories(data);
   };
   useEffect(() => {

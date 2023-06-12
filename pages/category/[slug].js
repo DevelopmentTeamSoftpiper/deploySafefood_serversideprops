@@ -1,39 +1,18 @@
 import React, { useEffect, useState } from "react";
-
-import { fetchDataFromApi, getData } from "@/utils/api";
-import useSWR from "swr";
-import { useRouter } from "next/router";
+import { getData } from "@/utils/api";
 import ProductCard from "@/components/product/ProductCard";
 import Link from "next/link";
-import BestDeal from "@/components/home/ProductCarousel";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProductCarousel from "@/components/home/ProductCarousel";
 import axios from "axios";
 import Image from "next/image";
-const maxResult = 3;
 
-const CategoryProduct = ({ category, products, slug }) => {
+const CategoryProduct = ({ category, products }) => {
   
-  const [pageIndex, setPageIndex] = useState(1);
-  const { query } = useRouter();
-
-  useEffect(() => {
-    setPageIndex(1);
-  }, [query]);
-
-  const { data, error, isLoading } = useSWR(
-    `/api/products?populate=*&[filters][category][slug][$eq]=${slug}&pagination[page]=${pageIndex}&pagination[pageSize]=${maxResult}`,
-    fetchDataFromApi,
-    {
-      fallbackData: products,
-    }
-  );
-
     const [categories, setCategories] = useState(null);
 
   const fetchCategories = async () => {
-    const {data} = await axios.get("http://localhost:3000/api/admin/category/getAll");
+    const {data} = await axios.get("/api/admin/category/getAll");
     setCategories(data);
   };
 

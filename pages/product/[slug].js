@@ -7,8 +7,6 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LatestProduct from "@/components/home/LatestProduct";
-import RelatedProducts from "@/components/product/RelatedProduct";
 
 const ProductDetails = ({ product }) => {
   
@@ -17,7 +15,7 @@ const ProductDetails = ({ product }) => {
   const showToastMessage =(data)=>{
     toast.success(data.msg, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
    
