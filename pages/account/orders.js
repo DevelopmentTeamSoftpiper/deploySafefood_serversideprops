@@ -17,7 +17,7 @@ const Orders = () => {
   const [orders, setOrders] = useState(null);
 
   const getOrders = async () => {
-    if (provider === "email-password") {
+
       const order = await axios.post("/api/admin/order/find",
       {
         'user_id_no':user?._id
@@ -30,7 +30,7 @@ const Orders = () => {
         }, 
       });
       setOrders(order);
-    } 
+    
     // else {
     //   const orderList = await fetchDataFromApi(
     //     `/api/orders?populate=*&[filters][user_id_no][$eq]=${user?.uid}&sort=id:desc`

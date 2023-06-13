@@ -24,20 +24,12 @@ const checkout = () => {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
-
   const dispatch = useDispatch();
   const router = useRouter();
-
   const user = useSelector((state) => state.user.currentUser);
-
-
   const jwt = useSelector((state) => state.user.jwt);
 
-  const provider = useSelector((state)=>state.user.provider);
-
-
   const getUserInfo = async () => {
-    if(provider === "email-password"){
       const userInfo =  await axios.post("/api/profile/find",
     {
       user_id_no: user._id,
@@ -57,26 +49,6 @@ const checkout = () => {
       setPostalCode(userInfo?.data?.post_code);
     setCity(userInfo?.data?.city);
     setCountry(userInfo?.data?.country);
-   
-    }
-    // else{
-    //   const userInfo = await fetchDataFromApi(
-    //     `/api/profiles?populate=*&[filters][user_id_no][$eq]=${user?.uid}`
-    //   );
-    //   console.log('checkout',userInfo)
-
-    //   setName(userInfo?.data?.[0]?.attributes?.username);
-    // setEmail(userInfo?.data?.[0]?.attributes?.email);
-    // setPhone(userInfo?.data?.[0]?.attributes?.phone);
-    // setAddress(userInfo?.data?.[0]?.attributes?.address);
-    // setPostalCode(userInfo?.data?.[0]?.attributes?.post_code);
-    // setCity(userInfo?.data?.[0]?.attributes?.city);
-    // setCountry(userInfo?.data?.[0]?.attributes?.country);
-    // setProfileId(userInfo?.data?.[0]?.id);
-
-    // }
-   
-
   };
 
 
@@ -127,16 +99,12 @@ const checkout = () => {
    
   }, []);
 
-
-
   const [phoneNo, setPhoneNo] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
   const order = async () => {
     try {
-
       const response = await axios.post("/api/admin/order/store", {
-
           products: productData,
           user_id_no: user._id,
           name: name,
@@ -155,27 +123,19 @@ const checkout = () => {
           status: "Not Processed",
           payment_status: "Not Verified",
           delivery_status: "Pending",
-          order_notes: orderNotes,
-     
+          order_notes: orderNotes,    
       }, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
           token: `Bearer ${jwt}`,
         },
-        
       }
-      
       );
-
-
       dispatch(emptyCart());
-      
       router.push("/success");
       setIsLoading(false);
-
     } catch (error) {
-
       toast.error(error.error.message, {
         position: "top-right",
         autoClose: 5000,

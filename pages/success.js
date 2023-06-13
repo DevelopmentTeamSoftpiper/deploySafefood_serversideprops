@@ -1,6 +1,4 @@
-import CartProduct from "@/components/checkout/CartProduct";
 import SuccessProduct from "@/components/checkout/SuccessProduct";
-
 import withAuth from "@/utils/restrict";
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
@@ -8,12 +6,11 @@ import { useSelector } from "react-redux";
 
 const Success = () => {
   const user = useSelector((state) => state.user.currentUser);
-  const provider = useSelector((state) => state.user.provider);
   const jwt = useSelector((state) => state.user.jwt);
   const [order, setOrder] = useState(null);
 
   const geOrderInfo = async () => {
-    if (provider === "email-password") {
+
       const order = await axios.post(
         "/api/admin/order/findLatest",
         {
@@ -29,7 +26,7 @@ const Success = () => {
       );
 
       setOrder(order);
-    }
+    
   };
   useEffect(() => {
     geOrderInfo();
@@ -54,7 +51,7 @@ const Success = () => {
         </div>
         {/* End .page-header */}
 
-        <div className="page-content">
+        <div className="page-content mt-2">
           <div className="checkout">
             <div className="container">
               <div className="row">

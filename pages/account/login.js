@@ -8,12 +8,13 @@ import {
   loginStart,
   loginSuccess,
   providerSuccess,
+  signupSuccess,
 } from "@/store/userSlice";
 import { fetchDataFromApi, postDataToApi } from "@/utils/api";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,7 +26,8 @@ const Login = () => {
 
   const [toggleProvider, setToggleProvider] = useState(false);
   const [isLoading, setIsLoading] =useState(false);
-
+  const [phone, setPhone] = useState("");
+  const [valid, setValid] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const [values, setValues] = useState({
@@ -101,6 +103,64 @@ const Login = () => {
   };
 
 
+  useEffect(()=>{
+    const regex = /^0[0-9]{10}$/;
+    const isValid = regex.test(phone);
+    setValid(isValid);
+  }, [phone])
+  console.log(valid);
+const otpLogin = async() =>{
+  try {
+    setIsLoading(true);
+    if(!valid){
+    setIsLoading(false);
+      return toast.error("Enter a valid phone no", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+  
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+    }
+
+    const res = await axios.post("/api/auth/otp-login", {
+      phone
+    });
+    console.log(res);
+    dispatch(signupSuccess(res?.data?.token));
+  
+    
+    router.push("/account/otp-verification");
+    setIsLoading(false);
+
+  } catch (error) {
+    console.log(error);
+  
+    toast.error("Something went wrong. Try again", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    setIsLoading(false);
+  }
+}
+
+  const otpSubmitHandler =(e)=>{
+    e.preventDefault();
+    otpLogin();
+
+  }
+
+console.log(phone);
   return (
     <main className="main">
       <ToastContainer/>
@@ -140,14 +200,14 @@ const Login = () => {
                 >              
                 <div>
                   <p className="text-center uppercase text-accent text-3xl text-black fs-bold">
-                    sign in with {toggleProvider ? 'EMAIL' : 'EMAIL'}
+                    sign in with {toggleProvider ? 'EMAIL' : 'OTP'}
                   </p> 
                 </div> 
           
 
             {
 
-              !toggleProvider 
+              toggleProvider 
               ?
                 <form onSubmit={submitHandler}>
                   <div className="form-group">
@@ -197,12 +257,50 @@ const Login = () => {
                   </div>
                 </form>
               :
-             <LoginOTP /> 
+              <form onSubmit={otpSubmitHandler}>
+              <div className="form-group d-flex justify-center align-middle mt-3">
+                {/* <label htmlFor="email" style={{alignContent:"center",paddingRight:"20px"}}>Mobile No</label> */}
+                
+                <input
+                  type="text"
+                  value="+88"
+                  className="form-control"
+                  disabled
+                  style={{width:"70px"}}
+                />
+                 <input
+                  type="text"
+                  
+                  onChange={(e)=>{setPhone(e.target.value)}}
+                  name="phone"
+                  value={phone}
+                  className="form-control"
+                  id="phone"
+                  required
+                  style={{width:"200px"}}
+                />
+              </div>
+              
+
+             
+
+              {  isLoading &&  <Loader />}
+
+              <div className="form-footer" style={{justifyContent:"center"}}>
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary-2"
+                >
+                  <span>Send OTP</span>
+                  <i className="icon-long-arrow-right" />
+                </button>
+              </div>
+            </form>
             
             }
 
 
-              {/* <div style={{textAlign:'center'}} className="d-flex justify-center">
+              <div style={{textAlign:'center'}} className="d-flex justify-center">
                 {
                   
                   !toggleProvider 
@@ -229,7 +327,7 @@ const Login = () => {
                       </div>
                 }
 
-              </div> */}
+              </div>
 
                   {/* End .form-choice */}
                 </div>

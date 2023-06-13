@@ -278,6 +278,7 @@ const EditProfile = () => {
                         name="email"
                         className="form-control"
                         required=""
+                        disabled={provider == "email-password"}
                         value={email}
                         onChange={(e) => {
                           return setEmail(e.target.value);
@@ -295,6 +296,7 @@ const EditProfile = () => {
                         className="form-control"
                         required=""
                         value={phone}
+                        disabled={provider=="otp"}
                         onChange={(e) => {
                           return setPhone(e.target.value);
                         }}

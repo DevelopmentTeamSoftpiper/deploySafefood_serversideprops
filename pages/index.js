@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import NewsLetter from "@/components/home/NewsLetter";
 import Blog from "@/components/home/Blog";
 
-export default function Home({ products,categories ,blogs,mainSlider,latestProducts,discountedProducts,bestDealProducts}) {
+export default function Home({ blogs,mainSlider,latestProducts,discountedProducts,bestDealProducts}) {
 
 const showToastMessage =(data)=>{
   toast.success(data.msg, {
@@ -59,7 +59,7 @@ const showToastMessage =(data)=>{
 }
 
 export async function getServerSideProps(context) {
-  const products =await getData("/api/admin/product/getAll");
+
   const categories = await getData("/api/admin/category/getAll");
   const blogs = await getData("/api/admin/blog/getAll");
   const mainSlider = await getData("/api/admin/slider/getAll");
@@ -70,7 +70,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      products,
+
       categories,
       blogs,
       mainSlider,

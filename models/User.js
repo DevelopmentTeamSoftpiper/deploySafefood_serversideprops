@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
             required: true
         },
         salt: String,
+        provider: {
+            type: String,
+            default: "email-password"
+        },
         role: {
             type: String,
             default: "customer"
