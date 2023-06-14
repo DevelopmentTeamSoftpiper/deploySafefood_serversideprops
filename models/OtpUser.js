@@ -1,14 +1,11 @@
-import { truncate } from 'fs/promises';
-
 const mongoose = require('mongoose');
  
-const Schema = new mongoose.Schema(
+const otpUserSchema = new mongoose.Schema(
     {
         phone: {
             type: String,
             trim: true,
-            required: truncate,
-            max: 32
+            max: 11
         },
         provider: {
             type: String,
@@ -26,6 +23,6 @@ const Schema = new mongoose.Schema(
 
 
  
-const OtpUser = mongoose.models.OtpUser || mongoose.model("OtpUser", Schema);
+const OtpUser = mongoose.models.OtpUser || mongoose.model("OtpUser", otpUserSchema);
 
 export default OtpUser;
