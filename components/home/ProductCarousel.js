@@ -43,9 +43,9 @@ const ProductCarousel = ({ title, products, showToastMessage }) => {
         className="mySwiper"
       >
         {products?.products?.map((product) => (
-          <SwiperSlide key={product?.id}>
+          <SwiperSlide key={product?._id}>
             <ProductCard
-              key={product?.id}
+              key={product?._id}
               data={product}
               showToastMsg={showToastMsg}
             />

@@ -106,7 +106,7 @@ const Header = ({ siteInfo }) => {
               </button>
               <Link href="/" className="logo">
                 <Image
-                  src={siteInfo?.data?.siteinfo?.logo}
+                  src="https://res.cloudinary.com/dymnymsph/image/upload/v1686222756/safefoods/ttd3bhc0qwmv9v9sdfed.ico"
                   alt="safefoods Logo"
                   width={150}
                   height={25}
