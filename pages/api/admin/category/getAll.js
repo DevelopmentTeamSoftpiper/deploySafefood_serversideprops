@@ -12,8 +12,7 @@ const router = createRouter();
 router.get(async(req, res)=>{
     try {
         db.connectDb();
-        await SubCategory.find({});
-        const categories =await Category.find({}).populate('subCategories').sort({ updatedAt: -1 });
+        const categories =await Category.find({}).populate({path:'subCategories',model: SubCategory}).sort({ updatedAt: -1 });
         db.disconnectDb();
         return res.json({
           categories: categories,

@@ -28,7 +28,7 @@ export default function MainSwiper({ mainSlider }) {
         modules={[Autoplay, Pagination, Navigation]}
         className="mainSwiper"
       >
-        {mainSlider?.sliders?.map((slider) => (
+        {mainSlider?.map((slider) => (
           <SwiperSlide key={slider?._id}>
             <img style={{ width: "100%" }} src={slider?.image} alt="" />
           </SwiperSlide>

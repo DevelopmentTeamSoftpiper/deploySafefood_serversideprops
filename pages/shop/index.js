@@ -6,19 +6,23 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Image from "next/image";
+import Product from "@/models/Products";
+import Category from "@/models/Category";
+import SubCategory from "@/models/SubCategory";
+import db from "@/utils/db";
 
-const Shop = ({products }) => {
-  const [categories, setCategories] = useState(null);
+const Shop = ({products,categories }) => {
+  // const [categories, setCategories] = useState(null);
 
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-  const fetchCategories = async () => {
-    const {data} = await axios.get("/api/admin/category/getAll");
+  // useEffect(() => {
+  //   fetchCategories();
+  // }, []);
+  // const fetchCategories = async () => {
+  //   const {data} = await axios.get("/api/admin/category/getAll");
     
-    setCategories(data);
-  };
+  //   setCategories(data);
+  // };
 
   const showToastMsg =(data)=>{
     toast.success(data.msg, {
@@ -69,7 +73,7 @@ const Shop = ({products }) => {
             {/* End .toolbox */}
             <div className="products mb-3">
               <div className="row justify-content-center">
-              {products?.products?.map((product) => (
+              {products?.map((product) => (
           <div key={product?._id} className="col-6 col-md-4 col-lg-4 col-xl-3">
             <ProductCard key={product?.id} data={product} showToastMsg={showToastMsg} />
           </div>
@@ -97,7 +101,7 @@ const Shop = ({products }) => {
                 className="menu-vertical sf-arrows sf-js-enabled"
                 style={{ touchAction: "pan-y" }}
               >
-              {categories?.categories?.map((c) => (
+              {categories?.map((c) => (
                   <li key={c._id} className="megamenu-container">
                     <Link
                       className={
@@ -162,16 +166,22 @@ export default Shop
 
 
 // `getStaticPaths` requires using `getStaticProps`
-export async function getServerSideProps() {
-  const products = await getData(
-  "/api/admin/product/getAll"
-  );
+export async function getStaticProps() {
+  db.connectDb();
+  const productsData = await Product.find({})
+  .populate({path:"category", model:Category})
+  .populate({path:"subCategory", model:SubCategory})
+  .sort({ updatedAt: -1 })
 
+  const catetgoriesData = await Category.find({}).populate({path:'subCategories',model: SubCategory}).sort({ updatedAt: -1 });
+db.disconnectDb();
   return {
     props: {
 
-      products,
+      products: JSON.parse(JSON.stringify(productsData)),
+      categories: JSON.parse(JSON.stringify(catetgoriesData)),
    
     },
+    revalidate:60
   };
 }

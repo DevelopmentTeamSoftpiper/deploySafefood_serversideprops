@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import { Keyboard, Mousewheel, Navigation, } from "swiper";
 import Articles from '../elements/Articles';
 const Blog = ({blogs}) => {
+  console.log(blogs);
   
   return (
     <div className="blog-section bg-white pt-2">
@@ -59,7 +60,7 @@ const Blog = ({blogs}) => {
             >
 
                 {
-                    blogs?.blogs?.map((blog)=><SwiperSlide key={blog?._id}> 
+                    blogs?.map((blog)=><SwiperSlide key={blog?._id}> 
                                                           <Articles blog={blog}/>
                                               </SwiperSlide>
                     )

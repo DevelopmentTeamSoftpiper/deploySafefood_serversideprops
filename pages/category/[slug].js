@@ -6,19 +6,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Image from "next/image";
+import Category from "@/models/Category";
+import SubCategory from "@/models/SubCategory";
+import Product from "@/models/Products";
+import db from "@/utils/db";
 
-const CategoryProduct = ({ category, products }) => {
-  
-    const [categories, setCategories] = useState(null);
-
-  const fetchCategories = async () => {
-    const {data} = await axios.get("/api/admin/category/getAll");
-    setCategories(data);
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+const CategoryProduct = ({ category, products, categories }) => {
   
   const showToastMsg =(data)=>{
     toast.success(data.msg, {
@@ -42,7 +35,7 @@ const CategoryProduct = ({ category, products }) => {
     >
       <div className="container">
         <h1 className="page-title">
-          {category?.category?.name}<span>Shop</span>
+          {category?.name}<span>Shop</span>
         </h1>
       </div>
       {/* End .container */}
@@ -55,7 +48,7 @@ const CategoryProduct = ({ category, products }) => {
             <Link href="/">Home</Link>
           </li>
           <li className="breadcrumb-item">
-            <Link href={`/category/${category?.category?.slug}`}>{category?.category?.name}</Link>
+            <Link href={`/category/${category?.slug}`}>{category?.name}</Link>
           </li>
         </ol>
       </div>
@@ -69,7 +62,7 @@ const CategoryProduct = ({ category, products }) => {
             {/* End .toolbox */}
             <div className="products mb-3">
               <div className="row justify-content-center">
-              {products?.products?.map((product) => (
+              {products?.map((product) => (
           <div key={product?._id} className="col-6 col-md-4 col-lg-4 col-xl-3">
             <ProductCard key={product?.id} data={product} showToastMsg={showToastMsg} />
           </div>
@@ -97,7 +90,7 @@ const CategoryProduct = ({ category, products }) => {
                 className="menu-vertical sf-arrows sf-js-enabled"
                 style={{ touchAction: "pan-y", height:"350px" }}
               >
-                {categories?.categories?.map((c) => (
+                {categories?.map((c) => (
                   <li key={c._id} className="megamenu-container">
                     <Link
                       className={
@@ -159,29 +152,47 @@ const CategoryProduct = ({ category, products }) => {
 
 export default CategoryProduct
 
-// export async function getStaticPaths() {
-//   const categories = await getData("/api/admin/category/getAll");
-//   const paths = categories?.categories?.map((c) => ({
-//     params: {
-//       slug: c?.slug,
-//     },
-//   }));
+export async function getStaticPaths() {
+  db.connectDb();
+  const categories = await Category.find({}).populate({path:'subCategories',model: SubCategory}).sort({ updatedAt: -1 });
+  const paths = categories?.map((c) => ({
+    params: {
+      slug: c?.slug,
+    },
+  }));
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
 // `getStaticPaths` requires using `getStaticProps`
-// export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
+  const categoryData =  await Category.findOne({ slug: slug });
+  const productsData = await Product.find({ category: categoryData._id });
+  const catetgoriesData = await Category.find({}).populate({path:'subCategories',model: SubCategory}).sort({ updatedAt: -1 });
+  db.disconnectDb();
+
+  return {
+    props: {
+      category: JSON.parse(JSON.stringify(categoryData)),
+      products: JSON.parse(JSON.stringify(productsData)),
+      categories: JSON.parse(JSON.stringify(catetgoriesData)),
+      slug,
+    },
+    revalidate:60
+  };
+}
+
+// export async function getServerSideProps(context) {
+//   const { slug } = context.query;
 //   const category =  await getData(
 //     `/api/admin/category/find?slug=${slug}`
 //   );
 //   const products = await getData(
 //     `/api/admin/category/getProducts?slug=${slug}`
 //   );
-
 //   return {
 //     props: {
 //       category,
@@ -190,21 +201,4 @@ export default CategoryProduct
 //     },
 //   };
 // }
-
-export async function getServerSideProps(context) {
-  const { slug } = context.query;
-  const category =  await getData(
-    `/api/admin/category/find?slug=${slug}`
-  );
-  const products = await getData(
-    `/api/admin/category/getProducts?slug=${slug}`
-  );
-  return {
-    props: {
-      category,
-      products,
-      slug,
-    },
-  };
-}
 

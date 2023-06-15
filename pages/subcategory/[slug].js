@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import { getData } from "@/utils/api";
-import { useRouter } from "next/router";
 import ProductCard from "@/components/product/ProductCard";
 import Link from "next/link";
 import BestDeal from "@/components/home/ProductCarousel";
@@ -9,17 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Image from "next/image";
+import db from "@/utils/db";
+import SubCategory from "@/models/SubCategory";
+import Product from "@/models/Products";
+import Category from "@/models/Category";
 
-const SubCategoryProduct = ({ subCategory, products }) => {
-    
-    const [categories, setCategories] = useState(null);
-    const fetchCategories = async () => {
-      const {data} = await axios.get("/api/admin/category/getAll");
-      setCategories(data);
-    };
-    useEffect(() => {
-      fetchCategories();
-    }, []);
+const SubCategoryProduct = ({ subCategory, products , categories}) => {
+  
 
 
     const showToastMsg =(data)=>{
@@ -42,7 +35,7 @@ const SubCategoryProduct = ({ subCategory, products }) => {
     >
       <div className="container">
         <h1 className="page-title">
-        {subCategory?.subCategory.name}<span>Shop</span>
+        {subCategory?.name}<span>Shop</span>
         </h1>
       </div>
       {/* End .container */}
@@ -58,7 +51,7 @@ const SubCategoryProduct = ({ subCategory, products }) => {
             {/* <Link href={`/category/${subCategory?.slug}`}>{category?.data?.[0]?.attributes?.category?.data?.attributes?.name}</Link> */}
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-          {subCategory?.subCategory?.name}
+          {subCategory?.name}
           </li>
         </ol>
       </div>
@@ -73,7 +66,7 @@ const SubCategoryProduct = ({ subCategory, products }) => {
             {/* End .toolbox */}
             <div className="products mb-3">
               <div className="row justify-content-center">
-              {products?.products?.map((product) => (
+              {products?.map((product) => (
           <div key={product?._id} className="col-6 col-md-4 col-lg-4 col-xl-3">
             <ProductCard key={product?.id} data={product} showToastMsg={showToastMsg} />
           </div>
@@ -100,7 +93,7 @@ const SubCategoryProduct = ({ subCategory, products }) => {
                 className="menu-vertical sf-arrows sf-js-enabled"
                 style={{ touchAction: "pan-y", height:"350px" }}
               >
-                {categories?.categories?.map((c) => (
+                {categories?.map((c) => (
                   <li key={c._id} className="megamenu-container">
                     <Link
                       className={
@@ -163,29 +156,46 @@ const SubCategoryProduct = ({ subCategory, products }) => {
 
 export default SubCategoryProduct
 
-// export async function getStaticPaths() {
-//     const subcategories = await getData("/api/admin/sub-category/getAll");
-//     const paths = subcategories?.subcategories?.map((c) => ({
-//       params: {
-//         slug: c.slug,
-//       },
-//     }));
+export async function getStaticPaths() {
+  db.connectDb();
+    const subcategories = await SubCategory.find({});
+    const paths = subcategories?.map((c) => ({
+      params: {
+        slug: c.slug,
+      },
+    }));
   
-//     return {
-//       paths,
-//       fallback: false,
-//     };
-//   }
+    return {
+      paths,
+      fallback: false,
+    };
+  }
   
   // `getStaticPaths` requires using `getStaticProps`
-  // export async function getStaticProps({ params: { slug } }) {
+  export async function getStaticProps({ params: { slug } }) {
+    const subCategoryData = await SubCategory.findOne({slug:slug});
+    const productsData = await Product.find({ subCategory: subCategoryData._id });
+    const catetgoriesData = await Category.find({}).populate({path:'subCategories',model: SubCategory}).sort({ updatedAt: -1 });
+  db.disconnectDb();
+    return {
+      props: {
+        subCategory: JSON.parse(JSON.stringify(subCategoryData)),
+        products: JSON.parse(JSON.stringify(productsData)),
+        categories: JSON.parse(JSON.stringify(catetgoriesData)),
+        slug,
+      },
+      revalidate:60
+    };
+  }
+
+  // export async function getServerSideProps(context) {
+  //   const { slug } = context.query;
   //   const subCategory = await getData(
   //     `/api/admin/sub-category/find?slug=${slug}`
   //   );
   //   const products = await getData(
   //     `/api/admin/sub-category/getProducts?slug=${slug}`
   //   );
-  
   //   return {
   //     props: {
   //       subCategory,
@@ -194,22 +204,5 @@ export default SubCategoryProduct
   //     },
   //   };
   // }
-
-  export async function getServerSideProps(context) {
-    const { slug } = context.query;
-    const subCategory = await getData(
-      `/api/admin/sub-category/find?slug=${slug}`
-    );
-    const products = await getData(
-      `/api/admin/sub-category/getProducts?slug=${slug}`
-    );
-    return {
-      props: {
-        subCategory,
-        products,
-        slug,
-      },
-    };
-  }
   
   

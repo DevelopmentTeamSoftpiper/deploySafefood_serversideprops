@@ -15,8 +15,6 @@ router.get(async (req, res) => {
     const { slug } = req.query;
     db.connectDb();
     const category = await Category.findOne({slug:slug});
- 
-
     const products = await Product.find({ category: category._id });
     db.disconnectDb();
     return res.json({

@@ -1,5 +1,8 @@
 import PageArticles from "@/components/elements/PageArticles";
+import Blog from "@/models/Blog";
+import SubBlog from "@/models/SubBlog";
 import { fetchDataFromApi, getData } from "@/utils/api";
+import db from "@/utils/db";
 import Link from "next/link";
 import React from "react";
 
@@ -38,7 +41,7 @@ const BlogCategory = ({ blogCategories, blogCats, slug }) => {
         <div className="container">
           <div className="row">
             <div className="col-lg-9">
-              {blogCats?.blogs?.map((blog) => (
+              {blogCats?.map((blog) => (
                 <PageArticles key={blog?._id} blog={blog} />
               ))}
 
@@ -112,7 +115,7 @@ const BlogCategory = ({ blogCategories, blogCats, slug }) => {
                   <h3 className="widget-title">Categories</h3>
                   {/* End .widget-title */}
                   <ul>
-                    {blogCategories?.subBlogs?.map((cat) => (
+                    {blogCategories?.map((cat) => (
                       <li key={cat?._id}>
                         <a href={`/blogs/category/${cat?.slug}`}>
                           {cat?.title}
@@ -137,44 +140,47 @@ const BlogCategory = ({ blogCategories, blogCats, slug }) => {
 
 export default BlogCategory;
 
-// export async function getStaticPaths() {
-//   const blogCats = await getData("/api/admin/sub-blog/getAll");
-//   const paths = blogCats?.subBlogs?.map((p) => ({
-//     params: {
-//       slug: p.slug,
-//     },
-//   }));
+export async function getStaticPaths() {
+  db.connectDb();
+  const blogCats = await SubBlog.find({}).sort({ updatedAt: -1 });
+  const paths = blogCats?.map((p) => ({
+    params: {
+      slug: p.slug,
+    },
+  }));
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
 // `getStaticPaths` requires using `getStaticProps`
-// export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
+  const blogCategoriesData=  await SubBlog.find({}).sort({ updatedAt: -1 });
+  const subBlog = await SubBlog.findOne({slug:slug});
+  const blogCatsData = await Blog.find({ subBlog: subBlog._id  }).populate({path:"subBlog", model:SubBlog});
+  db.disconnectDb();
+  return {
+    props: {
+      blogCategories:JSON.parse(JSON.stringify(blogCategoriesData)),
+
+      slug,
+      blogCats: JSON.parse(JSON.stringify(blogCatsData))
+    },
+    revalidate:60
+  };
+}
+
+// export async function getServerSideProps(context) {
+//   const { slug } = context.query;
 //   const blogCategories = await getData("/api/admin/sub-blog/getAll");
 //   const blogCats = await getData(`/api/admin/sub-blog/getBlogs?slug=${slug}`);
-
 //   return {
 //     props: {
 //       blogCategories,
-
 //       slug,
 //       blogCats,
 //     },
 //   };
 // }
-
-export async function getServerSideProps(context) {
-  const { slug } = context.query;
-  const blogCategories = await getData("/api/admin/sub-blog/getAll");
-  const blogCats = await getData(`/api/admin/sub-blog/getBlogs?slug=${slug}`);
-  return {
-    props: {
-      blogCategories,
-      slug,
-      blogCats,
-    },
-  };
-}

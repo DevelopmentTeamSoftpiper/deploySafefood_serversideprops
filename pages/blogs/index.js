@@ -1,9 +1,12 @@
 import PageArticles from '@/components/elements/PageArticles';
+import Blog from '@/models/Blog';
+import SubBlog from '@/models/SubBlog';
 import { fetchDataFromApi, getData } from '@/utils/api';
+import db from '@/utils/db';
 import Link from 'next/link';
 import React from 'react'
 
-const Blog = ({blogs,blogCats}) => {
+const Blogs = ({blogs,blogCats}) => {
   
   return (
     <main className="main px-5">
@@ -40,7 +43,7 @@ const Blog = ({blogs,blogCats}) => {
       <div className="container">
         <div className="row">
           <div className="col-lg-9">
-            {blogs?.blogs?.map((blog)=>(
+            {blogs?.map((blog)=>(
          <PageArticles key={blog?._id} blog={blog}/>
 
             ))}
@@ -115,7 +118,7 @@ const Blog = ({blogs,blogCats}) => {
                 <h3 className="widget-title">Categories</h3>
                 {/* End .widget-title */}
                 <ul>
-                {blogCats?.subBlogs?.map((cat)=>(
+                {blogCats?.map((cat)=>(
                       <li key={cat?._id}>
                       <a href={`/blogs/category/${cat?.slug}`}>
                         {cat?.title}
@@ -140,19 +143,22 @@ const Blog = ({blogs,blogCats}) => {
   )
 }
 
-export default Blog
+export default Blogs
 
 
-export async function getServerSideProps(context) {
-  const blogs = await getData("/api/admin/blog/getAll");
-  const blogCats=  await getData(
-    `/api/admin/sub-blog/getAll`
-  );
+export async function getStaticProps() {
+  db.connectDb();
+  const blogsData = await Blog.find({}).populate({path:'subBlog', model:SubBlog})
+  .sort({ updatedAt: -1 });
+  const blogCatsData=  await SubBlog.find({}).sort({ updatedAt: -1 });
+  db.disconnectDb();
+
   return {
     props: {
-      blogs,
-      blogCats
+      blogs:JSON.parse(JSON.stringify(blogsData)),
+      blogCats:JSON.parse(JSON.stringify(blogCatsData)),
     },
+    revalidate:60,
   };
 }
 

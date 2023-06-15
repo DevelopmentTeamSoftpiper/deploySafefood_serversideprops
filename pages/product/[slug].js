@@ -7,10 +7,14 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import db from "@/utils/db";
+import Product from "@/models/Products";
+import Category from "@/models/Category";
+import SubCategory from "@/models/SubCategory";
 
 const ProductDetails = ({ product }) => {
   
-  const p = product?.product;
+  const p = product;
   const dispatch = useDispatch();
   const showToastMessage =(data)=>{
     toast.success(data.msg, {
@@ -209,50 +213,51 @@ const ProductDetails = ({ product }) => {
 
 export default ProductDetails;
 
-// export async function getStaticPaths() {
-//   const products = await getData("/api/admin/product/getAll");
-//   const paths = products?.products?.map((p) => ({
-//     params: {
-//       slug: p?.slug,
-//     },
-//   }));
+export async function getStaticPaths() {
+  db.connectDb();
+  const products = await Product.find({})
+  .sort({ updatedAt: -1 })
+  const paths = products?.map((p) => ({
+    params: {
+      slug: p?.slug,
+    },
+  }));
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
 // `getStaticPaths` requires using `getStaticProps`
-// export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
 
+  const productData =  await Product.findOne({ slug: slug })
+  .populate({path: "category", model:Category})
+  .populate({path:"subCategory", model:SubCategory})
+
+db.disconnectDb();
+  return {
+    props: {
+      product: JSON.parse(JSON.stringify(productData)),
+      // products,
+      slug,
+    },
+    revalidate:60
+  };
+}
+
+
+// export async function getServerSideProps(context) {
+//   const { slug } = context.query;
 //   const product = await getData(
 //     `/api/admin/product/find?slug=${slug}`
 //   );
-//   // const products = await fetchDataFromApi(
-//   //   `/api/products?populate=*&[filters][slug][$ne]=${slug}`
-//   // );
-
+ 
 //   return {
 //     props: {
 //       product,
-//       // products,
 //       slug,
 //     },
 //   };
 // }
-
-
-export async function getServerSideProps(context) {
-  const { slug } = context.query;
-  const product = await getData(
-    `/api/admin/product/find?slug=${slug}`
-  );
- 
-  return {
-    props: {
-      product,
-      slug,
-    },
-  };
-}

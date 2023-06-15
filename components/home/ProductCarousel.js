@@ -42,7 +42,7 @@ const ProductCarousel = ({ title, products, showToastMessage }) => {
         modules={[Navigation, Mousewheel, Keyboard]}
         className="mySwiper"
       >
-        {products?.products?.map((product) => (
+        {products?.map((product) => (
           <SwiperSlide key={product?._id}>
             <ProductCard
               key={product?._id}

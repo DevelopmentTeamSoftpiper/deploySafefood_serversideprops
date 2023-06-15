@@ -10,8 +10,6 @@ const router = createRouter();
 router.get(async (req, res) => {
   try {
     db.connectDb();
-    await Category.find({});
-    await SubCategory.find({});
     const products = await Product.find({})
       .populate("category")
       .populate("subCategory")

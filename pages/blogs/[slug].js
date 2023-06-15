@@ -1,4 +1,7 @@
+import Blog from "@/models/Blog";
+import SubBlog from "@/models/SubBlog";
 import { fetchDataFromApi, getData } from "@/utils/api";
+import db from "@/utils/db";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,10 +9,8 @@ import React from "react";
 import { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
-  const router = useRouter();
-  const { slug } = router.query;
-  
-  const bl = blog?.blog;
+
+  const bl = blog;
   const htmlContent = bl?.content;
   return (
     <main className="main px-5">
@@ -103,7 +104,7 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
                   <h3 className="widget-title">Categories</h3>
                   {/* End .widget-title */}
                   <ul>
-                  {blogCats?.subBlogs?.map((cat)=>(
+                  {blogCats?.map((cat)=>(
                       <li key={cat?._id}>
                       <a href={`/blogs/category/${cat?.slug}`}>
                         {cat?.title}
@@ -118,7 +119,7 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
                   <h3 className="widget-title">Popular Posts</h3>
                   {/* End .widget-title */}
                   <ul className="posts-list">
-                   {relatedBlogs?.blogs?.map((rb)=>(
+                   {relatedBlogs?.map((rb)=>(
                      <li key={rb?._id}>
                      <figure>
                        <Link href={`/blogs/${rb?.slug}`}>
@@ -159,22 +160,44 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
 
 export default SingleBlog;
 
-// export async function getStaticPaths() {
-//   const blogs = await getData("/api/admin/blog/getAll");
-//   const paths = blogs?.blogs?.map((p) => ({
-//     params: {
-//       slug: p.slug,
-//     },
-//   }));
+export async function getStaticPaths() {
+  db.connectDb();
+  const blogs = await Blog.find({});
+  const paths = blogs?.map((p) => ({
+    params: {
+      slug: p.slug,
+    },
+  }));
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
 // `getStaticPaths` requires using `getStaticProps`
-// export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
+  const blogData = await Blog.findOne({slug:slug}).populate({path:"subBlog", model:SubBlog});
+  const blogCatsData=  await SubBlog.find({}).sort({ updatedAt: -1 });
+  const relatedBlogsData = await Blog.find({}).populate({path:'subBlog', model:SubBlog})
+  .sort({ updatedAt: -1 });
+  db.disconnectDb();
+
+  return {
+    props: {
+      blog: JSON.parse(JSON.stringify(blogData)),
+      relatedBlogs:JSON.parse(JSON.stringify(relatedBlogsData)),
+      slug,
+      blogCats: JSON.parse(JSON.stringify(blogCatsData))
+    },
+    revalidate:60
+  };
+}
+
+
+// export async function getServerSideProps(context) {
+//   const { slug } = context.query;
+  
 //   const blog = await getData(
 //     `/api/admin/blog/find?slug=${slug}`
 //   );
@@ -182,7 +205,6 @@ export default SingleBlog;
 //     `/api/admin/sub-blog/getAll`
 //   );
 //   const relatedBlogs = await getData("/api/admin/blog/getAll");
-
 //   return {
 //     props: {
 //       blog,
@@ -192,26 +214,5 @@ export default SingleBlog;
 //     },
 //   };
 // }
-
-
-export async function getServerSideProps(context) {
-  const { slug } = context.query;
-  
-  const blog = await getData(
-    `/api/admin/blog/find?slug=${slug}`
-  );
-  const blogCats=  await getData(
-    `/api/admin/sub-blog/getAll`
-  );
-  const relatedBlogs = await getData("/api/admin/blog/getAll");
-  return {
-    props: {
-      blog,
-      relatedBlogs,
-      slug,
-      blogCats
-    },
-  };
-}
 
 

@@ -12,8 +12,6 @@ router.get(async (req, res) => {
   try {
     const { slug } = req.query;
     db.connectDb();
-    await Category.find({});
-    await SubCategory.find({});
     const found = await Product.findOne({ slug: slug })
       .populate("category")
       .populate("subCategory");
