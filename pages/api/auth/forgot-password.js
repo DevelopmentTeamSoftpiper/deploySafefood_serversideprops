@@ -18,7 +18,7 @@ router.post(async(req, res)=>{
             error: 'User with this email does not exist.'
           })
        }
-       const randomNumber = Math.floor(10000000 + Math.random() * 90000000);
+       const randomNumber = Math.floor(100000 + Math.random() * 900000);
        const token = jwt.sign(
         { email, randomNumber },
         process.env.JWT_SECRET,

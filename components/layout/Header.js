@@ -99,16 +99,16 @@ const Header = ({ siteInfo }) => {
         {/* End .header-top */}
         <div className="header-middle">
           <div className="container">
-            <div className="header-left">
+            <div className="header-left" style={{paddingLeft:"20px",justifyContent:"center"}}>
               <button className="mobile-menu-toggler" onClick={showMenuHandler}>
                 <span className="sr-only">Toggle mobile menu</span>
                 <i className="icon-bars" />
               </button>
               <Link href="/" className="logo">
                 <Image
-                  src="https://res.cloudinary.com/dymnymsph/image/upload/v1686222756/safefoods/ttd3bhc0qwmv9v9sdfed.ico"
+                  src={siteInfo?.data?.siteinfo?.logo}
                   alt="safefoods Logo"
-                  width={150}
+                  width={50}
                   height={25}
                 />
               </Link>
@@ -137,7 +137,7 @@ const Header = ({ siteInfo }) => {
                         onMouseLeave={()=>{setShowAccount(false)}}
                       >
                         {user ? (
-                          <li style={{fontSize:"17px", backgroundColor:"#61AB00",padding:"5px", color:"white"}}>
+                          <li style={{fontSize:"13px", backgroundColor:"#61AB00",padding:"5px", color:"white"}}>
                             Account                           
                           </li>
                         ) : (

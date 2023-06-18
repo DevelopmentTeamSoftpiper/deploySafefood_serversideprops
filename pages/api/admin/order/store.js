@@ -3,6 +3,7 @@ import {  verifyToken, verifyTokenAndAuthorization } from "@/helpers/verityToken
 import db from "@/utils/db";
 import applyCors from "@/middleware/cors";
 import Order from "@/models/Order";
+import axios from "axios";
 
 const router = createRouter().use(verifyToken).use(verifyTokenAndAuthorization);
 // .use(verifyTokenAndAdmin);
@@ -27,6 +28,7 @@ router.post(async (req, res) => {
       status,
       payment_status,
       delivery_status,
+      isPaid,
       order_notes,
       user_id_no,
     } = req.body;
@@ -51,9 +53,21 @@ router.post(async (req, res) => {
       status,
       payment_status,
       delivery_status,
+      isPaid,
       order_notes,
       user_id_no,
     }).save();
+    const greenwebsms = new URLSearchParams();
+    greenwebsms.append(
+      "token",
+      "948517180416865686840be5e1974826707e83bb808895339109"
+    );
+    greenwebsms.append("to", phone);
+    greenwebsms.append("message", `প্রিয় ${name},আমরা সেইফফুড থেকে আপনার অর্ডারটি রিসিভ করেছি।`);
+    const response = await axios.post(
+      "http://api.greenweb.com.bd/api.php",
+      greenwebsms
+    );
 
     db.disconnectDb();
     if (order) {

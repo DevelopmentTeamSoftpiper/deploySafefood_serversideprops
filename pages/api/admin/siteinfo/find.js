@@ -13,7 +13,7 @@ const router = createRouter();
 router.get(async(req, res)=>{
     try {
         db.connectDb();
-        const siteinfo =await Siteinfo.findOne({}).sort({ updatedAt: -1 });
+        const siteinfo =await Siteinfo.findOne({}).sort({ updatedAt: 1 });
         db.disconnectDb();
         return res.json({
             siteinfo: siteinfo,

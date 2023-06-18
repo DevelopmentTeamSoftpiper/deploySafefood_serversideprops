@@ -64,7 +64,7 @@ router.post(async (req, res) => {
         
             } else {
               return res.status(401).json({
-                error: "Verification Number is incorrect",
+                error: "OTP is incorrect",
               });
             }
           }

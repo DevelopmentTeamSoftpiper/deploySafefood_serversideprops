@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }) {
   useEffect(()=>{
     getSiteInfo();
   },[])
-  
+  console.log(siteInfo);
   return(
     <>
 

@@ -60,6 +60,7 @@ const checkout = () => {
   const productData = cartProducts.map((p) => ({
     id: p?._id,
     title: p?.title,
+    image:p?.image,
     quantityPrice: p?.oneQuantityPrice,
     quantity: p?.quantity,
     price: p?.price,
@@ -123,6 +124,7 @@ const checkout = () => {
           status: "Not Processed",
           payment_status: "Not Verified",
           delivery_status: "Pending",
+          isPaid:false,
           order_notes: orderNotes,    
       }, {
         headers: {
@@ -136,9 +138,9 @@ const checkout = () => {
       router.push("/success");
       setIsLoading(false);
     } catch (error) {
-      toast.error(error.error.message, {
+      toast.error("Something Went Wrong", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
 
