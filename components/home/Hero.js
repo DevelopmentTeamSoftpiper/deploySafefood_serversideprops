@@ -1,21 +1,9 @@
-import { getData } from "@/utils/api";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MainSwiper from "./MainSwiper";
 import Image from "next/image";
-import axios from "axios";
 
-const Hero = ({mainSlider}) => {
-  const [categories, setCategories] = useState(null);
-
-  const fetchCategories = async () => {
-    const {data} = await axios.get("/api/admin/category/getAll");
-    setCategories(data);
-  };
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
+const Hero = ({mainSlider, categories}) => {
   return (
     <div className="intro-section">
       <div className="container mt-2">
@@ -31,7 +19,7 @@ const Hero = ({mainSlider}) => {
                 className="menu-vertical sf-arrows sf-js-enabled"
                 style={{ touchAction: "pan-y", height:"350px" }}
               >
-                {categories?.categories?.map((c) => (
+                {categories?.map((c) => (
                   <li key={c._id} className="megamenu-container">
                     <Link
                       className={

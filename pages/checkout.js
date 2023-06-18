@@ -1,20 +1,17 @@
 /* eslint-disable */
 import CartProduct from "@/components/checkout/CartProduct";
 import { emptyCart } from "@/store/cartSlice";
-import { fetchDataFromApi, postDataToApi } from "@/utils/api";
 import withAuth from "@/utils/restrict";
-import { STRAPI_API_TOKEN } from "@/utils/urls";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BsFillCartXFill } from 'react-icons/bs';
 import Link from "next/link";
 import Loader from "@/components/Loader";
 const checkout = () => {
-
+  const [isFetching,setIsFetching] = useState(false);
   const [isLoading, setIsLoading] =useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,6 +27,7 @@ const checkout = () => {
   const jwt = useSelector((state) => state.user.jwt);
 
   const getUserInfo = async () => {
+    setIsFetching(true);
       const userInfo =  await axios.post("/api/profile/find",
     {
       user_id_no: user._id,
@@ -49,6 +47,8 @@ const checkout = () => {
       setPostalCode(userInfo?.data?.post_code);
     setCity(userInfo?.data?.city);
     setCountry(userInfo?.data?.country);
+    setIsFetching(false);
+
   };
 
 
@@ -228,107 +228,112 @@ const checkout = () => {
               <div className="col-lg-7">
                 <h2 className="checkout-title">Billing Details</h2>
                 {/* End .checkout-title */}
-                <div className="row">
-                  <div className="col-sm-6">
-                    <label>Name </label>
-                    <input
-                      type="text"
-                      name="name"
-                      className="form-control"
-                      required={true}
-                      value={name}
-                      onChange={(e) => {
-                        return setName(e.target.value);
-                      }}
-                    />
+                {isFetching && <Loader/>}
+                {!isFetching && 
+                  <div>
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <label>Name </label>
+                      <input
+                        type="text"
+                        name="name"
+                        className="form-control"
+                        required={true}
+                        value={name}
+                        onChange={(e) => {
+                          return setName(e.target.value);
+                        }}
+                      />
+                    </div>
+  
+                    <div className="col-sm-6">
+                      <label>Email </label>
+                      <input
+                        type="email"
+                        name="email"
+                        className="form-control"
+                        required={true}
+                        value={email}
+                        onChange={(e) => {
+                          return setEmail(e.target.value);
+                        }}
+                      />
+                    </div>
                   </div>
-
-                  <div className="col-sm-6">
-                    <label>Email </label>
-                    <input
-                      type="email"
-                      name="email"
-                      className="form-control"
-                      required={true}
-                      value={email}
-                      onChange={(e) => {
-                        return setEmail(e.target.value);
-                      }}
-                    />
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <label>Phone No </label>
+                      <input
+                        type="text"
+                        name="phone"
+                        className="form-control"
+                        required={true}
+                        value={phone}
+                        onChange={(e) => {
+                          return setPhone(e.target.value);
+                        }}
+                      />
+                    </div>
+  
+                    <div className="col-sm-6">
+                      <label>Address </label>
+                      <input
+                        type="text"
+                        name="address"
+                        className="form-control"
+                        required=""
+                        value={address}
+                        onChange={(e) => {
+                          return setAddress(e.target.value);
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-6">
-                    <label>Phone No </label>
-                    <input
-                      type="text"
-                      name="phone"
-                      className="form-control"
-                      required={true}
-                      value={phone}
-                      onChange={(e) => {
-                        return setPhone(e.target.value);
-                      }}
-                    />
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <label>Postal Code </label>
+                      <input
+                        type="text"
+                        name="post_code"
+                        className="form-control"
+                        required=""
+                        value={postalCode}
+                        onChange={(e) => {
+                          return setPostalCode(e.target.value);
+                        }}
+                      />
+                    </div>
+  
+                    <div className="col-sm-6">
+                      <label>City </label>
+                      <input
+                        type="text"
+                        name="city"
+                        className="form-control"
+                        required=""
+                        value={city}
+                        onChange={(e) => {
+                          return setCity(e.target.value);
+                        }}
+                      />
+                    </div>
+  
+                    <div className="col-sm-6">
+                      <label>Country </label>
+                      <input
+                        type="text"
+                        name="country"
+                        className="form-control"
+                        required=""
+                        value={country}
+                        onChange={(e) => {
+                          return setCountry(e.target.value);
+                        }}
+                      />
+                    </div>
                   </div>
-
-                  <div className="col-sm-6">
-                    <label>Address </label>
-                    <input
-                      type="text"
-                      name="address"
-                      className="form-control"
-                      required=""
-                      value={address}
-                      onChange={(e) => {
-                        return setAddress(e.target.value);
-                      }}
-                    />
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-6">
-                    <label>Postal Code </label>
-                    <input
-                      type="text"
-                      name="post_code"
-                      className="form-control"
-                      required=""
-                      value={postalCode}
-                      onChange={(e) => {
-                        return setPostalCode(e.target.value);
-                      }}
-                    />
-                  </div>
-
-                  <div className="col-sm-6">
-                    <label>City </label>
-                    <input
-                      type="text"
-                      name="city"
-                      className="form-control"
-                      required=""
-                      value={city}
-                      onChange={(e) => {
-                        return setCity(e.target.value);
-                      }}
-                    />
-                  </div>
-
-                  <div className="col-sm-6">
-                    <label>Country </label>
-                    <input
-                      type="text"
-                      name="country"
-                      className="form-control"
-                      required=""
-                      value={country}
-                      onChange={(e) => {
-                        return setCountry(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
+                }
                 {/* End .row */}
 
                 {/* End .row */}

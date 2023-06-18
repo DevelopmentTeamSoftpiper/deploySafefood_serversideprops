@@ -18,7 +18,7 @@ const LatestProduct = ({ showToastMessage, products }) => {
   return (
     <div className="container deal-section">
       <h3 className="title text-center mt-5 font-weight-bold">
-        Latest Product
+        Latest Products
       </h3>
 
       <Swiper

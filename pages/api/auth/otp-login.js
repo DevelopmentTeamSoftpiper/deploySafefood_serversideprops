@@ -27,7 +27,7 @@ router.post(async (req, res) => {
     const greenwebsms = new URLSearchParams();
     greenwebsms.append(
       "token",
-      "948517180416865686840be5e1974826707e83bb808895339109"
+      `${process.env.GREENWEB_API}`
     );
     greenwebsms.append("to", phone);
     greenwebsms.append("message", `আপনার সেইফফুড লগইন OTP: ${randomNumber}`);

@@ -2,13 +2,13 @@ const nodeMailer = require("nodemailer");
  
 exports.sendEmailWithNodemailer = (req, res, emailData) => {
   const transporter = nodeMailer.createTransport({
-    host: 'smtp-relay.sendinblue.com',
+    host: `${process.env.EMAIL_HOST}`,
     port: 587,
     secure: false,
     requireTLS: true,
     auth: {
-      user: 'alarafatsiddique@gmail.com', // MAKE SURE THIS EMAIL IS YOUR GMAIL FOR WHICH YOU GENERATED APP PASSWORD
-      pass: 'WjzOIJdxAtbYgBm6', // MAKE SURE THIS PASSWORD IS YOUR GMAIL APP PASSWORD WHICH YOU GENERATED EARLIER
+      user: `${process.env.EMAIL_USER}`, // MAKE SURE THIS EMAIL IS YOUR GMAIL FOR WHICH YOU GENERATED APP PASSWORD
+      pass: `${process.env.EMAIL_PASSWORD}`, // MAKE SURE THIS PASSWORD IS YOUR GMAIL APP PASSWORD WHICH YOU GENERATED EARLIER
     },
   });
  

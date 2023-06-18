@@ -35,7 +35,7 @@ const ProductCard = ({data, showToastMsg}) => {
       <h3 className="product-title letter-spacing-normal font-size-normal text-left mb-0">
       <Link href={`/product/${data.slug}`}>
         {
-           data?.title?.length > 20 ? <span> {data?.title?.substring(0,20)}... </span>
+           data?.title?.length > 50 ? <span> {data?.title?.substring(0,50)}... </span>
             : <span> {data?.title} </span>
             }
       </Link>

@@ -60,10 +60,10 @@ router.post(async (req, res) => {
     const greenwebsms = new URLSearchParams();
     greenwebsms.append(
       "token",
-      "948517180416865686840be5e1974826707e83bb808895339109"
+      `${process.env.GREENWEB_API}`
     );
     greenwebsms.append("to", phone);
-    greenwebsms.append("message", `প্রিয় ${name},আমরা সেইফফুড থেকে আপনার অর্ডারটি রিসিভ করেছি।`);
+    greenwebsms.append("message", `প্রিয় ${name}, সেইফ ফুডে অর্ডারের জন্য ধন্যবাদ। খুব শীঘ্রই আমাদের প্রতিনিধি আপনার সাথে যোগাযোগ করে অর্ডারটি কনফার্ম করবেন।`);
     const response = await axios.post(
       "http://api.greenweb.com.bd/api.php",
       greenwebsms

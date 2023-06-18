@@ -17,7 +17,7 @@ import Slider from "@/models/Slider";
 import Product from "@/models/Products";
 
 
-export default function Home({ blogs,mainSlider,latestProducts,discountedProducts,bestDealProducts}) {
+export default function Home({ blogs,mainSlider,latestProducts,discountedProducts,bestDealProducts,categories}) {
 const showToastMessage =(data)=>{
   toast.success(data.msg, {
     position: "top-right",
@@ -38,14 +38,14 @@ const showToastMessage =(data)=>{
 
 
         <main className="main" style={{ backgroundColor: "#fafafa" }}>
-          <Hero mainSlider={mainSlider}/>
+          <Hero mainSlider={mainSlider} categories ={categories}/>
           <HomeService />
 
-          <MiniBanner  />
+          {/* <MiniBanner  /> */}
          
           <LatestProduct  products={latestProducts} showToastMessage={showToastMessage} />
           <Banner1/>
-          <ProductCarousel title="Discount Sales" products={discountedProducts} showToastMessage={showToastMessage} />
+          <ProductCarousel title="Discounted Sales" products={discountedProducts} showToastMessage={showToastMessage} />
           <ProductCarousel title="Best Deals" products={bestDealProducts} showToastMessage={showToastMessage} /> 
           <BlogSection blogs={blogs} />
           <NewsLetter/>

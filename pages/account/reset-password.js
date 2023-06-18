@@ -79,10 +79,16 @@ const ResetPassword = () => {
       }}
     >
       <div className="container">
+        
         <div className="form-box">
           <div className="form-tab">
             <h6>Reset Password</h6>
+            <section className="entire-banner">
 
+    <h6 className="text-center mx-auto px-5">
+    Check your inbox for a <span style={{color:"crimson"}}>verification code</span>. Put the code with along with your new password.
+    </h6>
+    </section>
             <div className="tab-content">
               <div
                 className="tab-pane fade show active"
@@ -123,10 +129,10 @@ const ResetPassword = () => {
                     <p style={{color:"brown", fontWeight:600}}>Password do not match</p>
                     }
                     <div className="form-group">
-                      <label htmlFor="number">Verification Number</label>
+                      <label htmlFor="number">Verification Code</label>
                       <input
                         type="text"
-                        placeholder="Verification Number"
+                        placeholder="Verification Code"
                         name="number"
                         value={number}
                         onChange={(e)=>{setNumber(e.target.value)}}

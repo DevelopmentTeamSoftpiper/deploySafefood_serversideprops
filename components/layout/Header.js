@@ -27,7 +27,16 @@ const Header = ({ siteInfo }) => {
     if (provider === "firebase") {
       await signOut(auth);
     }
-    toast.success("Sign out successfully");
+    toast.success("Signed Out Successfully", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+   
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   };
 
   //menu tab
@@ -99,17 +108,17 @@ const Header = ({ siteInfo }) => {
         {/* End .header-top */}
         <div className="header-middle">
           <div className="container">
-            <div className="header-left" style={{paddingLeft:"20px",justifyContent:"center"}}>
+            <div className="header-left" style={{paddingLeft:"20px",justifyContent:"center", maxHeight:"90px"}}>
               <button className="mobile-menu-toggler" onClick={showMenuHandler}>
                 <span className="sr-only">Toggle mobile menu</span>
                 <i className="icon-bars" />
               </button>
               <Link href="/" className="logo">
                 <Image
-                  src={siteInfo?.data?.siteinfo?.logo}
+                  src="/assets/images/logo-safefoods.png"
                   alt="safefoods Logo"
-                  width={50}
-                  height={25}
+                  width={65}
+                  height={85}
                 />
               </Link>
             </div>
