@@ -31,6 +31,7 @@ router.post(async (req, res) => {
         payment_status,
         delivery_status,
         order_notes,
+        isPaid,
         user_id_no,
     } = req.body;
 
@@ -54,6 +55,7 @@ router.post(async (req, res) => {
         status,
         payment_status,
         delivery_status,
+        isPaid,
         order_notes,
         user_id_no,
     });
