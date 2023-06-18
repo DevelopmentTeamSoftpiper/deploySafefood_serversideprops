@@ -1,0 +1,37 @@
+import { createRouter } from 'next-connect';
+import { verifyToken, verifyTokenAndAdmin } from '@/helpers/verityToken';
+import db from '@/utils/db';
+import Product from '@/models/Products';
+import applyCors from '@/middleware/cors';
+import Profile from '@/models/Profile';
+
+
+const router = createRouter().use(verifyToken).use(verifyTokenAndAdmin);
+
+router.get(async(req, res)=>{
+    try {
+    
+        db.connectDb();
+        await Product.find({});
+        const found = await Profile.find({}).sort({ updatedAt: -1 });
+        db.disconnectDb();
+        if(found){
+          return res.json({
+            message: "Profiles found successfully",
+            order: found
+          });
+        }else{
+          return res.json({
+            message: "something went wrong",
+          });
+        }
+       
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+})
+
+
+
+
+export default applyCors(router.handler());

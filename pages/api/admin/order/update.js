@@ -57,7 +57,7 @@ router.post(async (req, res) => {
         delivery_status,
         isPaid,
         order_notes,
-        user_id_no,
+ 
     });
     db.disconnectDb();
     if (updated) {
