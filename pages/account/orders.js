@@ -154,21 +154,53 @@ const Orders = () => {
                         <div className="card-body">
                           <div className="d-flex flex-column">
                             <h6 className=""> Order Id: {order?._id}</h6>
-                            <h6 className=" mb-2">
-                              <span>Order Status:</span>
+                            <p >
+                              <span>Delivery Status:</span>
                               <span
                                 style={{
                                   color:
                                     order?.delivery_status ===
                                     "Pending"
-                                      ? "red"
+                                      ? "crimson"
                                       : "green",
                                 }}
                               >
                                 {" "}
                                 {order?.delivery_status}
                               </span>
-                            </h6>
+                            </p>
+                            <p >
+                              <span>Order Status:</span>
+                              <span
+                                style={{
+                                  color:
+                                    order?.status ==
+                                    "Not Processed"
+                                      ? "black"
+                                      :  order?.status ==
+                                      "Processing" ? "yellow":  order?.status ==
+                                      "Completed" ? "green": "crimson"
+                                }}
+                              >
+                                {" "}
+                                {order?.status}
+                              </span>
+                            </p>
+                            <p >
+                              <span>Payment Status:</span>
+                              <span
+                                style={{
+                                  color:
+                                    order?.payment_status ==
+                                    "Not Verified"
+                                      ? "crimson"
+                                      :  "green"
+                                }}
+                              >
+                                {" "}
+                                {order?.status}
+                              </span>
+                            </p>
                           </div>
                           <p>
                             Order Date:{" "}
@@ -177,7 +209,7 @@ const Orders = () => {
                             ).toLocaleDateString()}
                           </p>
                           <div className="d-flex justify-between">
-                            <h6> BDT {order?.total}</h6>
+                            <h6>Order Total: BDT {order?.total}</h6>
                           </div>
                           <div className="d-flex justify-between">
                             <button
@@ -194,6 +226,20 @@ const Orders = () => {
                             >
                               Details
                             </button>
+                           {order?.status == "Not Processed" && 
+                            <button
+                            type="button"
+                            style={{
+                              color: "red",
+                              fontWeight: 600,
+                              border: "2px solid black",
+                              padding: "2px",
+                              borderRadius: "5px",
+                            }}
+                          
+                          >
+                            Delete
+                          </button>}
                             <div
                               className="modal fade"
                               id={`exampleModal-${order?._id}`}

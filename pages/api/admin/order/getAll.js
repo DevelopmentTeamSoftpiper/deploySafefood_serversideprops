@@ -13,7 +13,7 @@ router.get(async(req, res)=>{
     
         db.connectDb();
         await Product.find({});
-        const found = await Order.find({}).populate("products");
+        const found = await Order.find({}).populate("products").sort({ updatedAt: -1 });
         db.disconnectDb();
         if(found){
           return res.json({
