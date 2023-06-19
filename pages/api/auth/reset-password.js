@@ -17,14 +17,14 @@ router.post(async (req, res) => {
           process.env.JWT_SECRET,
           async function (err, decoded) {
             if (err) {
-              console.log("JWT verify account activation error");
+              // console.log("JWT verify account activation error");
               return res.status(401).json({
                 error: "Expired link",
               });
             }
             if (decoded) {
                 const {email, randomNumber} = jwt.decode(token);
-                console.log(email, randomNumber);
+                // console.log(email, randomNumber);
               
               if (number == randomNumber) {
                 const findUser = await User.findOne({'email':email});

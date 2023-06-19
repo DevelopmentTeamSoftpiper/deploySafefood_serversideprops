@@ -11,7 +11,7 @@ router.post(async (req, res) => {
   try {
     db.connectDb();
     const  {id}  = req.body;
-    console.log(id);
+    // console.log(id);
     const exist = await Order.findOne({ _id: id });
     if (exist) {
       await Order.findByIdAndRemove(id);

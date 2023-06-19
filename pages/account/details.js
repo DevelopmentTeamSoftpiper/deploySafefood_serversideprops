@@ -1,12 +1,12 @@
 /*eslint-disable */
 import { logout } from "@/store/userSlice";
-import { fetchDataFromApi, postDataToApi,updateDataToApi } from "@/utils/api";
 import withAuth from "@/utils/restrict";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {toast, ToastContainer } from "react-toastify";
 
 const AccountDetails = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -14,7 +14,6 @@ const AccountDetails = () => {
   const user = useSelector((state) => state.user.currentUser);
 
   const jwt = useSelector((state) => state.user.jwt);
-  const provider = useSelector((state)=>state.user.provider);
   const getUserInfo = async ()=>{
 
     const userInfo =  await axios.post("/api/profile/find",
@@ -32,12 +31,10 @@ const AccountDetails = () => {
       setUserInfo(userInfo);
   
   }
+
   useEffect(()=>{
     getUserInfo();
   },[])
-
-
-
 
   if (!user) {
     router.push("/account/login");
@@ -47,6 +44,7 @@ const AccountDetails = () => {
   const dispatch = useDispatch();
   return (
     <main className="main">
+      <ToastContainer/>
       <div
         className="page-header text-center"
         style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
@@ -120,6 +118,17 @@ const AccountDetails = () => {
                   className="nav-link"
                   onClick={() => {
                     dispatch(logout());
+                    toast.success("Signed Out Successfully", {
+                      position: "top-right",
+                      autoClose: 1000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                   
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                      });
+                    
                   }}
                 >
                   Logout

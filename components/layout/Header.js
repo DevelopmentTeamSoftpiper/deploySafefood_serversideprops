@@ -24,9 +24,6 @@ const Header = ({ siteInfo }) => {
 
   const logOut = async () => {
     dispatch(logout());
-    if (provider === "firebase") {
-      await signOut(auth);
-    }
     toast.success("Signed Out Successfully", {
       position: "top-right",
       autoClose: 1000,

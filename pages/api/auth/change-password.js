@@ -14,7 +14,7 @@ router.post(async (req, res) => {
     db.connectDb();
     const findUser = await User.findOne({_id:id});
     
-    console.log(findUser);
+    // console.log(findUser);
 
     db.disconnectDb();
     if (findUser) {

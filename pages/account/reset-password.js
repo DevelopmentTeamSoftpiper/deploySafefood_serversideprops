@@ -40,8 +40,8 @@ const ResetPassword = () => {
                 progress: undefined,
                 theme: "dark",
                 });
-            console.log(error);
-          console.log(error.response.data.error.message);
+          //   console.log(error);
+          // console.log(error.response.data.error.message);
          
         }
       };

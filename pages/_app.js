@@ -10,7 +10,6 @@ import "../public/assets/css/demos/demo-26.css"
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/store/store";
-import { fetchDataFromApi } from '@/utils/api'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { useEffect, useState } from 'react'
@@ -29,7 +28,6 @@ export default function App({ Component, pageProps }) {
   useEffect(()=>{
     getSiteInfo();
   },[])
-  console.log(siteInfo);
   return(
     <>
 

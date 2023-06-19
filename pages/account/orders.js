@@ -1,10 +1,8 @@
 /*eslint-disable */
 import { logout } from "@/store/userSlice";
-import { fetchDataFromApi, postDataToApi, updateDataToApi } from "@/utils/api";
 import withAuth from "@/utils/restrict";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -30,13 +28,6 @@ const Orders = () => {
         }, 
       });
       setOrders(order);
-    
-    // else {
-    //   const orderList = await fetchDataFromApi(
-    //     `/api/orders?populate=*&[filters][user_id_no][$eq]=${user?.uid}&sort=id:desc`
-    //   );
-    //   setOrders(orderList);
-    // }
   };
 
 
@@ -62,7 +53,7 @@ const Orders = () => {
   };
   const deleteOrder = async(id)=>{
     try{
-      console.log(id);
+      // console.log(id);
       const response = await axios.post("/api/admin/order/userDelete",
       {
         user_id_no:user?._id,
@@ -88,7 +79,16 @@ const Orders = () => {
         });
       }
     }catch(error){
-      console.log(error)
+      // console.log(error)
+      toast.error("Something went wrong", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   }
   const orderDeleteHandler=(id)=>{
@@ -101,6 +101,7 @@ const Orders = () => {
   }, []);
   return (
     <main className="main">
+      <ToastContainer/>
       <div
         className="page-header text-center"
         style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}

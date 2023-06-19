@@ -19,7 +19,7 @@ router.post(async(req, res)=>{
         greenwebsms.append('to', mobileNo);
         greenwebsms.append('message', `আপনার সেইফফুড লগইন OTP: ${randomNumber}`);
         const response = await axios.post('http://api.greenweb.com.bd/api.php', greenwebsms);
-        console.log(response);
+        // console.log(response);
         if(response){
 
             return res.status(200).json({success: response.data});
@@ -31,7 +31,7 @@ router.post(async(req, res)=>{
 
 
     }catch(error){
-        console.log(error);
+        // console.log(error);
 
         return res.json({
             message: "something went wrong",

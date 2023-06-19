@@ -15,7 +15,7 @@ const router = createRouter();
 router.post(async (req, res) => {
   try {
     const { token, number ,mobile} = req.body;
-    console.log( number, mobile);
+    // console.log( number, mobile);
     if (token) {
       jwt.verify(
         token,
@@ -29,11 +29,11 @@ router.post(async (req, res) => {
           }
           if (decoded) {
             const {randomNumber } = jwt.decode(token);
-            console.log( randomNumber);
+            // console.log( randomNumber);
             if (number == randomNumber) {
               db.connectDb();
               const existingUser = await OtpUser.findOne({phone:mobile});
-              console.log("existing",existingUser);
+              // console.log("existing",existingUser);
               if(existingUser){
                 const token = jwt.sign({_id: existingUser._id, role: existingUser.role, provider: existingUser.provider}, process.env.JWT_SECRET, {expiresIn: '7d'});
                 const {_id, phone, role, provider} = existingUser;

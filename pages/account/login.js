@@ -1,7 +1,5 @@
 /* eslint-disable */
 import Loader from "@/components/Loader";
-import LoginOTP from "@/components/auth/LoginOTP";
-import AlertBox from "@/components/elements/AlertBox";
 import {
   jwtSuccess,
   loginFailure,
@@ -10,7 +8,6 @@ import {
   providerSuccess,
   signupSuccess,
 } from "@/store/userSlice";
-import { fetchDataFromApi, postDataToApi } from "@/utils/api";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -18,8 +15,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { API_URL } from "../../utils/urls";
-
 
 
 const Login = () => {
@@ -34,7 +29,7 @@ const Login = () => {
     emailId: "",
     password: "",
     response: "",
-    buttonText: "sign in",
+    buttonText: "Sign in",
   });
   const { emailId, password, response, buttonText } = values;
   const handleChange = (e) => {
@@ -77,7 +72,6 @@ const Login = () => {
       setIsLoading(false);
 
     } catch (error) {
-      console.log(error);
       setValues({
         ...values,
         response: "Invalid Email or Password",
@@ -108,7 +102,6 @@ const Login = () => {
     const isValid = regex.test(phone);
     setValid(isValid);
   }, [phone])
-  console.log(valid);
 const otpLogin = async() =>{
   try {
     setIsLoading(true);
@@ -130,7 +123,6 @@ const otpLogin = async() =>{
     const res = await axios.post("/api/auth/otp-login", {
       phone
     });
-    console.log(res);
     dispatch(signupSuccess(res?.data?.token));
   
     
@@ -138,8 +130,6 @@ const otpLogin = async() =>{
     setIsLoading(false);
 
   } catch (error) {
-    console.log(error);
-  
     toast.error("Something went wrong. Try again", {
       position: "top-right",
       autoClose: 2000,
@@ -159,8 +149,6 @@ const otpLogin = async() =>{
     otpLogin();
 
   }
-
-console.log(phone);
   return (
     <main className="main">
       <ToastContainer/>
@@ -328,20 +316,12 @@ console.log(phone);
                 }
 
               </div>
-
-                  {/* End .form-choice */}
                 </div>
-                {/* .End .tab-pane */}
               </div>
-              {/* End .tab-content */}
             </div>
-            {/* End .form-tab */}
           </div>
-          {/* End .form-box */}
         </div>
-        {/* End .container */}
       </div>
-      {/* End .login-page section-bg */}
     </main>
   );
 };

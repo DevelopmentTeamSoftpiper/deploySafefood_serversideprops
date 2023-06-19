@@ -17,7 +17,7 @@ const OtpVerification = () => {
   const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes in seconds
   const token = useSelector((state) => state.user.signupToken);
   const phone = token ? jwt(token).phone : "";
-  console.log(phone);
+  // console.log(phone);
 
 const dispatch = useDispatch();
   const router = useRouter();
@@ -81,7 +81,7 @@ const dispatch = useDispatch();
         
     
         } catch (error) {
-          console.log(error.response.data.error);
+          // console.log(error.response.data.error);
          
           dispatch(loginFailure());
           toast.error(error.response.data.error, {

@@ -14,21 +14,21 @@ const router = createRouter();
 router.post(async (req, res) => {
   try {
     const { token, number } = req.body;
-    console.log(token, number);
+    // console.log(token, number);
     if (token) {
       jwt.verify(
         token,
         process.env.JWT_ACCOUNT_ACTIVATION,
         async function (err, decoded) {
           if (err) {
-            console.log("JWT verify account activation error");
+            // console.log("JWT verify account activation error");
             return res.status(401).json({
               error: "Expired link. Sign up again",
             });
           }
           if (decoded) {
             const { name, email, password, randomNumber } = jwt.decode(token);
-            console.log(name, email, password, randomNumber);
+            // console.log(name, email, password, randomNumber);
             if (number == randomNumber) {
               db.connectDb();
               const user = new User({ name, email, password });

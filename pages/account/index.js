@@ -46,13 +46,20 @@ const index = () => {
   }
   const logOut = async () => {
     dispatch(logout());
-    if(provider === "firebase"){
-      await signOut(auth);
-    }
-    toast.success("Sign out successfully");
+    toast.success("Signed Out Successfully", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+   
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   };
   return (
     <main className="main">
+      <ToastContainer/>
       <div
         className="page-header text-center"
         style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
@@ -126,7 +133,7 @@ const index = () => {
               <button
                   className="nav-link"
                   onClick={() => {
-                    dispatch(logout());
+                    logOut();
                   }}
                 >
                   Logout

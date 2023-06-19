@@ -1,9 +1,7 @@
 /*eslint-disable */
 import Loader from "@/components/Loader";
 import { logout } from "@/store/userSlice";
-import { fetchDataFromApi, postDataToApi, updateDataToApi } from "@/utils/api";
 import withAuth from "@/utils/restrict";
-import { API_URL } from "@/utils/urls";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -49,7 +47,7 @@ const EditProfile = () => {
       },
       
     });
-    // console.log("userInfo", userInfo);
+
       setName(userInfo?.data?.name);
       setEmail(userInfo?.data?.email);
       setPhone(userInfo?.data?.phone);
@@ -97,7 +95,16 @@ const EditProfile = () => {
 
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      toast.error("Something Went Wrong.", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setIsLoading(false);
     }
   };
@@ -127,7 +134,7 @@ const EditProfile = () => {
       );
       toast.success("Password Updated Successfully", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
 
@@ -140,9 +147,9 @@ const EditProfile = () => {
       setPasswordConfirmation("");
 
     } catch (error) {
-      toast.error(error?.response?.data?.error, {
+      toast.error("Something Went Wrong.", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
 
@@ -240,6 +247,16 @@ const EditProfile = () => {
                   className="nav-link"
                   onClick={() => {
                     dispatch(logout());
+                    toast.success("Signed Out Successfully", {
+                      position: "top-right",
+                      autoClose: 1000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                   
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                      });
                   }}
                 >
                   Logout

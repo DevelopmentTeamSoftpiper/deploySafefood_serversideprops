@@ -97,7 +97,6 @@ const LoginOTP = () => {
           router.push(redirectPath);
         })
         .catch((err) => {
-          console.log("Otp===> ", err);
           setLoading(false);
         });
     }
