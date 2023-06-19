@@ -22,8 +22,6 @@ const EditProfile = () => {
   const [postalCode, setPostalCode] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-  const [profileInfo, setProfileInfo] = useState(null);
-  const [profileId, setProfileId] = useState(null);
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
@@ -88,7 +86,7 @@ const EditProfile = () => {
       });
       toast.success("Profile Edited Successfully", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
 

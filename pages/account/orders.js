@@ -7,11 +7,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Orders = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
-  const provider = useSelector((state) => state.user.provider);
   const jwt = useSelector((state) => state.user.jwt);
 
   const [orders, setOrders] = useState(null);
@@ -38,9 +38,7 @@ const Orders = () => {
     //   setOrders(orderList);
     // }
   };
-  useEffect(() => {
-    getOrders();
-  }, []);
+
 
   
   if (!user) {
@@ -48,14 +46,59 @@ const Orders = () => {
     return null;
   }
 
-  const logOut = async () => {
+  const logOutHandler = async () => {
     dispatch(logout());
-    if (provider === "strapi") {
-      await signOut(auth);
-    }
-    toast.success("Sign out successfully");
-  };
 
+    toast.success("Signed out successfully", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const deleteOrder = async(id)=>{
+    try{
+      console.log(id);
+      const response = await axios.post("/api/admin/order/userDelete",
+      {
+        user_id_no:user?._id,
+        id: id,
+      },
+       {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          token: `Bearer ${jwt}`,
+        },
+        
+      });
+      if(response){
+        toast.success("Order deleted successfully", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+  const orderDeleteHandler=(id)=>{
+    deleteOrder(id);
+    getOrders();
+  }
+
+  useEffect(() => {
+    getOrders();
+  }, []);
   return (
     <main className="main">
       <div
@@ -128,7 +171,7 @@ const Orders = () => {
               <button
                   className="nav-link"
                   onClick={() => {
-                    dispatch(logout());
+                    logOutHandler()
                   }}
                 >
                   Logout
@@ -236,7 +279,7 @@ const Orders = () => {
                               padding: "2px",
                               borderRadius: "5px",
                             }}
-                          
+                          onClick={()=>{orderDeleteHandler(order?._id)}}
                           >
                             Delete
                           </button>}

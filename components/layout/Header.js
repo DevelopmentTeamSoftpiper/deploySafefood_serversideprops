@@ -117,8 +117,8 @@ const Header = ({ siteInfo }) => {
                 <Image
                   src="/assets/images/logo-safefoods.png"
                   alt="safefoods Logo"
-                  width={65}
-                  height={85}
+                  width={55}
+                  height={25}
                 />
               </Link>
             </div>
