@@ -10,9 +10,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 const Footer = () => {
   const { data, error } = useSWR('/api/admin/siteinfo/find', fetcher)
- 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+
   return (
     <footer
       className="footer footer-2 font-weight-normal second-primary-color"
@@ -109,7 +107,7 @@ const Footer = () => {
                   <Link href="/returns-refund">Returns</Link>
                 </li>
                 <li>
-                  <Link href="/shop">Shipping</Link>
+                  <Link href="#">Shipping</Link>
                 </li>
                 <li>
                     <Link href="/terms-and-conditions">Terms and conditions</Link>
@@ -158,7 +156,7 @@ const Footer = () => {
     <div className="footer-bottom font-weight-normal">
       <div className="container">
         <p className="footer-copyright font-weight-normal ml-lg-2 second-primary-color">
-          Copyright © 2023 Safefoods  
+          Copyright © 2023 Safefoods | Developed by: softpiper
         </p>
   
         {/* End .soial-icons */}
