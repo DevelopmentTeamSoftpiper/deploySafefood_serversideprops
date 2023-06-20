@@ -4,12 +4,10 @@ import React from 'react'
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { MdCall } from 'react-icons/md';
 import { AiOutlineMail } from 'react-icons/ai';
-import useSWR from 'swr'
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
 
 
 const Footer = () => {
-  const { data, error } = useSWR('/api/admin/siteinfo/find', fetcher)
 
   return (
     <footer
@@ -27,7 +25,7 @@ const Footer = () => {
           <div className="col-12 col-lg-2-5cols">
             <div className="widget widget-about mb-4">
             <Image
-              src={data?.siteinfo?.logo}
+              src="/assets/images/logo-safefoods.png"
               alt="safefood logo"
               width={65}
               height={25}
@@ -39,7 +37,7 @@ const Footer = () => {
                     <span> 
                       <FaMapMarkerAlt className='text-3xl mr-3' />
                     </span>
-                    <span> {data?.siteinfo?.address}</span>
+                    <span> Safe Food Headquarter,51/1, Senpara Parbata, Mirpur-10, Dhaka</span>
                   </div>
                 </li>
                 <li>
@@ -47,7 +45,7 @@ const Footer = () => {
                     <span> 
                     <MdCall className='text-3xl mr-3' />
                     </span> 
-                    <span> {data?.siteinfo?.phone}</span>
+                    <span> +8801730593752</span>
                   </div>
                 </li>
                 <li>
@@ -55,7 +53,7 @@ const Footer = () => {
                     <span> 
                       <AiOutlineMail className='text-3xl mr-3' />
                     </span> 
-                    <span> {data?.siteinfo?.email} </span>
+                    <span> safefoods.info@gmail.com</span>
                   </div>
                 </li>
                 
