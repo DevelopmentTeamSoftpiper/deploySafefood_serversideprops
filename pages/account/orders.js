@@ -77,6 +77,7 @@ const Orders = () => {
           progress: undefined,
           theme: "dark",
         });
+        getOrders();
       }
     }catch(error){
       // console.log(error)
@@ -93,7 +94,7 @@ const Orders = () => {
   }
   const orderDeleteHandler=(id)=>{
     deleteOrder(id);
-    getOrders();
+    
   }
 
   useEffect(() => {
