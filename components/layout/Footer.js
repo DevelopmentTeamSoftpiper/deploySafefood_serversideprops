@@ -4,8 +4,15 @@ import React from 'react'
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { MdCall } from 'react-icons/md';
 import { AiOutlineMail } from 'react-icons/ai';
+import useSWR from 'swr'
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-const Footer = ({siteInfo}) => {
+
+const Footer = () => {
+  const { data, error } = useSWR('/api/admin/siteinfo/find', fetcher)
+ 
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Loading...</div>
   return (
     <footer
       className="footer footer-2 font-weight-normal second-primary-color"
@@ -22,7 +29,7 @@ const Footer = ({siteInfo}) => {
           <div className="col-12 col-lg-2-5cols">
             <div className="widget widget-about mb-4">
             <Image
-              src={siteInfo?.data?.siteinfo?.logo}
+              src={data?.siteinfo?.logo}
               alt="safefood logo"
               width={65}
               height={25}
@@ -34,7 +41,7 @@ const Footer = ({siteInfo}) => {
                     <span> 
                       <FaMapMarkerAlt className='text-3xl mr-3' />
                     </span>
-                    <span> {siteInfo?.data?.siteinfo?.address}</span>
+                    <span> {data?.siteinfo?.address}</span>
                   </div>
                 </li>
                 <li>
@@ -42,7 +49,7 @@ const Footer = ({siteInfo}) => {
                     <span> 
                     <MdCall className='text-3xl mr-3' />
                     </span> 
-                    <span> {siteInfo?.data?.siteinfo?.phone}</span>
+                    <span> {data?.siteinfo?.phone}</span>
                   </div>
                 </li>
                 <li>
@@ -50,7 +57,7 @@ const Footer = ({siteInfo}) => {
                     <span> 
                       <AiOutlineMail className='text-3xl mr-3' />
                     </span> 
-                    <span> {siteInfo?.data?.siteinfo?.email} </span>
+                    <span> {data?.siteinfo?.email} </span>
                   </div>
                 </li>
                 

@@ -2,7 +2,7 @@
   "name": "molla",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://frontend.safefoods.com.bd",
+  "homepage": "http://safefoods.com.bd",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",

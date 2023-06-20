@@ -109,7 +109,7 @@ const otpLogin = async() =>{
     setIsLoading(false);
       return toast.error("Enter a valid phone no", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
   

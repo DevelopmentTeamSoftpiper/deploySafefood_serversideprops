@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AccountDetails = () => {
   const [userInfo, setUserInfo] = useState(null);

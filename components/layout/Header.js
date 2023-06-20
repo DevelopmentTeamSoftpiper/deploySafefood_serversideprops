@@ -5,16 +5,15 @@ import Cart from "./Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/userSlice";
 import Search from "./Search";
-import { signOut } from "firebase/auth";
-import { auth } from "@/firebase.config";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { FiUserPlus } from "react-icons/fi";
 import { FiUserCheck } from "react-icons/fi";
 
 import axios from "axios";
 
-const Header = ({ siteInfo }) => {
+const Header = () => {
   
   const router = useRouter();
   const user = useSelector((state) => state.user.currentUser);
@@ -459,12 +458,7 @@ const Header = ({ siteInfo }) => {
             <li className="nav-item">
               <Link
                 className="nav-link font-size-normal second-primary-color font-weight-normal text-uppercase active"
-                // id="mobile-menu-link"
-                // data-toggle="tab"
                 href="#"
-                // role="tab"
-                // aria-controls="mobile-menu-tab"
-                // aria-selected="true"
                 onClick={() => {
                   setTab("category");
                 }}

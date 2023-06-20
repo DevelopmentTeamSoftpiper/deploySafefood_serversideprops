@@ -1,45 +1,42 @@
 /*eslint-disable */
 import { logout } from "@/store/userSlice";
-import { fetchDataFromApi, postDataToApi,updateDataToApi } from "@/utils/api";
+import { fetchDataFromApi } from "@/utils/api";
 import withAuth from "@/utils/restrict";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const index = () => {
-
+  const [userInfo, setUserInfo] = useState(null);
+  const jwt = useSelector((state) => state.user.jwt);
   const router = useRouter();
   const user = useSelector((state) => state.user.currentUser);
-  const provider = useSelector((state)=>state.user.provider);
-  const [userInfo, setUserInfo] = useState(null);
-  // console.log('redux user',user);
-
+  const dispatch = useDispatch();
   const getUserInfo = async ()=>{
-    if(provider === "strapi"){
-      const userInformation = await fetchDataFromApi(
-        `/api/profiles?populate=*&[filters][user_id_no][$eq]=${user?.id}`
-      );
-      setUserInfo(userInformation);
-    }else{
-      const userInformation = await fetchDataFromApi(
-        `/api/profiles?populate=*&[filters][user_id_no][$eq]=${user?.uid}`
-      );
-      setUserInfo(userInformation);
-    }
-   
- 
-    
+
+    const userInfo =  await axios.post("/api/profile/find",
+    {
+      user_id_no: user._id,
+    },
+     {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        token: `Bearer ${jwt}`,
+      },
+    });
+
+      setUserInfo(userInfo);
+  
   }
+
   useEffect(()=>{
     getUserInfo();
   },[])
-  
-  
-
-  const dispatch = useDispatch();
-
   if (!user) {
     router.push("/account/login");
     return null;
@@ -57,6 +54,7 @@ const index = () => {
       theme: "dark",
       });
   };
+  console.log(userInfo);
   return (
     <main className="main">
       <ToastContainer/>
@@ -66,7 +64,7 @@ const index = () => {
       >
         <div className="container">
           <h1 className="page-title">
-            My Account<span>Welcome! {userInfo?.data?.[0]?.attributes?.username ? userInfo?.data?.[0]?.attributes?.username : ""} </span>
+            My Account<span>Welcome! {userInfo?.data?.name? userInfo?.data?.name : ""} </span>
             
           </h1>
         </div>
@@ -150,11 +148,11 @@ const index = () => {
                 <p>
                   Hello{" "}
                   <span className="font-weight-normal text-dark">
-                    {userInfo?.data?.[0]?.attributes?.username ? userInfo?.data?.[0]?.attributes?.username : "User"}
+                    {userInfo?.data?.name ? userInfo?.data?.name : "User"}
                   </span>{" "}
                   (not{" "}
                   <span className="font-weight-normal text-dark">
-                  {userInfo?.data?.[0]?.attributes?.username ? userInfo?.data?.[0]?.attributes?.username : "User"}
+                  {userInfo?.data?.name ? userInfo?.data?.name : "User"}
                   </span>
                   ?{" "}
                   <button

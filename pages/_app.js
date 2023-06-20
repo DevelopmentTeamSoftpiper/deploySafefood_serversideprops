@@ -16,26 +16,15 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function App({ Component, pageProps }) {
-  const [siteInfo, setSiteInfo] = useState(null);
-  const getSiteInfo = async()=>{
-    const siteinfo = await axios.get(
-      `/api/admin/siteinfo/find`
-    );
-    setSiteInfo(siteinfo);
 
-    
-  }
-  useEffect(()=>{
-    getSiteInfo();
-  },[])
   return(
     <>
 
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-        <Header siteInfo ={siteInfo}/>
+        <Header/>
           <Component {...pageProps} />
-      <Footer siteInfo ={siteInfo}/>
+      <Footer/>
         </PersistGate>
       </Provider>
 

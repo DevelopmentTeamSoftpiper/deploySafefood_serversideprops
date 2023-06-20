@@ -1,6 +1,4 @@
-import AlertBox from "@/components/elements/AlertBox";
 import { forgotPasswordSuccess } from "@/store/userSlice";
-import { API_URL } from "@/utils/urls";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";

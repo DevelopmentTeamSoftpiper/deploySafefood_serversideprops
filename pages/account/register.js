@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import Loader from "@/components/Loader";
-import { API_URL } from "@/utils/urls";
 import { useDispatch } from "react-redux";
 import { signupSuccess } from "@/store/userSlice";
 import { ToastContainer, toast } from "react-toastify";
