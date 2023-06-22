@@ -60,7 +60,7 @@ const showToastMessage =(data)=>{
 export async function getStaticProps() {
   db.connectDb();
   const blogData = await Blog.find({}).populate({path:'subBlog', model:SubBlog})
-  .sort({ updatedAt: -1 });
+  .sort({ updatedAt: -1 }).limit(5);
   const mainSliderData = await Slider.find({}).sort({ updatedAt: -1 });
   const categoryData = await Category.find({}).populate({path:'subCategories',model: SubCategory}).sort({ updatedAt: -1 });
   const bestDealProductsData =  await Product.find({ bestDeal: true });

@@ -146,7 +146,7 @@ const SubCategoryProduct = ({ subCategory, products , categories}) => {
         {/* End .row */}
       </div>
       {/* End .container */}
-      <BestDeal title="Related Products" products={products}/>
+      {/* <BestDeal title="Related Products" products={products}/> */}
 
     </div>
     {/* End .page-content */}

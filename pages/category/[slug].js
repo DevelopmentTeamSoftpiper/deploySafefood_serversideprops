@@ -35,7 +35,7 @@ const CategoryProduct = ({ category, products, categories }) => {
     >
       <div className="container">
         <h1 className="page-title">
-          {category?.name}<span>Shop</span>
+          {category?.name}
         </h1>
       </div>
       {/* End .container */}

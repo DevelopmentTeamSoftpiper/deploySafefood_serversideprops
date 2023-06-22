@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Keyboard, Mousewheel, Navigation } from "swiper";
 import Articles from "../elements/Articles";
+import Link from "next/link";
 const Blog = ({ blogs }) => {
   return (
     <div className="blog-section bg-white pt-2">
@@ -16,13 +17,13 @@ const Blog = ({ blogs }) => {
           </div>
 
           <div className="heading-right">
-            <a
-              href="category.html"
+            <Link
+              href="/blogs"
               className="title-link font-size-normal text-uppercase font-weight-normal"
             >
               View More Posts
               <i className="icon-long-arrow-right" />
-            </a>
+            </Link>
           </div>
         </div>
 

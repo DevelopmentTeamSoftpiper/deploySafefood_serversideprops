@@ -73,12 +73,14 @@ const cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartProducts?.map((cartProduct) => (
+                  {cartProducts.length>0 ? cartProducts?.map((cartProduct) => (
                       <CartItem
                         key={cartProduct?._id}
                         cartProduct={cartProduct}
                       />
-                    ))}
+                    )): 
+                    <h3>Nothing in the Cart.</h3>
+                    }
                   </tbody>
                 </table>
                 {/* End .table table-wishlist */}
@@ -144,10 +146,10 @@ const cart = () => {
                   </table>
                   {/* End .table table-summary */}
                   <Link
-                    href="/checkout"
+                    href={cartProducts.length > 0 ? "/checkout": "/shop"}
                     className="btn btn-outline-primary-2 btn-order btn-block"
                   >
-                    PROCEED TO CHECKOUT
+                    {cartProducts.length > 0 ? "PROCEED TO CHECKOUT" : "CONTINUE SHOPPING"}
                   </Link>
                 </div>
                 {/* End .summary */}

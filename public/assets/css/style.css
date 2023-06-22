@@ -11310,7 +11310,7 @@ button:focus {
   flex-flow: row wrap;
   margin-bottom: 3rem; }
   .product-details-action .btn-cart {
-    padding: 2rem 1.5rem;
+    padding: 1rem 1rem;
     max-width: 198px;
     color: #c96;
     border: 0.1rem solid #c96; }
@@ -11788,7 +11788,8 @@ button:focus {
 
   .product-details-action .btn-cart,
   .product-details-centered .product-details-action .btn-cart {
-    min-width: 198px; }
+    min-width: 198px;
+    padding: 2rem 1.5rem; }
 
   .product-details-sidebar .details-action-col .btn-product {
     min-width: 168px; } }

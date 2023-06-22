@@ -18,7 +18,7 @@ const showToastMsg = (data)=>{
   return (
     <div className="container deal-section">
         <h3 className="title text-center mt-5 font-weight-bold">
-          Related Products
+          You May Also Like
         </h3>
 
           <Swiper
@@ -48,7 +48,7 @@ const showToastMsg = (data)=>{
             >
 
                 {
-                    products?.data?.map((product)=><SwiperSlide key={product?.id}> 
+                    products?.map((product)=><SwiperSlide key={product?.id}> 
                                                           <ProductCard key={product?.id} data = {product} showToastMsg={showToastMsg}/>
                                               </SwiperSlide>
                     )

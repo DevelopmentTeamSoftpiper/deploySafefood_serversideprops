@@ -11,8 +11,9 @@ import db from "@/utils/db";
 import Product from "@/models/Products";
 import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
+import RelatedProducts from "@/components/product/RelatedProduct";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product,products }) => {
   
   const p = product;
   const dispatch = useDispatch();
@@ -67,13 +68,13 @@ const ProductDetails = ({ product }) => {
                         alt={p?.title}
                         priority="true"
                       />
-                      <Link
+                      {/* <Link
                         href="#"
                         id="btn-product-gallery"
                         className="btn-product-gallery"
                       >
                         <i className="icon-arrows" />
-                      </Link>
+                      </Link> */}
                     </figure>
                   </div>
                 </div>
@@ -205,7 +206,7 @@ const ProductDetails = ({ product }) => {
             </div>
           </div>
         </div>
-      {/* < RelatedProducts products={products} showToastMessage={showToastMessage} /> */}
+      < RelatedProducts products={products} showToastMessage={showToastMessage} />
       </div>
     </main>
   );
@@ -235,12 +236,14 @@ export async function getStaticProps({ params: { slug } }) {
   const productData =  await Product.findOne({ slug: slug })
   .populate({path: "category", model:Category})
   .populate({path:"subCategory", model:SubCategory})
+  const productsData = await Product.find({category:productData.category});
+  
 
 db.disconnectDb();
   return {
     props: {
       product: JSON.parse(JSON.stringify(productData)),
-      // products,
+      products: JSON.parse(JSON.stringify(productsData)),
       slug,
     },
     revalidate:60

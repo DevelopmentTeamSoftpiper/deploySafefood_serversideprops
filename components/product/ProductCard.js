@@ -35,7 +35,7 @@ const ProductCard = ({data, showToastMsg}) => {
       <h3 className="product-title letter-spacing-normal font-size-normal text-left mb-0">
       <Link href={`/product/${data.slug}`}>
         {
-           data?.title?.length > 50 ? <span> {data?.title?.substring(0,50)}... </span>
+           data?.title?.length > 50 ? <span> {data?.title?.substring(0,40)}... </span>
             : <span> {data?.title} </span>
             }
       </Link>
@@ -44,9 +44,9 @@ const ProductCard = ({data, showToastMsg}) => {
       </div>
       {/* End .product-title letter-spacing-normal font-size-normal */}
       <div className="product-price mb-1">
-        <div className="new-price">${data.price}</div>
+        <div className="new-price">৳{data.price}</div> 
         <div className="old-price font-size-normal font-weight-normal">
-          ${data.original_price}
+        ৳{data.originalPrice}
         </div>
       </div>
       {/* End .product-price */}
