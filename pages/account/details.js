@@ -2,6 +2,7 @@
 import { logout } from "@/store/userSlice";
 import withAuth from "@/utils/restrict";
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -44,6 +45,11 @@ const AccountDetails = () => {
 
   const dispatch = useDispatch();
   return (
+   <>
+   <Head>
+      <title>Account Details</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+    </Head>
     <main className="main">
       <ToastContainer/>
       <div
@@ -210,6 +216,7 @@ const AccountDetails = () => {
         </div>
       </div>
     </main>
+   </>
   );
 };
 

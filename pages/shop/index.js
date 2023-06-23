@@ -10,6 +10,7 @@ import Product from "@/models/Products";
 import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
 import db from "@/utils/db";
+import Head from "next/head";
 
 const Shop = ({products,categories }) => {
   // const [categories, setCategories] = useState(null);
@@ -37,7 +38,12 @@ const Shop = ({products,categories }) => {
       });
   }
   return (
-    <main className="main">
+<>
+<Head>
+      <title>Safefoods-Shop</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+    </Head>
+<main className="main">
       <ToastContainer/>
 
     <div
@@ -158,6 +164,7 @@ const Shop = ({products,categories }) => {
     </div>
     {/* End .page-content */}
   </main>
+</>
   )
 }
 

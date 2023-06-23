@@ -1,7 +1,13 @@
+import Head from 'next/head';
 import React from 'react';
 
 const Policy = () => {
     return (
+     <>
+    <Head>
+      <title>Safefoods-Private Policy</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+    </Head>
         <div className='container my-5 p-5'>
              <div className="row">
                 <div className="col-lg-12">
@@ -108,6 +114,7 @@ const Policy = () => {
                 </div>
               </div>
         </div>
+     </>
     );
 };
 

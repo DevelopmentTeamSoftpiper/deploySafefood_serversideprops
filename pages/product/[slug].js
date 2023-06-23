@@ -12,6 +12,7 @@ import Product from "@/models/Products";
 import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
 import RelatedProducts from "@/components/product/RelatedProduct";
+import Head from "next/head";
 
 const ProductDetails = ({ product,products }) => {
   
@@ -33,7 +34,15 @@ const ProductDetails = ({ product,products }) => {
   const [quantity, setQuantity] = useState(1);
   const htmlContent = p?.description;
   return (
-    <main className="main">
+<>
+<Head>
+      <title>{p?.title}</title>
+      <meta name="description" content = {p?.shortDescription}/>
+      <meta property="og:title" content={p?.title} />
+      <meta property="og:description" content={p?.description} />
+      <meta property="og:image" content={p?.image} />
+    </Head>
+<main className="main">
       <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
         <div className="container d-flex align-items-center">
           <ol className="breadcrumb">
@@ -208,6 +217,7 @@ const ProductDetails = ({ product,products }) => {
       < RelatedProducts products={products} showToastMessage={showToastMessage} />
       </div>
     </main>
+</>
   );
 };
 

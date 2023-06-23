@@ -1,7 +1,13 @@
+import Head from 'next/head';
 import React from 'react';
 
 const Return = () => {
     return (
+   <>
+   <Head>
+      <title>Safefoods-Returns and Refund</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+    </Head>
         <div className='container  my-8 p-5'>
             <h3>
                  Return Policy
@@ -46,6 +52,7 @@ const Return = () => {
             </p>
             
         </div>
+   </>
     );
 };
 

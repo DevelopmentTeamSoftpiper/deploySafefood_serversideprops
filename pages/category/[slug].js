@@ -10,6 +10,7 @@ import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
 import Product from "@/models/Products";
 import db from "@/utils/db";
+import Head from "next/head";
 
 const CategoryProduct = ({ category, products, categories }) => {
   
@@ -26,7 +27,12 @@ const CategoryProduct = ({ category, products, categories }) => {
       });
   }
   return (
-    <main className="main">
+<>
+<Head>
+      <title>{category?.name}</title>
+      <meta name="description" content = {category?.name}/>
+    </Head>
+<main className="main">
       <ToastContainer/>
 
     <div
@@ -147,6 +153,7 @@ const CategoryProduct = ({ category, products, categories }) => {
     </div>
     {/* End .page-content */}
   </main>
+</>
   )
 }
 

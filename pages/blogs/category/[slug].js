@@ -3,13 +3,19 @@ import Blog from "@/models/Blog";
 import SubBlog from "@/models/SubBlog";
 import { fetchDataFromApi, getData } from "@/utils/api";
 import db from "@/utils/db";
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
-const BlogCategory = ({ blogCategories, blogCats, slug }) => {
+const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
 
   return (
-    <main className="main px-5">
+<>
+<Head>
+      <title>{subBlog?.title}</title>
+      <meta name="description" content = {subBlog?.title}/>
+    </Head>
+<main className="main px-5">
       <div
         className="page-header text-center"
         style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
@@ -135,6 +141,7 @@ const BlogCategory = ({ blogCategories, blogCats, slug }) => {
       </div>
       {/* End .page-content */}
     </main>
+</>
   );
 };
 
@@ -158,12 +165,13 @@ export async function getStaticPaths() {
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({ params: { slug } }) {
   const blogCategoriesData=  await SubBlog.find({}).sort({ updatedAt: -1 });
-  const subBlog = await SubBlog.findOne({slug:slug});
-  const blogCatsData = await Blog.find({ subBlog: subBlog._id  }).populate({path:"subBlog", model:SubBlog});
+  const subBlogData = await SubBlog.findOne({slug:slug});
+  const blogCatsData = await Blog.find({ subBlog: subBlogData._id  }).populate({path:"subBlog", model:SubBlog});
   db.disconnectDb();
   return {
     props: {
       blogCategories:JSON.parse(JSON.stringify(blogCategoriesData)),
+      subBlog:JSON.parse(JSON.stringify(subBlogData)),
 
       slug,
       blogCats: JSON.parse(JSON.stringify(blogCatsData))

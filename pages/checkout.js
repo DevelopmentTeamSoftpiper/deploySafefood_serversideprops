@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import Loader from "@/components/Loader";
+import Head from "next/head";
 const checkout = () => {
   const [isFetching,setIsFetching] = useState(false);
   const [isLoading, setIsLoading] =useState(false);
@@ -170,6 +171,11 @@ const checkout = () => {
 
 
   return (
+ <>
+     <Head>
+      <title>Safefoods-Checkout</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+    </Head>
     <div className="page-wrapper p-5">
       <ToastContainer />
 
@@ -513,6 +519,7 @@ const checkout = () => {
     </main>
 
     </div>
+ </>
   );
 };
 

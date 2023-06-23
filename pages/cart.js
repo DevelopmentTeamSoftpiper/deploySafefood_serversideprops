@@ -1,6 +1,7 @@
 /*eslint-disable */
 import CartItem from "@/components/product/CartItem";
 import { fetchDataFromApi } from "@/utils/api";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
@@ -27,6 +28,11 @@ const cart = () => {
 
 
   return (
+ <>
+    <Head>
+      <title>Safefoods-Cart</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+    </Head>
     <main className="main">
       <div
         className="page-header text-center"
@@ -171,6 +177,7 @@ const cart = () => {
       </div>
       {/* End .page-content */}
     </main>
+ </>
   );
 };
 

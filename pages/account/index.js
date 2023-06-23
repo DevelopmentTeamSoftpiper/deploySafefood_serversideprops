@@ -56,7 +56,12 @@ const index = () => {
   };
   console.log(userInfo);
   return (
-    <main className="main">
+<>
+<Head>
+      <title>My Account </title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+    </Head>
+<main className="main">
       <ToastContainer/>
       <div
         className="page-header text-center"
@@ -190,6 +195,7 @@ const index = () => {
         </div>
       </div>
     </main>
+</>
   );
 };
 

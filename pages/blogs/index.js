@@ -3,13 +3,19 @@ import Blog from '@/models/Blog';
 import SubBlog from '@/models/SubBlog';
 import { fetchDataFromApi, getData } from '@/utils/api';
 import db from '@/utils/db';
+import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react'
 
 const Blogs = ({blogs,blogCats}) => {
   
   return (
-    <main className="main px-5">
+<>
+<Head>
+      <title>Safefoods-Blogs</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+</Head>
+<main className="main px-5">
     <div
       className="page-header text-center"
       style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
@@ -140,6 +146,7 @@ const Blogs = ({blogs,blogCats}) => {
     </div>
     {/* End .page-content */}
   </main>
+</>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Head from "next/head";
 
 const Contact = () => {
   const [siteInfo, setSiteInfo] = useState(null);
@@ -15,7 +16,12 @@ const Contact = () => {
     getSiteInfo();
   },[])
   return (
-    <main className="main">
+<>
+<Head>
+      <title>Safefoods-Contact</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+    </Head>
+<main className="main">
       <div
         className="page-header text-center"
         style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
@@ -102,6 +108,7 @@ const Contact = () => {
         </div>
       </div>
     </main>
+</>
   );
 };
 
