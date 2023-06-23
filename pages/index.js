@@ -15,6 +15,7 @@ import SubBlog from "@/models/SubBlog";
 import Blog from "@/models/Blog";
 import Slider from "@/models/Slider";
 import Product from "@/models/Products";
+import Head from "next/head";
 
 
 export default function Home({ blogs,mainSlider,latestProducts,discountedProducts,bestDealProducts,categories}) {
@@ -33,6 +34,10 @@ const showToastMessage =(data)=>{
 
   return (
     <>
+    <Head>
+      <title>Safefoods</title>
+      <meta name="description" content = "For Your Family" />
+    </Head>
       <div className="page-wrapper" style={{padding:"10px"}}>
       <ToastContainer/>
 

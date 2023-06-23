@@ -31,7 +31,7 @@ const ProductDetails = ({ product,products }) => {
   }
 
   const [quantity, setQuantity] = useState(1);
-  
+  const htmlContent = p?.description;
   return (
     <main className="main">
       <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
@@ -198,9 +198,8 @@ const ProductDetails = ({ product,products }) => {
               >
                 <div className="product-desc-content">
                   <h3>Product Information</h3>
-                  <p>
-                    <ReactMarkdown>{p?.description}</ReactMarkdown>
-                  </p>
+                  <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                
                 </div>
               </div>
             </div>

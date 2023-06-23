@@ -33,10 +33,10 @@ const LatestProduct = ({ showToastMessage, products }) => {
             slidesPerView: 4,
           },
           1024: {
-            slidesPerView: 6,
+            slidesPerView: 5,
           },
           1280: {
-            slidesPerView: 6,
+            slidesPerView: 5,
           },
         }}
         navigation={true}

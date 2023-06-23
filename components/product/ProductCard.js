@@ -8,7 +8,7 @@ const ProductCard = ({data, showToastMsg}) => {
 
     const dispatch = useDispatch();
   return (
-    <div className="product d-flex flex-column overflow-hidden">
+    <div className="product d-flex flex-column overflow-hidden p-1">
     <figure className="mb-0 product-media bg-white d-flex justify-content-center align-items-center">
       <span className="product-label label-sale">SALE</span>
       <Link href={`/product/${data?.slug}`} className="w-100">

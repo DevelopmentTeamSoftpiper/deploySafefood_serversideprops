@@ -13,7 +13,7 @@ router.get(async (req, res) => {
     const products = await Product.find({})
       .populate("category")
       .populate("subCategory")
-      .sort({ updatedAt: -1 })
+      .sort({ createdAt: -1 })
       .lean();
     db.disconnectDb();
     return res.json({
