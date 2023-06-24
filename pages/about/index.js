@@ -1,7 +1,14 @@
+import Head from 'next/head';
 import React from 'react';
 
 const About = () => {
     return (
+    <>
+       <Head>
+      <title>Safefoods|About</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
         <div className='container text-justify my-10 p-5'>
             <h3> About </h3>
            <div>
@@ -87,6 +94,7 @@ const About = () => {
                 </ul>
            </div>
         </div>
+    </>
     );
 };
 

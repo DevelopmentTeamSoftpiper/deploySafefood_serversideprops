@@ -72,7 +72,7 @@ const EditProfile = () => {
         address: address,
         post_code: postalCode,
         city: city,
-        country: country,
+        country: country ? country : "Bangladesh",
         user_id_no: user._id,
       },
        {
@@ -280,12 +280,12 @@ const EditProfile = () => {
                 <form onSubmit={profileSubmitHandler}>
                   <div className="row">
                     <div className="col-sm-6">
-                      <label>Username </label>
+                      <label>Username <span style={{color:'red'}}>*</span> </label>
                       <input
                         type="text"
                         name="name"
                         className="form-control"
-                        required=""
+                        required={true}
                         value={name}
                         onChange={(e) => {
                           return setName(e.target.value);
@@ -299,7 +299,7 @@ const EditProfile = () => {
                         type="email"
                         name="email"
                         className="form-control"
-                        required=""
+                        
                         disabled={provider == "email-password"}
                         value={email}
                         onChange={(e) => {
@@ -311,12 +311,12 @@ const EditProfile = () => {
 
                   <div className="row">
                     <div className="col-sm-12">
-                      <label>Phone </label>
+                      <label>Phone <span style={{color:'red'}}>*</span> </label>
                       <input
                         type="text"
                         name="phone"
                         className="form-control"
-                        required=""
+                        required={true}
                         value={phone}
                         disabled={provider=="otp"}
                         onChange={(e) => {
@@ -326,12 +326,12 @@ const EditProfile = () => {
                     </div>
                   </div>
 
-                  <label>Address </label>
+                  <label>Flat No, House No, Road No <span style={{color:'red'}}>*</span> </label>
                   <input
                     type="text"
                     name="address"
                     className="form-control"
-                    required=""
+                    required={true}
                     value={address}
                     onChange={(e) => {
                       return setAddress(e.target.value);
@@ -344,7 +344,7 @@ const EditProfile = () => {
                         type="text"
                         name="postal_code"
                         className="form-control"
-                        required=""
+                       
                         value={postalCode}
                         onChange={(e) => {
                           return setPostalCode(e.target.value);
@@ -352,12 +352,12 @@ const EditProfile = () => {
                       />
                     </div>
                     <div className="col-md-4">
-                      <label>City </label>
+                      <label>District <span style={{color:'red'}}>*</span> </label>
                       <input
                         type="text"
                         name="city"
                         className="form-control"
-                        required=""
+                        required={true}
                         value={city}
                         onChange={(e) => {
                           return setCity(e.target.value);
@@ -365,12 +365,12 @@ const EditProfile = () => {
                       />
                     </div>
                     <div className="col-md-4">
-                      <label>Country </label>
+                      <label>Country <span style={{color:'red'}}>*</span> </label>
                       <input
                         type="text"
                         name="country"
                         className="form-control"
-                        required=""
+                        required={true}
                         value={country}
                         onChange={(e) => {
                           return setCountry(e.target.value);

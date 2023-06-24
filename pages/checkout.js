@@ -231,6 +231,7 @@ const checkout = () => {
         </div> */}
             {/* End .checkout-discount */}
 
+            <form onSubmit={orderSubmitHandler}>
             <div className="row">
               <div className="col-lg-7">
                 <h2 className="checkout-title">Billing Details</h2>
@@ -238,9 +239,10 @@ const checkout = () => {
                 {isFetching && <Loader/>}
                 {!isFetching && 
                   <div>
+
                   <div className="row">
                     <div className="col-sm-6">
-                      <label>Name </label>
+                      <label>Name <span style={{color:'red'}}>*</span> </label>
                       <input
                         type="text"
                         name="name"
@@ -259,7 +261,7 @@ const checkout = () => {
                         type="email"
                         name="email"
                         className="form-control"
-                        required={true}
+                        // required={true}
                         value={email}
                         onChange={(e) => {
                           return setEmail(e.target.value);
@@ -269,7 +271,7 @@ const checkout = () => {
                   </div>
                   <div className="row">
                     <div className="col-sm-6">
-                      <label>Phone No </label>
+                      <label>Phone No <span style={{color:'red'}}>*</span></label>
                       <input
                         type="text"
                         name="phone"
@@ -283,12 +285,12 @@ const checkout = () => {
                     </div>
   
                     <div className="col-sm-6">
-                      <label>Address </label>
+                      <label>Flat No, House No, Road No <span style={{color:'red'}}>*</span></label>
                       <input
                         type="text"
                         name="address"
                         className="form-control"
-                        required=""
+                        required={true}
                         value={address}
                         onChange={(e) => {
                           return setAddress(e.target.value);
@@ -303,7 +305,7 @@ const checkout = () => {
                         type="text"
                         name="post_code"
                         className="form-control"
-                        required=""
+                        
                         value={postalCode}
                         onChange={(e) => {
                           return setPostalCode(e.target.value);
@@ -312,12 +314,12 @@ const checkout = () => {
                     </div>
   
                     <div className="col-sm-6">
-                      <label>City </label>
+                      <label>District <span style={{color:'red'}}>*</span></label>
                       <input
                         type="text"
                         name="city"
                         className="form-control"
-                        required=""
+                        required={true}
                         value={city}
                         onChange={(e) => {
                           return setCity(e.target.value);
@@ -326,13 +328,13 @@ const checkout = () => {
                     </div>
   
                     <div className="col-sm-6">
-                      <label>Country </label>
+                      <label>Country <span style={{color:'red'}}>*</span></label>
                       <input
                         type="text"
                         name="country"
                         className="form-control"
                         required=""
-                        value={country}
+                        value={country? country: "Bangladesh"}
                         onChange={(e) => {
                           return setCountry(e.target.value);
                         }}
@@ -341,10 +343,6 @@ const checkout = () => {
                   </div>
                   </div>
                 }
-                {/* End .row */}
-
-                {/* End .row */}
-
                 <label>Order notes (optional)</label>
                 <textarea
                   className="form-control"
@@ -354,12 +352,12 @@ const checkout = () => {
                   value={orderNotes}
                   onChange={(e) => setOrderNotes(e.target.value)}
                 />
+                
+
               </div>
-              {/* End .col-lg-9 */}
               <aside className="col-lg-5">
                 <div className="summary">
                   <h3 className="summary-title">Your Order</h3>
-                  {/* End .summary-title */}
                   <table className="table table-summary">
                     <thead>
                       <tr>
@@ -424,7 +422,6 @@ const checkout = () => {
                       {/* End .summary-total */}
                     </tbody>
                   </table>
-                  {/* End .table table-summary */}
                   <tr className="summary-shipping">
                     <td style={{ fontSize: "1.5rem", fontWeight: 600 }}>
                       Payment Method:
@@ -498,18 +495,21 @@ const checkout = () => {
                   {/* End .accordion */}
                   <button
                     className="btn btn-outline-primary-2 btn-order btn-block mt-2"
-                    onClick={orderSubmitHandler}
+                   type="submit"
                   >
                     <span className="btn-text">Place Order</span>
                     <span className="btn-hover-text">
                       Proceed to Checkout
                     </span>
                   </button>
+
                 </div>
+                
                 {/* End .summary */}
               </aside>
               {/* End .col-lg-3 */}
             </div>
+            </form>
             {/* End .row */}
           </div>
           {/* End .container */}
