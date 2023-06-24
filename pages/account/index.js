@@ -3,6 +3,7 @@ import { logout } from "@/store/userSlice";
 import { fetchDataFromApi } from "@/utils/api";
 import withAuth from "@/utils/restrict";
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -54,7 +55,7 @@ const index = () => {
       theme: "dark",
       });
   };
-  console.log(userInfo);
+
   return (
 <>
 <Head>
