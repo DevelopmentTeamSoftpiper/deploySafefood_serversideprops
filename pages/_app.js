@@ -12,8 +12,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/store/store";
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+
 
 export default function App({ Component, pageProps }) {
 

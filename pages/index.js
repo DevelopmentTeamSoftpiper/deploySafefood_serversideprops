@@ -34,10 +34,13 @@ const showToastMessage =(data)=>{
 
   return (
     <>
+    <div>
     <Head>
-      <title>Safefoods</title>
+      <title>Safefoods| For Your Family</title>
       <meta name="description" content = "For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
+    </div>
       <div className="page-wrapper" style={{padding:"10px"}}>
       <ToastContainer/>
 

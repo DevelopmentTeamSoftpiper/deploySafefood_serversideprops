@@ -71,7 +71,7 @@ const checkout = () => {
 
 
   const [shippings, setShippings] = useState(null);
-  const [shippingCost, setShippingCost] = useState("70");
+  const [shippingCost, setShippingCost] = useState("60");
 
   const shippingCostChangeHandler = (e) => {
     setShippingCost(e.target.value);
@@ -452,7 +452,7 @@ const checkout = () => {
                               }
                             />
                             <p>{method?.name} </p>
-                            <small>{method?.description}</small>
+                            <p style={{color:"black", fontWeight:600}}>{method?.description}</p>
                           </label>
                         </div>
                         {/* End .custom-control */}
