@@ -18,8 +18,9 @@ const Contact = () => {
   return (
 <>
 <Head>
-      <title>Safefoods-Contact</title>
+      <title>Safefoods|Contact</title>
       <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
 <main className="main">
       <div

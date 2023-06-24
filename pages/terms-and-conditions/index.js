@@ -1,7 +1,15 @@
+import Head from 'next/head';
 import React from 'react';
 
 const TermsCondition = () => {
     return (
+   <>
+       <Head>
+      <title>Safefoods|Terms and Conditions</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+
+    </Head>
         <div className='container text-justify p-5 my-10'>
             <div className='row'>
                 <section>
@@ -261,6 +269,7 @@ const TermsCondition = () => {
 
             </div>
         </div>
+   </>
     );
 };
 

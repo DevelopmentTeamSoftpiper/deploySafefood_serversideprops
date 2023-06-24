@@ -10,6 +10,7 @@ import db from "@/utils/db";
 import SubCategory from "@/models/SubCategory";
 import Product from "@/models/Products";
 import Category from "@/models/Category";
+import Head from "next/head";
 
 const SubCategoryProduct = ({ subCategory, products , categories}) => {
   
@@ -28,7 +29,15 @@ const SubCategoryProduct = ({ subCategory, products , categories}) => {
         });
     }
   return (
-    <main className="main">
+<>
+<Head>
+      <title>Safefoods|{subCategory?.name}</title>
+      <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+
+    </Head>
+
+<main className="main">
     <div
       className="page-header text-center"
       style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
@@ -151,6 +160,7 @@ const SubCategoryProduct = ({ subCategory, products , categories}) => {
     </div>
     {/* End .page-content */}
   </main>
+</>
   )
 }
 

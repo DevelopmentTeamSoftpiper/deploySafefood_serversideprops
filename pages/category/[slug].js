@@ -29,8 +29,9 @@ const CategoryProduct = ({ category, products, categories }) => {
   return (
 <>
 <Head>
-      <title>{category?.name}</title>
+      <title>Safefoods|{category?.name}</title>
       <meta name="description" content = {category?.name}/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
 <main className="main">
       <ToastContainer/>

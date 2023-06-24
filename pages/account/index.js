@@ -58,8 +58,9 @@ const index = () => {
   return (
 <>
 <Head>
-      <title>My Account </title>
+      <title>Safefoods|My Account </title>
       <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
 <main className="main">
       <ToastContainer/>

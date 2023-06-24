@@ -38,6 +38,7 @@ const ProductDetails = ({ product,products }) => {
 <Head>
       <title>{p?.title}</title>
       <meta name="description" content = {p?.shortDescription}/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
       <meta property="og:title" content={p?.title} />
       <meta property="og:description" content={p?.description} />
       <meta property="og:image" content={p?.image} />

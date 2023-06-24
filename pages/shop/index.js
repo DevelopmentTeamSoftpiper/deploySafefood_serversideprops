@@ -40,8 +40,10 @@ const Shop = ({products,categories }) => {
   return (
 <>
 <Head>
-      <title>Safefoods-Shop</title>
+      <title>Safefoods|Shop</title>
       <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+
     </Head>
 <main className="main">
       <ToastContainer/>

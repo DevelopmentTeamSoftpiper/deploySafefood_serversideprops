@@ -9,6 +9,7 @@ import jwt from 'jwt-decode';
 import Timer from "@/components/auth/Timer";
 import axios from "axios";
 import { jwtSuccess, loginFailure, loginSuccess, providerSuccess } from "@/store/userSlice";
+import Head from "next/head";
 
 const OtpVerification = () => {
   const [number, setNumber] = useState("");
@@ -106,6 +107,11 @@ const dispatch = useDispatch();
 
   return (
     <>
+      <Head>
+      <title>Safefoods|OTP-verification</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
       <ToastContainer />
       {!token && <p>First Login with OTP and try again.</p>}
       {token && (

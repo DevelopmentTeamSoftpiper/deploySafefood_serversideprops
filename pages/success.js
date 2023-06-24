@@ -1,6 +1,7 @@
 import SuccessProduct from "@/components/checkout/SuccessProduct";
 import withAuth from "@/utils/restrict";
 import axios from "axios";
+import Head from "next/head";
 import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -38,7 +39,13 @@ const Success = () => {
   }
 
   return (
-    <div className="page-wrapper p-5">
+<>
+<Head>
+      <title>Safefoods|Order Summery</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
+<div className="page-wrapper p-5">
       <main className="main">
         <div
           className="page-header text-center"
@@ -171,6 +178,7 @@ const Success = () => {
         {/* End .page-content */}
       </main>
     </div>
+</>
   );
 };
 

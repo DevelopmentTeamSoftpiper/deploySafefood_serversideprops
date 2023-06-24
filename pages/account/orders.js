@@ -2,6 +2,7 @@
 import { logout } from "@/store/userSlice";
 import withAuth from "@/utils/restrict";
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -101,6 +102,12 @@ const Orders = () => {
     getOrders();
   }, []);
   return (
+  <>
+  <Head>
+      <title>Safefoods|My Orders</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
     <main className="main">
       <ToastContainer/>
       <div
@@ -398,6 +405,7 @@ const Orders = () => {
         </div>
       </div>
     </main>
+  </>
   );
 };
 

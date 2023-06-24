@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import jwt from 'jwt-decode';
 import Timer from "@/components/auth/Timer";
 import axios from "axios";
+import Head from "next/head";
 
 const VerifyAccount = () => {
   const [number, setNumber] = useState("");
@@ -70,6 +71,11 @@ const VerifyAccount = () => {
 
   return (
     <>
+    <Head>
+      <title>Safefoods|Reset Password</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
       <ToastContainer />
       {!token && <p>First signup and then activate your account</p>}
       {token && (

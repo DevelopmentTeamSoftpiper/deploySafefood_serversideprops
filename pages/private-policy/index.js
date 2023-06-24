@@ -5,8 +5,9 @@ const Policy = () => {
     return (
      <>
     <Head>
-      <title>Safefoods-Private Policy</title>
+      <title>Safefoods|Private Policy</title>
       <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
         <div className='container my-5 p-5'>
              <div className="row">

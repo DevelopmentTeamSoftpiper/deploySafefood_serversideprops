@@ -173,8 +173,9 @@ const checkout = () => {
   return (
  <>
      <Head>
-      <title>Safefoods-Checkout</title>
+      <title>Safefoods|Checkout</title>
       <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
     <div className="page-wrapper p-5">
       <ToastContainer />

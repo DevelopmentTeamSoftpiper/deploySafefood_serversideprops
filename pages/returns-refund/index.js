@@ -5,8 +5,10 @@ const Return = () => {
     return (
    <>
    <Head>
-      <title>Safefoods-Returns and Refund</title>
+      <title>Safefoods|Returns and Refund</title>
       <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+
     </Head>
         <div className='container  my-8 p-5'>
             <h3>

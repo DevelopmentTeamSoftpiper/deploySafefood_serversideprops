@@ -150,7 +150,13 @@ const otpLogin = async() =>{
 
   }
   return (
-    <main className="main">
+<>
+<Head>
+      <title>Safefoods|Login</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
+<main className="main">
       <ToastContainer/>
 
       <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
@@ -323,6 +329,7 @@ const otpLogin = async() =>{
         </div>
       </div>
     </main>
+</>
   );
 };
 

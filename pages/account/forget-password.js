@@ -1,5 +1,6 @@
 import { forgotPasswordSuccess } from "@/store/userSlice";
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -45,7 +46,13 @@ const ForgetPassword = () => {
       };
       // console.log(email);
   return (
-    <main className="main">
+<>
+<Head>
+      <title>Safefoods|Verity Email</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
+<main className="main">
       <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
         <div className="container">
           <ol className="breadcrumb">
@@ -125,6 +132,7 @@ const ForgetPassword = () => {
       </div>
       {/* End .login-page section-bg */}
     </main>
+</>
   );
 };
 

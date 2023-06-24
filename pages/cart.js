@@ -30,8 +30,10 @@ const cart = () => {
   return (
  <>
     <Head>
-      <title>Safefoods-Cart</title>
+      <title>Safefoods|Cart</title>
       <meta name="description" content = "Safefoods: For Your Family" />
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+
     </Head>
     <main className="main">
       <div

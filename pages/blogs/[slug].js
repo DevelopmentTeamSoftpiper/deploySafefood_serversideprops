@@ -16,8 +16,9 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
   return (
  <>
   <Head>
-      <title>{bl?.title}</title>
+      <title>Safefoods|{bl?.title}</title>
       <meta name="description" content = {bl?.content}/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
       <meta property="og:title" content={bl?.title} />
       <meta property="og:description" content={bl?.content} />
       <meta property="og:image" content={bl?.image} />

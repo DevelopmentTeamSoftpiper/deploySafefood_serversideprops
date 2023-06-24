@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { signupSuccess } from "@/store/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 const register = () => {
 
   const dispatch = useDispatch();
@@ -72,7 +73,14 @@ const register = () => {
     signup();
   };
   return (
-    <main className="main">
+<>
+
+<Head>
+      <title>Safefoods|Register</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
+<main className="main">
       <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
         <div className="container">
           <ol className="breadcrumb">
@@ -193,6 +201,7 @@ const register = () => {
       </div>
       {/* End .login-page section-bg */}
     </main>
+</>
   );
 };
 

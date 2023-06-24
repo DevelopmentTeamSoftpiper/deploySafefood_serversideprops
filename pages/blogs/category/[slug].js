@@ -12,8 +12,9 @@ const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
   return (
 <>
 <Head>
-      <title>{subBlog?.title}</title>
+      <title>Safefoods|{subBlog?.title}</title>
       <meta name="description" content = {subBlog?.title}/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
 <main className="main px-5">
       <div

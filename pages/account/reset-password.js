@@ -1,6 +1,7 @@
 import AlertBox from '@/components/elements/AlertBox';
 import { API_URL } from '@/utils/urls';
 import axios from 'axios';
+import Head from 'next/head';
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
@@ -52,7 +53,14 @@ const ResetPassword = () => {
 
     
   return (
-    <main className="main">
+<>
+
+<Head>
+      <title>Safefoods|Reset Password</title>
+      <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+    </Head>
+<main className="main">
       <ToastContainer/>
 
     <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
@@ -172,6 +180,7 @@ const ResetPassword = () => {
     </div>
     {/* End .login-page section-bg */}
   </main>
+</>
   )
 }
 

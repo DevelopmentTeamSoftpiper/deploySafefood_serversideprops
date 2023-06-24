@@ -176,8 +176,9 @@ const EditProfile = () => {
   return (
     <>
        <Head>
-      <title>Edit Account Details</title>
+      <title>Safefoods|Edit Account Details</title>
       <meta name="description" content = "Safefoods: For Your Family"/>
+      <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
         <main className="main">
       <ToastContainer />
