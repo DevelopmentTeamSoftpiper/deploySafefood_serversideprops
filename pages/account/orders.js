@@ -104,9 +104,20 @@ const Orders = () => {
   return (
   <>
   <Head>
-      <title>Safefoods|My Orders</title>
-      <meta name="description" content = "Safefoods: For Your Family"/>
-      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  <title>Safefoods | Account | Orders</title>
+  <meta name="description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
+  <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  <meta property="og:url" content="https://safefoods.com.bd/account/orders"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Safefoods | Account | Orders"/>
+  <meta property="og:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
+  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:domain" content="safefoods.com.bd"/>
+  <meta property="twitter:url" content="https://safefoods.com.bd/account/orders"/>
+  <meta name="twitter:title" content="Safefoods | Account | Orders"/>
+  <meta name="twitter:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
+  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
     </Head>
     <main className="main">
       <ToastContainer/>

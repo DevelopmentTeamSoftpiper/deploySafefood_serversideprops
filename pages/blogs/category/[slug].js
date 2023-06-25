@@ -8,13 +8,24 @@ import Link from "next/link";
 import React from "react";
 
 const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
-
   return (
 <>
 <Head>
-      <title>Safefoods|{subBlog?.title}</title>
-      <meta name="description" content = {subBlog?.title}/>
-      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+<title>Safefoods | Blogs | {subBlog?.title}</title>
+  <meta name="description" content={subBlog?.title}/>
+  <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  
+  <meta property="og:url" content={`https://safefoods.com.bd/blogs/category/${subBlog?.slug}`}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content={`Safefoods | Blogs | ${subBlog?.title}`} />
+  <meta property="og:description" content={subBlog?.title}/>
+  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:domain" content="safefoods.com.bd"/>
+  <meta property="twitter:url" content={`https://safefoods.com.bd/blogs/category/${subBlog?.slug}`}/>
+  <meta name="twitter:title" content={`Safefoods | Blogs | ${subBlog?.title}`}/>
+  <meta name="twitter:description" content={subBlog?.title}/>
+  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
     </Head>
 <main className="main px-5">
       <div
@@ -22,7 +33,7 @@ const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
         style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
       >
         <div className="container">
-          <h1 className="page-title">{slug.toUpperCase()} Blogs</h1>
+          <h1 className="page-title">{subBlog?.title} Blogs</h1>
         </div>
         {/* End .container */}
       </div>
@@ -37,7 +48,7 @@ const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
               <Link href="/blogs">Blog</Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              {slug.toUpperCase()}
+            {subBlog?.title}
             </li>
           </ol>
         </div>

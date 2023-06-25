@@ -36,12 +36,22 @@ const ProductDetails = ({ product,products }) => {
   return (
 <>
 <Head>
-      <title>{p?.title}</title>
-      <meta name="description" content = {p?.shortDescription}/>
-      <link rel="icon" href="/assets/images/logo-safefoods.png" />
-      <meta property="og:title" content={p?.title} />
-      <meta property="og:description" content={p?.description} />
-      <meta property="og:image" content={p?.image} />
+
+  <title>Safefoods | Product | {p?.title}</title>
+  <meta name="description" content={p?.shortDescription}/>
+  <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  
+  <meta property="og:url" content={`https://safefoods.com.bd/product/${p?.slug}`}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content={`Safefoods |${p?.title}`} />
+  <meta property="og:description" content={p?.shortDescription}/>
+  <meta property="og:image" content={p?.image}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:domain" content="safefoods.com.bd"/>
+  <meta property="twitter:url" content={`https://safefoods.com.bd/product/${p?.slug}`}/>
+  <meta name="twitter:title" content={`Safefoods | ${p?.title}`}/>
+  <meta name="twitter:description" content={p?.shortDescription}/>
+  <meta name="twitter:image" content={p?.image}/>
     </Head>
 <main className="main">
       <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">

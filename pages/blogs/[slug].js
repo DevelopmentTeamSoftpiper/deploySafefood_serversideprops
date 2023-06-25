@@ -16,12 +16,21 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
   return (
  <>
   <Head>
-      <title>Safefoods|{bl?.title}</title>
-      <meta name="description" content = {bl?.content}/>
-      <link rel="icon" href="/assets/images/logo-safefoods.png" />
-      <meta property="og:title" content={bl?.title} />
-      <meta property="og:description" content={bl?.content} />
-      <meta property="og:image" content={bl?.image} />
+  <title>Safefoods | Blogs | {bl?.title}</title>
+  <meta name="description" content={bl?.title}/>
+  <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  
+  <meta property="og:url" content={`https://safefoods.com.bd/blogs/${bl?.slug}`}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content={`Safefoods |${bl?.title}`} />
+  <meta property="og:description" content={bl?.title}/>
+  <meta property="og:image" content={bl?.image}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:domain" content="safefoods.com.bd"/>
+  <meta property="twitter:url" content={`https://safefoods.com.bd/blogs/${bl?.slug}`}/>
+  <meta name="twitter:title" content={`Safefoods | ${bl?.title}`}/>
+  <meta name="twitter:description" content={bl?.title}/>
+  <meta name="twitter:image" content={bl?.image}/>
     </Head>
 
     <main className="main px-5">
