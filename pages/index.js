@@ -52,7 +52,7 @@ const showToastMessage =(data)=>{
   <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
     </Head>
     </div>
-      <div className="page-wrapper" style={{padding:"10px"}}>
+      <div className="page-wrapper" style={{padding:"5px"}}>
       <ToastContainer/>
 
 

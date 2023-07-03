@@ -16,7 +16,7 @@ const ProductCarousel = ({ title, products, showToastMessage }) => {
   };
   return (
     <div className="container deal-section">
-      <h3 className="title text-center mt-5 font-weight-bold">{title}</h3>
+      <h3 className="title text-center mt-1 font-weight-bold">{title}</h3>
 
       <Swiper
         breakpoints={{
