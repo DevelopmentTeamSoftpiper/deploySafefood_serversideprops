@@ -39,10 +39,10 @@ const Blog = ({ blogs }) => {
               slidesPerView: 3,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 4,
             },
             1280: {
-              slidesPerView: 3,
+              slidesPerView: 4,
             },
           }}
           navigation={true}

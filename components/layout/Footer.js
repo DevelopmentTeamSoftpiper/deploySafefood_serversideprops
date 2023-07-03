@@ -163,7 +163,7 @@ const Footer = () => {
     </div>
 
     <a
-    href="https://wa.me/8801674974381?text="
+    href="https://wa.me/8801326709913?text="
     target="_blank"
     className="material-symbols-outlined floating-btn"
   >
