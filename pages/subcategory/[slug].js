@@ -31,10 +31,21 @@ const SubCategoryProduct = ({ subCategory, products , categories}) => {
   return (
 <>
 <Head>
-      <title>Safefoods|{subCategory?.name}</title>
-      <meta name="description" content = "Safefoods: For Your Family" />
-      <link rel="icon" href="/assets/images/logo-safefoods.png" />
-
+  <title>Safefoods | Products | {subCategory?.name}</title>
+  <meta name="description" content={subCategory?.name}/>
+  <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  
+  <meta property="og:url" content={`https://safefoods.com.bd/subcategory/${subCategory?.slug}`}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content={`Safefoods | Products | ${subCategory?.name}`} />
+  <meta property="og:description" content={subCategory?.name}/>
+  <meta property="og:image" content={subCategory?.image}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:domain" content="safefoods.com.bd"/>
+  <meta property="twitter:url" content={`https://safefoods.com.bd/subcategory/${subCategory?.slug}`}/>
+  <meta name="twitter:title" content={`Safefoods | Products | ${subCategory?.name}`}/>
+  <meta name="twitter:description" content={subCategory?.name}/>
+  <meta name="twitter:image" content={subCategory?.image}/>
     </Head>
 
 <main className="main">

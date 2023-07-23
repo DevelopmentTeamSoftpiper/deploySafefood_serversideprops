@@ -17,7 +17,7 @@ const LatestProduct = ({ showToastMessage, products }) => {
 
   return (
     <div className="container deal-section">
-      <h3 className="title text-center mt-5 font-weight-bold">
+      <h3 className="title text-center mt-1 font-weight-bold">
         Latest Products
       </h3>
 
@@ -33,10 +33,10 @@ const LatestProduct = ({ showToastMessage, products }) => {
             slidesPerView: 4,
           },
           1024: {
-            slidesPerView: 5,
+            slidesPerView: 6,
           },
           1280: {
-            slidesPerView: 5,
+            slidesPerView: 6,
           },
         }}
         navigation={true}

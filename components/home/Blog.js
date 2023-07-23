@@ -30,19 +30,19 @@ const Blog = ({ blogs }) => {
         <Swiper
           breakpoints={{
             0: {
-              slidesPerView: 2,
+              slidesPerView: 1,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
             },
             768: {
               slidesPerView: 3,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 4,
             },
             1280: {
-              slidesPerView: 3,
+              slidesPerView: 4,
             },
           }}
           navigation={true}

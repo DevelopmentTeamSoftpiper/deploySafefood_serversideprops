@@ -7769,6 +7769,7 @@ min-height:178px;
 
 .new-price {
   color: #ef837b;
+  font-size:1.5rem;
   margin-right: .8rem; }
 
 .old-price {
@@ -11796,7 +11797,7 @@ button:focus {
 /*--------------------- 5.4.Blog -------------------- */
 .entry {
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 0rem;
   font-size: 1.4rem;
   line-height: 1.85; }
 
@@ -11811,8 +11812,8 @@ button:focus {
     display: block;
     max-width: none;
     width: 100%;
-    max-height:200px;
-  min-height: 195px; }
+    max-height:132px;
+  min-height: 130px; }
 
 .entry-video a:after {
   content: '\ec2c';

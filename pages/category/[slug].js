@@ -13,7 +13,7 @@ import db from "@/utils/db";
 import Head from "next/head";
 
 const CategoryProduct = ({ category, products, categories }) => {
-  
+  console.log(category);
   const showToastMsg =(data)=>{
     toast.success(data.msg, {
       position: "top-right",
@@ -29,9 +29,21 @@ const CategoryProduct = ({ category, products, categories }) => {
   return (
 <>
 <Head>
-      <title>Safefoods|{category?.name}</title>
-      <meta name="description" content = {category?.name}/>
-      <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  <title>Safefoods | Products | {category?.name}</title>
+  <meta name="description" content={category?.name}/>
+  <link rel="icon" href="/assets/images/logo-safefoods.png" />
+  
+  <meta property="og:url" content={`https://safefoods.com.bd/category/${category?.slug}`}/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content={`Safefoods | Products | ${category?.name}`} />
+  <meta property="og:description" content={category?.name}/>
+  <meta property="og:image" content={category?.image}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:domain" content="safefoods.com.bd"/>
+  <meta property="twitter:url" content={`https://safefoods.com.bd/category/${category?.slug}`}/>
+  <meta name="twitter:title" content={`Safefoods | Products | ${category?.name}`}/>
+  <meta name="twitter:description" content={category?.name}/>
+  <meta name="twitter:image" content={category?.image}/>
     </Head>
 <main className="main">
       <ToastContainer/>
