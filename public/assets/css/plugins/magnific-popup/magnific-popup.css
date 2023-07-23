@@ -186,7 +186,7 @@ button::-moz-focus-inner {
   top: 0;
   right: 0;
   color: #CCC;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 18px;
   white-space: nowrap; }
 
@@ -280,7 +280,7 @@ img.mfp-img {
   .mfp-figure small {
     color: #BDBDBD;
     display: block;
-    font-size: 12px;
+    font-size: 16px;
     line-height: 14px; }
   .mfp-figure figure {
     margin: 0; }

@@ -14,10 +14,11 @@ const ProductCard = ({data, showToastMsg}) => {
       <Link href={`/product/${data?.slug}`} className="w-100">
         <Image
           src={data?.image}
-          alt="Product image"
+          alt={data?.slug}
           className="product-image"
           width={239}
           height={239}
+          priority={true}
         />
        
       </Link>

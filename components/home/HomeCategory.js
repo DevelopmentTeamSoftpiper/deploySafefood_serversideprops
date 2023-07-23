@@ -49,7 +49,7 @@ const HomeCategory = ({ categories }) => {
                     <Link href={`/category/${cat?.attributes?.slug}`}>
                       <Image
                         src={cat?.attributes?.image?.data?.[0]?.attributes?.url}
-                        
+                        priority={true}
                         alt="img"
                         width={30}
                         height={30}

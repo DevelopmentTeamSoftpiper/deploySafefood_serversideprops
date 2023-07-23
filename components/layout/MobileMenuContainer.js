@@ -129,6 +129,7 @@ const MobileMenuContainer = ({ showMenu, menuCloseHandler }) => {
                         width={30}
                         src={p?.url}
                         alt={p?.title}
+                        priority={true}
                       />
                       <span className="d-flex align-items-center">
                         {p?.title}

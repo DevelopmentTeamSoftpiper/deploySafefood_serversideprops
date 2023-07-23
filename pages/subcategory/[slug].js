@@ -117,6 +117,7 @@ const SubCategoryProduct = ({ subCategory, products , categories}) => {
                         width={20}
                         src={c?.image}
                         alt={c?.name}
+                        priority={true}
                       />
                       {c?.name}
                     </Link>

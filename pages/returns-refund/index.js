@@ -11,9 +11,9 @@ const Return = () => {
 
     </Head>
         <div className='container  my-8 p-5'>
-            <h3>
+            <h1 className='text-center'>
                  Return Policy
-            </h3>
+            </h1>
             <p>
                     A user may return any product during the time of delivery, if:
             </p>

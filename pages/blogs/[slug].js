@@ -54,6 +54,8 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
               alt={bl?.title}
               width={400}
               height={200}
+              priority={true}
+              
             />
           </figure>
           {/* End .entry-media */}
@@ -68,7 +70,7 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
               </a>
             </div>
             {/* End .entry-meta */}
-            <h2 className="entry-title">{bl?.title}</h2>
+            <h1 className="entry-title">{bl?.title}</h1>
             {/* End .entry-title */}
             <div className="entry-cats">
               in   

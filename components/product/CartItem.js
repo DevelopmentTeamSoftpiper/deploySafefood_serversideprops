@@ -26,9 +26,10 @@ const CartItem = ({cartProduct}) => {
               src={
                 cartProduct?.image
               }
-              alt="product"
+              alt={cartProduct.slug}
               width={200}
               height={300}
+              priority={true}
             />
           </Link>
         </figure>

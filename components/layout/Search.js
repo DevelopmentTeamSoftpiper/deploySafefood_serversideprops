@@ -122,7 +122,7 @@ const Search = () => {
                     className="d-flex align-items-center"
                     href={`/product/${p?.slug}`}
                   >
-                    <Image height={30} width={30} src={p?.url} alt={p?.title} />
+                    <Image height={30} width={30} src={p?.url} alt={p?.title}  priority={true} />
                     <span className="d-flex align-items-center">
                       {p?.title}
                     </span>

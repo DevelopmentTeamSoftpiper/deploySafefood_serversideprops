@@ -15,6 +15,7 @@ const PageArticles = ({blog}) => {
           alt={blog?.title}
           width={335}
           height={200}
+          priority={true}
         />
           </Link>
         </figure>

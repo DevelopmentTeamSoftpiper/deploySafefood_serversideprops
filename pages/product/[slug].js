@@ -76,7 +76,7 @@ const ProductDetails = ({ product,products }) => {
                         width={300}
                         height={300}
                         alt={p?.title}
-                        priority="true"
+                        priority={true}
                       />
                       {/* <Link
                         href="#"

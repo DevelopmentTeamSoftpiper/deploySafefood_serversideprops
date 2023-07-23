@@ -29,6 +29,7 @@ const Footer = () => {
               alt="safefood logo"
               width={65}
               height={25}
+              priority={true}
             />
             
              <ul className="widget-list mt-3">

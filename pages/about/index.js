@@ -5,12 +5,12 @@ const About = () => {
     return (
     <>
        <Head>
-      <title>Safefoods|About</title>
+      <title>Safefoods | About of Safefoods</title>
       <meta name="description" content = "Safefoods: For Your Family"/>
       <link rel="icon" href="/assets/images/logo-safefoods.png" />
     </Head>
         <div className='container text-justify my-10 p-5'>
-            <h3> About </h3>
+            <h1 className='text-center'> About </h1>
            <div>
                 <h5> Why We Start? </h5>
                 <p>

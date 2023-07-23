@@ -1,0 +1,23 @@
+# *
+User-agent: *
+Disallow: /checkout
+Disallow: /account
+Disallow: /account/edit-profile
+Disallow: /account/details
+Disallow: /cart
+Disallow: /account/email-verification
+Disallow: /account/forget-password
+Disallow: /account/orders
+Disallow: /account/otp-verification
+Disallow: /account/reset-password
+Disallow: /account/verify-account
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://safefoods.com.bd
+
+# Sitemaps
+Sitemap: https://safefoods.com.bd/sitemap.xml

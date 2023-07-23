@@ -18,6 +18,7 @@ const TestCategoryRow = ({pd}) => {
             className="product-image"
             width={192}
             height={192}
+            priority={true}
             />
             <Image
             src="assets/images/demos/demo-26/products/product-7-2.jpg"
@@ -25,6 +26,7 @@ const TestCategoryRow = ({pd}) => {
             className="product-image-hover"
             width={192}
             height={192}
+            priority={true}
             />
         </Link>
         <div className="product-action-vertical">

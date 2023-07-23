@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
+import Image from "next/image";
 
 export default function MainSwiper({ mainSlider }) {
   return (
@@ -30,7 +31,8 @@ export default function MainSwiper({ mainSlider }) {
       >
         {mainSlider?.map((slider) => (
           <SwiperSlide key={slider?._id}>
-            <img style={{ width: "100%" }} src={slider?.image} alt="" />
+            {/* <img style={{ width: "100%" }} src={slider?.image} alt="Carousel Image" /> */}
+            <Image width={1000} height={1000} src={slider?.image} alt="Carousel Image"  priority={true} />
           </SwiperSlide>
         ))}
       </Swiper>

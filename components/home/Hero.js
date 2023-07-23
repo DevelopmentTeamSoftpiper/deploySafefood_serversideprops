@@ -34,6 +34,7 @@ const Hero = ({mainSlider, categories}) => {
                         width={20}
                         src={c?.image}
                         alt={c?.name}
+                        priority={true}
                       />
                       {c?.name}
                     </Link>

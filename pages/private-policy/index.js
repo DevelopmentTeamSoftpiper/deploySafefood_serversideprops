@@ -13,7 +13,7 @@ const Policy = () => {
              <div className="row">
                 <div className="col-lg-12">
                     <div className=''>
-                        <h3> Privacy Policy </h3>
+                        <h1 className='text-center'> Privacy Policy </h1>
                         <p>
                             This privacy policy has been published for visitors to let them know how Personally Identifiable Information (PII) is being used on our website. PII has been described based on US privacy law and information security. Please go through this privacy policy sincerely to know about how we collect, use, protect your PII on our website.
                         </p>

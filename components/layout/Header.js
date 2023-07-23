@@ -115,6 +115,7 @@ const Header = () => {
                   alt="safefoods Logo"
                   width={55}
                   height={25}
+                  priority={true}
                 />
               </Link>
             </div>
@@ -442,6 +443,7 @@ const Header = () => {
                           width={30}
                           src={p?.url}
                           alt={p?.title}
+                          priority={true}
                         />
                         <span className="d-flex align-items-center">
                           {p?.title}
