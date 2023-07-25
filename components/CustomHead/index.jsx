@@ -22,7 +22,7 @@ const CustomHead = ({
       <meta property="og:site_name" content="https://safefoods.com.bd" />
       <meta name="robots" content="index, follow" />
       {/* <link rel="canonical" href="https://safefoods.com.bd" /> */}
-      <meta http-equiv="refresh" content="5; url=https://safefoods.com.bd" />
+      {/* <meta http-equiv="refresh" content="5; url=https://safefoods.com.bd" /> */}
       <meta
         name="news_keywords"
         content={`Safefood, Food, online e commerce bd ,${title} `}
