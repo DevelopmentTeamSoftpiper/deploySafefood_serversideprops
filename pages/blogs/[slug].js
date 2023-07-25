@@ -9,98 +9,111 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
-
+const SingleBlog = ({ blog, relatedBlogs, blogCats }) => {
   const bl = blog;
   const htmlContent = bl?.content;
   return (
- <>
-  <Head>
-  <title>Safefoods | Blogs | {bl?.title}</title>
-  <meta name="description" content={bl?.title}/>
-  <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  
-  <meta property="og:url" content={`https://safefoods.com.bd/blogs/${bl?.slug}`}/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content={`Safefoods |${bl?.title}`} />
-  <meta property="og:description" content={bl?.title}/>
-  <meta property="og:image" content={bl?.image}/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content={`https://safefoods.com.bd/blogs/${bl?.slug}`}/>
-  <meta name="twitter:title" content={`Safefoods | ${bl?.title}`}/>
-  <meta name="twitter:description" content={bl?.title}/>
-  <meta name="twitter:image" content={bl?.image}/>
-    </Head>
+    <>
+      <Head>
+        <title>Safefoods | Blogs | {bl?.title}</title>
+        <meta name="description" content={bl?.title} />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
 
-    <main className="main px-5">
+        <meta
+          property="og:url"
+          content={`https://safefoods.com.bd/blogs/${bl?.slug}`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Safefoods |${bl?.title}`} />
+        <meta property="og:description" content={bl?.title} />
+        <meta property="og:image" content={bl?.image} />
+        {/* TWITTER CARD  */}
+        <meta name="twitter:site" content="@sajibahmed5282" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://twitter.com/sajibahmed5282/"
+        />
+        <meta name="twitter:title" content={`Safefoods | ${bl?.title}`} />
+        <meta name="twitter:description" content={bl?.title} />
+        <meta name="twitter:image" content={bl?.image} />
 
-<nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
-  <div className="container">
-    <ol className="breadcrumb">
-      <li className="breadcrumb-item">
-        <Link href="/">Home</Link>
-      </li>
-      <li className="breadcrumb-item">
-        <Link href="/blogs">Blogs</Link>
-      </li>
-      <li className="breadcrumb-item active" aria-current="page">
-       {bl?.title}
-      </li>
-    </ol>
-  </div>
-  {/* End .container */}
-</nav>
-{/* End .breadcrumb-nav */}
-<div className="page-content">
-  <div className="container">
-    <div className="row">
-      <div className="col-lg-9">
-        <article className="entry single-entry">
-          <figure className=" d-flex justify-content-center">
-            <Image
-              src={bl?.image}
-              alt={bl?.title}
-              width={400}
-              height={200}
-              priority={true}
-              
-            />
-          </figure>
-          {/* End .entry-media */}
-          <div className="entry-body">
-            <div className="entry-meta">
-              <span className="entry-author">
-                by <span>{bl?.author}</span>
-              </span>
-              <span className="meta-separator">|</span>
-              <a href="#">
-                {new Date(bl?.updatedAt).toLocaleDateString()}
-              </a>
-            </div>
-            {/* End .entry-meta */}
-            <h1 className="entry-title">{bl?.title}</h1>
-            {/* End .entry-title */}
-            <div className="entry-cats">
-              in   
-        <Link key={bl?.subBlog?.id} href={`/blogs/category/${bl?.subBlog?.slug}`} style={{color:'black'}}> | {bl?.subBlog?.title} </Link>
- 
-            </div>
-            {/* End .entry-cats */}
-            <div className="entry-content editor-content">
-              {/* <p>
+        <link rel="canonical" href={`https://safefoods.com.bd/${bl.slug}`} />
+        <link rel="canonical" href={`https://www.safefoods.com.bd/${bl.slug}`} />
+      </Head>
+
+      <main className="main px-5">
+        <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
+          <div className="container">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link href="/">Home</Link>
+              </li>
+              <li className="breadcrumb-item">
+                <Link href="/blogs">Blogs</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                {bl?.title}
+              </li>
+            </ol>
+          </div>
+          {/* End .container */}
+        </nav>
+        {/* End .breadcrumb-nav */}
+        <div className="page-content">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-9">
+                <article className="entry single-entry">
+                  <figure className=" d-flex justify-content-center">
+                    <Image
+                      src={bl?.image}
+                      alt={bl?.title}
+                      width={400}
+                      height={200}
+                      priority={true}
+                    />
+                  </figure>
+                  {/* End .entry-media */}
+                  <div className="entry-body">
+                    <div className="entry-meta">
+                      <span className="entry-author">
+                        by <span>{bl?.author}</span>
+                      </span>
+                      <span className="meta-separator">|</span>
+                      <a href="#">
+                        {new Date(bl?.updatedAt).toLocaleDateString()}
+                      </a>
+                    </div>
+                    {/* End .entry-meta */}
+                    <h1 className="entry-title">{bl?.title}</h1>
+                    {/* End .entry-title */}
+                    <div className="entry-cats">
+                      in
+                      <Link
+                        key={bl?.subBlog?.id}
+                        href={`/blogs/category/${bl?.subBlog?.slug}`}
+                        style={{ color: "black" }}
+                      >
+                        {" "}
+                        | {bl?.subBlog?.title}{" "}
+                      </Link>
+                    </div>
+                    {/* End .entry-cats */}
+                    <div className="entry-content editor-content">
+                      {/* <p>
                 <ReactMarkdown>{bl?.content}</ReactMarkdown>
               </p> */}
-               <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-            </div>
-          </div>
-          {/* End .entry-body */}
-        </article>
-      </div>
-      {/* End .col-lg-9 */}
-      <aside className="col-lg-3">
-        <div className="sidebar">
-          {/* <div className="widget widget-search">
+                      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                    </div>
+                  </div>
+                  {/* End .entry-body */}
+                </article>
+              </div>
+              {/* End .col-lg-9 */}
+              <aside className="col-lg-3">
+                <div className="sidebar">
+                  {/* <div className="widget widget-search">
             <h3 className="widget-title">Search</h3>
        
             <form action="#">
@@ -121,63 +134,65 @@ const SingleBlog = ({ blog, relatedBlogs ,blogCats}) => {
               </button>
             </form>
           </div> */}
-          {/* End .widget */}
-          <div className="widget widget-cats">
-            <h3 className="widget-title">Categories</h3>
-            {/* End .widget-title */}
-            <ul>
-            {blogCats?.map((cat)=>(
-                <li key={cat?._id}>
-                <a href={`/blogs/category/${cat?.slug}`}>
-                  {cat?.title}
-                </a>
-              </li>
-            ))}
-
-            </ul>
+                  {/* End .widget */}
+                  <div className="widget widget-cats">
+                    <h3 className="widget-title">Categories</h3>
+                    {/* End .widget-title */}
+                    <ul>
+                      {blogCats?.map((cat) => (
+                        <li key={cat?._id}>
+                          <a href={`/blogs/category/${cat?.slug}`}>
+                            {cat?.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  {/* End .widget */}
+                  <div className="widget">
+                    <h3 className="widget-title">Popular Posts</h3>
+                    {/* End .widget-title */}
+                    <ul className="posts-list">
+                      {relatedBlogs?.map((rb) => (
+                        <li key={rb?._id}>
+                          <figure>
+                            <Link href={`/blogs/${rb?.slug}`}>
+                              <Image
+                                src={rb?.image}
+                                alt="post"
+                                width={100}
+                                height={100}
+                              />
+                            </Link>
+                          </figure>
+                          <div>
+                            <span>
+                              {new Date(rb?.createdAt).toLocaleDateString()}
+                            </span>
+                            <h4>
+                              <Link href={`/blogs/${rb?.slug}`}>
+                                {rb?.title}
+                              </Link>
+                            </h4>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    {/* End .posts-list */}
+                  </div>
+                  {/* End .widget */}
+                </div>
+                {/* End .sidebar sidebar-shop */}
+              </aside>
+              {/* End .col-lg-3 */}
+            </div>
+            {/* End .row */}
           </div>
-          {/* End .widget */}
-          <div className="widget">
-            <h3 className="widget-title">Popular Posts</h3>
-            {/* End .widget-title */}
-            <ul className="posts-list">
-             {relatedBlogs?.map((rb)=>(
-               <li key={rb?._id}>
-               <figure>
-                 <Link href={`/blogs/${rb?.slug}`}>
-                   <Image
-                     src={rb?.image}
-                     alt="post"
-                     width={100}
-                     height={100}
-                   />
-                 </Link>
-               </figure>
-               <div>
-                 <span>{new Date(rb?.createdAt).toLocaleDateString()}</span>
-                 <h4>
-                   <Link href={`/blogs/${rb?.slug}`}>{rb?.title}</Link>
-                 </h4>
-               </div>
-             </li>
-             ))}
-
-            </ul>
-            {/* End .posts-list */}
-          </div>
-          {/* End .widget */}
+          {/* End .container */}
         </div>
-        {/* End .sidebar sidebar-shop */}
-      </aside>
-      {/* End .col-lg-3 */}
-    </div>
-    {/* End .row */}
-  </div>
-  {/* End .container */}
-</div>
-{/* End .page-content */}
-</main>
- </>
+        {/* End .page-content */}
+      </main>
+    </>
   );
 };
 
@@ -200,27 +215,30 @@ export async function getStaticPaths() {
 
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({ params: { slug } }) {
-  const blogData = await Blog.findOne({slug:slug}).populate({path:"subBlog", model:SubBlog});
-  const blogCatsData=  await SubBlog.find({}).sort({ updatedAt: -1 });
-  const relatedBlogsData = await Blog.find({}).populate({path:'subBlog', model:SubBlog})
-  .sort({ updatedAt: -1 });
+  const blogData = await Blog.findOne({ slug: slug }).populate({
+    path: "subBlog",
+    model: SubBlog,
+  });
+  const blogCatsData = await SubBlog.find({}).sort({ updatedAt: -1 });
+  const relatedBlogsData = await Blog.find({})
+    .populate({ path: "subBlog", model: SubBlog })
+    .sort({ updatedAt: -1 });
   db.disconnectDb();
 
   return {
     props: {
       blog: JSON.parse(JSON.stringify(blogData)),
-      relatedBlogs:JSON.parse(JSON.stringify(relatedBlogsData)),
+      relatedBlogs: JSON.parse(JSON.stringify(relatedBlogsData)),
       slug,
-      blogCats: JSON.parse(JSON.stringify(blogCatsData))
+      blogCats: JSON.parse(JSON.stringify(blogCatsData)),
     },
-    revalidate:60
+    revalidate: 60,
   };
 }
 
-
 // export async function getServerSideProps(context) {
 //   const { slug } = context.query;
-  
+
 //   const blog = await getData(
 //     `/api/admin/blog/find?slug=${slug}`
 //   );
@@ -237,5 +255,3 @@ export async function getStaticProps({ params: { slug } }) {
 //     },
 //   };
 // }
-
-
