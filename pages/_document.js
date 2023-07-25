@@ -5,10 +5,32 @@ import Script from "next/script";
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        {/* <meta
+          name="google-site-verification"
+          content="google48924631d299e5ac.html"
+        /> */}
+      </Head>
       <body>
         <Main />
         <NextScript />
+        {/* <!-- Google tag (gtag.js) --> */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZVGWSF31ZS"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-ZVGWSF31ZS');
+
+          `}
+        </Script>
+
         <Script
           src="..//assets/js/jquery.min.js"
           strategy="beforeInteractive"
