@@ -40,8 +40,7 @@ const TermsCondition = () => {
           name="twitter:image"
           content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
         />
-        <link rel="canonical" href="https://safefoods.com.bd/terms-and-conditions" />
-        <link rel="canonical" href="https://www.safefoods.com.bd/terms-and-conditions" />
+        
       </Head>
       <div className="container text-justify p-5 my-10">
         <div className="row">

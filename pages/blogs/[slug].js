@@ -38,8 +38,7 @@ const SingleBlog = ({ blog, relatedBlogs, blogCats }) => {
         <meta name="twitter:description" content={bl?.title} />
         <meta name="twitter:image" content={bl?.image} />
 
-        <link rel="canonical" href={`https://safefoods.com.bd/${bl.slug}`} />
-        <link rel="canonical" href={`https://www.safefoods.com.bd/${bl.slug}`} />
+
       </Head>
 
       <main className="main px-5">

@@ -57,8 +57,6 @@ const ProductDetails = ({ product, products }) => {
         <meta property="og:image" content={p?.image} />
         <meta property="og:site_name" content="https://safefoods.com.bd" />
         
-        <link rel="canonical" href={`https://safefoods.com.bd/product/${p?.slug}`} />
-        <link rel="canonical" href={`https://www.safefoods.com.bd/product/${p?.slug}`} />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:site" content="@sajibahmed5282" />

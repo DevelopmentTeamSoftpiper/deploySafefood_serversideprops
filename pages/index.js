@@ -62,8 +62,6 @@ export default function Home({
           />
           <meta property="og:site_name" content="https://safefoods.com.bd" />
 
-          <link rel="canonical" href="https://safefoods.com.bd" />
-          <link rel="canonical" href="https://www.safefoods.com.bd" />
 
           {/* Twitter Card Meta Tags */}
           <meta name="twitter:site" content="@sajibahmed5282" />

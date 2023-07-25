@@ -35,8 +35,7 @@ const Blogs = ({ blogs, blogCats }) => {
           name="twitter:image"
           content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
         />
-        <link rel="canonical" href="https://safefoods.com.bd/blogs" />
-        <link rel="canonical" href="https://www.safefoods.com.bd/blogs" />
+   
       </Head>
 
       <main className="main px-5">
