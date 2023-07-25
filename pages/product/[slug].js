@@ -12,12 +12,12 @@ import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
 import RelatedProducts from "@/components/product/RelatedProduct";
 
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-} from "react-share";
+// import {
+//   FacebookIcon,
+//   FacebookShareButton,
+//   TwitterIcon,
+//   TwitterShareButton,
+// } from "react-share";
 import CustomHead from "@/components/CustomHead";
 
 const ProductDetails = ({ product, products }) => {
@@ -184,7 +184,7 @@ const ProductDetails = ({ product, products }) => {
                         </Link>
                       </div>
                     </div>
-                    <div>
+                    {/* <div>
                       <TwitterShareButton
                         url={`https://safefoods.com.bd/product/${p?.slug}`}
                         title={p?.title}
@@ -198,7 +198,7 @@ const ProductDetails = ({ product, products }) => {
                       >
                         <FacebookIcon size={50} round />
                       </FacebookShareButton>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
