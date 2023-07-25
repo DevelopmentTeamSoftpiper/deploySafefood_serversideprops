@@ -10,10 +10,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import Loader from "@/components/Loader";
-import Head from "next/head";
+import CustomHead from "@/components/CustomHead";
 const checkout = () => {
-  const [isFetching,setIsFetching] = useState(false);
-  const [isLoading, setIsLoading] =useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -29,29 +29,29 @@ const checkout = () => {
 
   const getUserInfo = async () => {
     setIsFetching(true);
-      const userInfo =  await axios.post("/api/profile/find",
-    {
-      user_id_no: user._id,
-    },
-     {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        token: `Bearer ${jwt}`,
+    const userInfo = await axios.post(
+      "/api/profile/find",
+      {
+        user_id_no: user._id,
       },
-    });
-   
-      setName(userInfo?.data?.name);
-      setEmail(userInfo?.data?.email);
-      setPhone(userInfo?.data?.phone);
-      setAddress(userInfo?.data?.address);
-      setPostalCode(userInfo?.data?.post_code);
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          token: `Bearer ${jwt}`,
+        },
+      }
+    );
+
+    setName(userInfo?.data?.name);
+    setEmail(userInfo?.data?.email);
+    setPhone(userInfo?.data?.phone);
+    setAddress(userInfo?.data?.address);
+    setPostalCode(userInfo?.data?.post_code);
     setCity(userInfo?.data?.city);
     setCountry(userInfo?.data?.country);
     setIsFetching(false);
-
   };
-
 
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const subTotal = useMemo(() => {
@@ -61,14 +61,13 @@ const checkout = () => {
   const productData = cartProducts.map((p) => ({
     id: p?._id,
     title: p?.title,
-    image:p?.image,
+    image: p?.image,
     quantityPrice: p?.oneQuantityPrice,
     quantity: p?.quantity,
     price: p?.price,
     category: p?.category?.name,
     subcategory: p?.subcategory?.name,
   }));
-
 
   const [shippings, setShippings] = useState(null);
   const [shippingCost, setShippingCost] = useState("60");
@@ -87,18 +86,15 @@ const checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
 
   const getPaymentMethods = async () => {
-    const pMethods =  await axios.get("/api/admin/payment-methods/getAll");
+    const pMethods = await axios.get("/api/admin/payment-methods/getAll");
 
     setPaymentMethods(pMethods);
   };
   const total = parseInt(subTotal) + parseInt(shippingCost);
-;
-
   useEffect(() => {
     getUserInfo();
     getShippings();
     getPaymentMethods();
-   
   }, []);
 
   const [phoneNo, setPhoneNo] = useState("");
@@ -106,7 +102,9 @@ const checkout = () => {
 
   const order = async () => {
     try {
-      const response = await axios.post("/api/admin/order/store", {
+      const response = await axios.post(
+        "/api/admin/order/store",
+        {
           products: productData,
           user_id_no: user._id,
           name: name,
@@ -125,15 +123,16 @@ const checkout = () => {
           status: "Not Processed",
           payment_status: "Not Verified",
           delivery_status: "Pending",
-          isPaid:false,
-          order_notes: orderNotes,    
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          token: `Bearer ${jwt}`,
+          isPaid: false,
+          order_notes: orderNotes,
         },
-      }
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            token: `Bearer ${jwt}`,
+          },
+        }
       );
       dispatch(emptyCart());
       router.push("/success");
@@ -162,69 +161,59 @@ const checkout = () => {
     router.push("/account/login");
     return null;
   }
-  useEffect(()=>{
-    if(cartProducts.length == 0){
+  useEffect(() => {
+    if (cartProducts.length == 0) {
       router.push("/emptyCart");
       return null;
     }
-  },[])
-
+  }, []);
 
   return (
- <>
-     <Head>
-     <title>Safefoods | Checkout</title>
-  <meta name="description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  <meta property="og:url" content="https://safefoods.com.bd/checkout"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Safefoods | Checkout"/>
-  <meta property="og:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content="https://safefoods.com.bd/checkout"/>
-  <meta name="twitter:title" content="Safefoods | For Your Family"/>
-  <meta name="twitter:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-    </Head>
-    <div className="page-wrapper p-5">
-      <ToastContainer />
+    <>
+    <CustomHead
+        title="Checkout"
+        url="https://safefoods.com.bd/account/checkout"
+      />
+     
+      <div className="page-wrapper p-5">
+        <ToastContainer />
 
-      <main className="main">
-      <div
-        className="page-header text-center"
-        style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
-      >
-        <div className="container">
-          <h1 className="page-title">
-            Checkout<span>Shop</span>
-          </h1>
-        </div>
-        {/* End .container */}
-      </div>
-      {/* End .page-header */}
-      <nav aria-label="breadcrumb" className="breadcrumb-nav">
-        <div className="container">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link href="index.html">Home</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link href="#">Shop</Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Checkout
-            </li>
-          </ol>
-        </div>
-        {/* End .container */}
-      </nav>
-      {/* End .breadcrumb-nav */}
-      <div className="page-content">
-        <div className="checkout">
-          <div className="container">
-            {/* <div className="checkout-discount">
+        <main className="main">
+          <div
+            className="page-header text-center"
+            style={{
+              backgroundImage: 'url("assets/images/page-header-bg.jpg")',
+            }}
+          >
+            <div className="container">
+              <h1 className="page-title">
+                Checkout<span>Shop</span>
+              </h1>
+            </div>
+            {/* End .container */}
+          </div>
+          {/* End .page-header */}
+          <nav aria-label="breadcrumb" className="breadcrumb-nav">
+            <div className="container">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <Link href="index.html">Home</Link>
+                </li>
+                <li className="breadcrumb-item">
+                  <Link href="#">Shop</Link>
+                </li>
+                <li className="breadcrumb-item active" aria-current="page">
+                  Checkout
+                </li>
+              </ol>
+            </div>
+            {/* End .container */}
+          </nav>
+          {/* End .breadcrumb-nav */}
+          <div className="page-content">
+            <div className="checkout">
+              <div className="container">
+                {/* <div className="checkout-discount">
           <form >
             <input
               type="text"
@@ -240,298 +229,315 @@ const checkout = () => {
             </label>
           </form>
         </div> */}
-            {/* End .checkout-discount */}
+                {/* End .checkout-discount */}
 
-            <form onSubmit={orderSubmitHandler}>
-            <div className="row">
-              <div className="col-lg-7">
-                <h2 className="checkout-title">Billing Details</h2>
-                {/* End .checkout-title */}
-                {isFetching && <Loader/>}
-                {!isFetching && 
-                  <div>
-
+                <form onSubmit={orderSubmitHandler}>
                   <div className="row">
-                    <div className="col-sm-6">
-                      <label>Name <span style={{color:'red'}}>*</span> </label>
-                      <input
-                        type="text"
-                        name="name"
-                        className="form-control"
-                        required={true}
-                        value={name}
-                        onChange={(e) => {
-                          return setName(e.target.value);
-                        }}
-                      />
-                    </div>
-  
-                    <div className="col-sm-6">
-                      <label>Email </label>
-                      <input
-                        type="email"
-                        name="email"
-                        className="form-control"
-                        // required={true}
-                        value={email}
-                        onChange={(e) => {
-                          return setEmail(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <label>Phone No <span style={{color:'red'}}>*</span></label>
-                      <input
-                        type="text"
-                        name="phone"
-                        className="form-control"
-                        required={true}
-                        value={phone}
-                        onChange={(e) => {
-                          return setPhone(e.target.value);
-                        }}
-                      />
-                    </div>
-  
-                    <div className="col-sm-6">
-                      <label>Flat No, House No, Road No <span style={{color:'red'}}>*</span></label>
-                      <input
-                        type="text"
-                        name="address"
-                        className="form-control"
-                        required={true}
-                        value={address}
-                        onChange={(e) => {
-                          return setAddress(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <label>Postal Code </label>
-                      <input
-                        type="text"
-                        name="post_code"
-                        className="form-control"
-                        
-                        value={postalCode}
-                        onChange={(e) => {
-                          return setPostalCode(e.target.value);
-                        }}
-                      />
-                    </div>
-  
-                    <div className="col-sm-6">
-                      <label>District <span style={{color:'red'}}>*</span></label>
-                      <input
-                        type="text"
-                        name="city"
-                        className="form-control"
-                        required={true}
-                        value={city}
-                        onChange={(e) => {
-                          return setCity(e.target.value);
-                        }}
-                      />
-                    </div>
-  
-                    <div className="col-sm-6">
-                      <label>Country <span style={{color:'red'}}>*</span></label>
-                      <input
-                        type="text"
-                        name="country"
-                        className="form-control"
-                        required=""
-                        value={country? country: "Bangladesh"}
-                        onChange={(e) => {
-                          return setCountry(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                  </div>
-                }
-                <label>Order notes (optional)</label>
-                <textarea
-                  className="form-control"
-                  cols={30}
-                  rows={4}
-                  placeholder="Notes about your order, e.g. special notes for delivery"
-                  value={orderNotes}
-                  onChange={(e) => setOrderNotes(e.target.value)}
-                />
-                
-
-              </div>
-              <aside className="col-lg-5">
-                <div className="summary">
-                  <h3 className="summary-title">Your Order</h3>
-                  <table className="table table-summary">
-                    <thead>
-                      <tr>
-                        <th>Product</th>
-                        <th></th>
-                        <th></th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cartProducts?.map((cartProduct) => (
-                        <CartProduct
-                          key={cartProduct?._id}
-                          cartProduct={cartProduct}
-                        />
-                      ))}
-
-                      <tr className="summary-subtotal">
-                        <td>Subtotal:</td>
-                        <td></td>
-                        <td></td>
-                        <td>${subTotal}</td>
-                      </tr>
-                      <tr className="summary-shipping">
-                        <td>Shipping:</td>
-                        <td>&nbsp;</td>
-                      </tr>
-                      {/* End .summary-subtotal */}
-                      {shippings?.data?.shippings?.map((ship) => (
-                        <tr key={ship?._id} className="summary-shipping-row">
-                          <td>
-                            <div className="form-check ">
-                              <label className="form-check-label">
-                                <input
-                                  type="radio"
-                                  className="form-check-input"
-                                  name="shippingMethod"
-                                  value={ship?.cost}
-                                  style={{
-                                    marginTop: ".6rem",
-                                    marginLeft: "-2rem",
-                                  }}
-                                  onChange={shippingCostChangeHandler}
-                                  checked={
-                                    ship?.cost == shippingCost
-                                  }
-                                />
-                                {ship?.name}
+                    <div className="col-lg-7">
+                      <h2 className="checkout-title">Billing Details</h2>
+                      {/* End .checkout-title */}
+                      {isFetching && <Loader />}
+                      {!isFetching && (
+                        <div>
+                          <div className="row">
+                            <div className="col-sm-6">
+                              <label>
+                                Name <span style={{ color: "red" }}>*</span>{" "}
                               </label>
+                              <input
+                                type="text"
+                                name="name"
+                                className="form-control"
+                                required={true}
+                                value={name}
+                                onChange={(e) => {
+                                  return setName(e.target.value);
+                                }}
+                              />
                             </div>
-                            {/* End .custom-control */}
-                          </td>
-                          <td>BDT {ship?.cost}</td>
-                        </tr>
-                      ))}
-                      <tr className="summary-total">
-                        <td>Total:</td>
-                        <td></td>
-                        <td></td>
-                        <td>BDT {total}</td>
-                      </tr>
-                      {/* End .summary-total */}
-                    </tbody>
-                  </table>
-                  <tr className="summary-shipping">
-                    <td style={{ fontSize: "1.5rem", fontWeight: 600 }}>
-                      Payment Method:
-                    </td>
-                    <td>&nbsp;</td>
-                  </tr>
-                  {paymentMethods?.data?.paymentMethods?.map((method) => (
-                    <tr key={method?._id} className="summary-shipping-row">
-                      <td>
-                        <div className="form-check ">
-                          <label className="form-check-label">
-                            <input
-                              type="radio"
-                              className="form-check-input"
-                              name="paymentMethod"
-                              value={method?.name}
-                              style={{
-                                marginTop: ".6rem",
-                                marginLeft: "-2rem",
-                              }}
-                              onChange={(e) => {
-                                setPaymentMethod(e.target.value);
-                              }}
-                              checked={
-                                method?.name == paymentMethod
-                              }
-                            />
-                            <p>{method?.name} </p>
-                            <p style={{color:"black", fontWeight:600}}>{method?.description}</p>
-                          </label>
+
+                            <div className="col-sm-6">
+                              <label>Email </label>
+                              <input
+                                type="email"
+                                name="email"
+                                className="form-control"
+                                // required={true}
+                                value={email}
+                                onChange={(e) => {
+                                  return setEmail(e.target.value);
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-sm-6">
+                              <label>
+                                Phone No <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="phone"
+                                className="form-control"
+                                required={true}
+                                value={phone}
+                                onChange={(e) => {
+                                  return setPhone(e.target.value);
+                                }}
+                              />
+                            </div>
+
+                            <div className="col-sm-6">
+                              <label>
+                                Flat No, House No, Road No{" "}
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="address"
+                                className="form-control"
+                                required={true}
+                                value={address}
+                                onChange={(e) => {
+                                  return setAddress(e.target.value);
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col-sm-6">
+                              <label>Postal Code </label>
+                              <input
+                                type="text"
+                                name="post_code"
+                                className="form-control"
+                                value={postalCode}
+                                onChange={(e) => {
+                                  return setPostalCode(e.target.value);
+                                }}
+                              />
+                            </div>
+
+                            <div className="col-sm-6">
+                              <label>
+                                District <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="city"
+                                className="form-control"
+                                required={true}
+                                value={city}
+                                onChange={(e) => {
+                                  return setCity(e.target.value);
+                                }}
+                              />
+                            </div>
+
+                            <div className="col-sm-6">
+                              <label>
+                                Country <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="country"
+                                className="form-control"
+                                required=""
+                                value={country ? country : "Bangladesh"}
+                                onChange={(e) => {
+                                  return setCountry(e.target.value);
+                                }}
+                              />
+                            </div>
+                          </div>
                         </div>
-                        {/* End .custom-control */}
-                      </td>
-                    </tr>
-                  ))}
-                  {(paymentMethod === "Bkash" ||
-                    paymentMethod === "Rocket" ||
-                    paymentMethod === "Nagad") && (
-                    <div className="row">
-                      <div className="col-md-6">
-                        <input
-                          type="text"
-                          placeholder="Mobile No"
-                          className="form-control"
-                          name="phonNo"
-                          value={phoneNo}
-                          onChange={(e) => {
-                            setPhoneNo(e.target.value);
-                          }}
-                          style={{ marginTop: ".6rem", marginLeft: "-2rem" }}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <input
-                          type="text"
-                          placeholder="Transaction Id"
-                          className="form-control"
-                          name="transactionId"
-                          value={transactionId}
-                          onChange={(e) => {
-                            setTransactionId(e.target.value);
-                          }}
-                          style={{ marginTop: ".6rem", marginLeft: "-2rem" }}
-                        />
-                      </div>
+                      )}
+                      <label>Order notes (optional)</label>
+                      <textarea
+                        className="form-control"
+                        cols={30}
+                        rows={4}
+                        placeholder="Notes about your order, e.g. special notes for delivery"
+                        value={orderNotes}
+                        onChange={(e) => setOrderNotes(e.target.value)}
+                      />
                     </div>
-                  )}
+                    <aside className="col-lg-5">
+                      <div className="summary">
+                        <h3 className="summary-title">Your Order</h3>
+                        <table className="table table-summary">
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th></th>
+                              <th></th>
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {cartProducts?.map((cartProduct) => (
+                              <CartProduct
+                                key={cartProduct?._id}
+                                cartProduct={cartProduct}
+                              />
+                            ))}
 
-                  {isLoading && <Loader />}
+                            <tr className="summary-subtotal">
+                              <td>Subtotal:</td>
+                              <td></td>
+                              <td></td>
+                              <td>${subTotal}</td>
+                            </tr>
+                            <tr className="summary-shipping">
+                              <td>Shipping:</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            {/* End .summary-subtotal */}
+                            {shippings?.data?.shippings?.map((ship) => (
+                              <tr
+                                key={ship?._id}
+                                className="summary-shipping-row"
+                              >
+                                <td>
+                                  <div className="form-check ">
+                                    <label className="form-check-label">
+                                      <input
+                                        type="radio"
+                                        className="form-check-input"
+                                        name="shippingMethod"
+                                        value={ship?.cost}
+                                        style={{
+                                          marginTop: ".6rem",
+                                          marginLeft: "-2rem",
+                                        }}
+                                        onChange={shippingCostChangeHandler}
+                                        checked={ship?.cost == shippingCost}
+                                      />
+                                      {ship?.name}
+                                    </label>
+                                  </div>
+                                  {/* End .custom-control */}
+                                </td>
+                                <td>BDT {ship?.cost}</td>
+                              </tr>
+                            ))}
+                            <tr className="summary-total">
+                              <td>Total:</td>
+                              <td></td>
+                              <td></td>
+                              <td>BDT {total}</td>
+                            </tr>
+                            {/* End .summary-total */}
+                          </tbody>
+                        </table>
+                        <tr className="summary-shipping">
+                          <td style={{ fontSize: "1.5rem", fontWeight: 600 }}>
+                            Payment Method:
+                          </td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        {paymentMethods?.data?.paymentMethods?.map((method) => (
+                          <tr
+                            key={method?._id}
+                            className="summary-shipping-row"
+                          >
+                            <td>
+                              <div className="form-check ">
+                                <label className="form-check-label">
+                                  <input
+                                    type="radio"
+                                    className="form-check-input"
+                                    name="paymentMethod"
+                                    value={method?.name}
+                                    style={{
+                                      marginTop: ".6rem",
+                                      marginLeft: "-2rem",
+                                    }}
+                                    onChange={(e) => {
+                                      setPaymentMethod(e.target.value);
+                                    }}
+                                    checked={method?.name == paymentMethod}
+                                  />
+                                  <p>{method?.name} </p>
+                                  <p
+                                    style={{ color: "black", fontWeight: 600 }}
+                                  >
+                                    {method?.description}
+                                  </p>
+                                </label>
+                              </div>
+                              {/* End .custom-control */}
+                            </td>
+                          </tr>
+                        ))}
+                        {(paymentMethod === "Bkash" ||
+                          paymentMethod === "Rocket" ||
+                          paymentMethod === "Nagad") && (
+                          <div className="row">
+                            <div className="col-md-6">
+                              <input
+                                type="text"
+                                placeholder="Mobile No"
+                                className="form-control"
+                                name="phonNo"
+                                value={phoneNo}
+                                onChange={(e) => {
+                                  setPhoneNo(e.target.value);
+                                }}
+                                style={{
+                                  marginTop: ".6rem",
+                                  marginLeft: "-2rem",
+                                }}
+                              />
+                            </div>
+                            <div className="col-md-6">
+                              <input
+                                type="text"
+                                placeholder="Transaction Id"
+                                className="form-control"
+                                name="transactionId"
+                                value={transactionId}
+                                onChange={(e) => {
+                                  setTransactionId(e.target.value);
+                                }}
+                                style={{
+                                  marginTop: ".6rem",
+                                  marginLeft: "-2rem",
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
 
-                  {/* End .accordion */}
-                  <button
-                    className="btn btn-outline-primary-2 btn-order btn-block mt-2"
-                   type="submit"
-                  >
-                    <span className="btn-text">Place Order</span>
-                    <span className="btn-hover-text">
-                      Proceed to Checkout
-                    </span>
-                  </button>
+                        {isLoading && <Loader />}
 
-                </div>
-                
-                {/* End .summary */}
-              </aside>
-              {/* End .col-lg-3 */}
+                        {/* End .accordion */}
+                        <button
+                          className="btn btn-outline-primary-2 btn-order btn-block mt-2"
+                          type="submit"
+                        >
+                          <span className="btn-text">Place Order</span>
+                          <span className="btn-hover-text">
+                            Proceed to Checkout
+                          </span>
+                        </button>
+                      </div>
+
+                      {/* End .summary */}
+                    </aside>
+                    {/* End .col-lg-3 */}
+                  </div>
+                </form>
+                {/* End .row */}
+              </div>
+              {/* End .container */}
             </div>
-            </form>
-            {/* End .row */}
+            {/* End .checkout */}
           </div>
-          {/* End .container */}
-        </div>
-        {/* End .checkout */}
+          {/* End .page-content */}
+        </main>
       </div>
-      {/* End .page-content */}
-    </main>
-
-    </div>
- </>
+    </>
   );
 };
 

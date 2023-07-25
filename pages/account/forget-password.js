@@ -1,3 +1,4 @@
+import CustomHead from "@/components/CustomHead";
 import { forgotPasswordSuccess } from "@/store/userSlice";
 import axios from "axios";
 import Head from "next/head";
@@ -8,142 +9,126 @@ import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const ForgetPassword = () => {
-    const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
-    const router = useRouter();
-    const dispatch = useDispatch();
-    const handleChange = (e)=>{
-        setEmail(e.target.value);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const forgetPassword = async () => {
+    try {
+      const res = await axios.post("/api/auth/forgot-password", {
+        email,
+      });
+      dispatch(forgotPasswordSuccess(res.data.token));
+      router.push("/account/reset-password");
+    } catch (error) {
+      console.log(error.response.data.error);
+      toast.success(error.response.data.error, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
-    const forgetPassword = async () => {
-        try {
-          const res = await axios.post("/api/auth/forgot-password", {
-            email,
-     
-          });
-          dispatch(forgotPasswordSuccess(res.data.token))
-          router.push("/account/reset-password");
-
-
-        } catch (error) {
-          console.log(error.response.data.error);
-          toast.success(error.response.data.error, {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-         
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-         
-        }
-      };
-      const submitHandler = (e) => {
-        e.preventDefault();
-        forgetPassword();
-      };
-      // console.log(email);
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    forgetPassword();
+  };
+  // console.log(email);
   return (
-<>
-<Head>
-<title>Safefoods | Forgot Password</title>
-  <meta name="description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  <meta property="og:url" content="https://safefoods.com.bd/account/forget-password"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Safefoods | Forgot Password"/>
-  <meta property="og:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content="https://safefoods.com.bd/account/forget-password"/>
-  <meta name="twitter:title" content="Safefoods | Forgot Password"/>
-  <meta name="twitter:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-    </Head>
-<main className="main">
-      <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
-        <div className="container">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link href="/">Home</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link href="/account">Account</Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              ForgetPassword
-            </li>
-          </ol>
-        </div>
-        {/* End .container */}
-      </nav>
-      {/* End .breadcrumb-nav */}
-      <div
-        className="login-page bg-image pt-8 pb-8 pt-md-3 pb-md-3 pt-lg-4 pb-lg-4"
-        style={{
-          backgroundImage: 'url("assets/images/backgrounds/login-bg.jpg")',
-        }}
-      >
-        <div className="container">
-          <div className="form-box">
-            <div className="form-tab">
-              <h6>Forget Password</h6>
+    <>
+      <CustomHead
+        title="Forgot Password"
+        url="https://safefoods.com.bd/forget-password"
+      />
 
-              <div className="tab-content">
-                <div
-                  className="tab-pane fade show active"
-                  id="register-2"
-                  role="tabpanel"
-                  aria-labelledby="register-tab-2"
-                >
-                  <form onSubmit={submitHandler}>
-                    <div className="form-group">
-                      <label htmlFor="email">Email Address</label>
-                      <input
-                        type="email"
-                        placeholder="email"
+      <main className="main">
+        <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
+          <div className="container">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link href="/">Home</Link>
+              </li>
+              <li className="breadcrumb-item">
+                <Link href="/account">Account</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                ForgetPassword
+              </li>
+            </ol>
+          </div>
+          {/* End .container */}
+        </nav>
+        {/* End .breadcrumb-nav */}
+        <div
+          className="login-page bg-image pt-8 pb-8 pt-md-3 pb-md-3 pt-lg-4 pb-lg-4"
+          style={{
+            backgroundImage: 'url("assets/images/backgrounds/login-bg.jpg")',
+          }}
+        >
+          <div className="container">
+            <div className="form-box">
+              <div className="form-tab">
+                <h6>Forget Password</h6>
+
+                <div className="tab-content">
+                  <div
+                    className="tab-pane fade show active"
+                    id="register-2"
+                    role="tabpanel"
+                    aria-labelledby="register-tab-2"
+                  >
+                    <form onSubmit={submitHandler}>
+                      <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                          type="email"
+                          placeholder="email"
                           onChange={handleChange}
                           name="email"
                           value={email}
-                        className="form-control"
-                        id="email"
-                        required
-                      />
-                    </div>
+                          className="form-control"
+                          id="email"
+                          required
+                        />
+                      </div>
 
-                    <div className="form-footer">
-                      <button
-                        type="submit"
-                        className="btn btn-outline-primary-2"
-                      >
-                        <span>Submit</span>
-                        <i className="icon-long-arrow-right" />
-                      </button>
-      
-                      {/* End .custom-checkbox */}
-                    </div>
-                    {/* End .form-footer */}
-                  </form>
-               
+                      <div className="form-footer">
+                        <button
+                          type="submit"
+                          className="btn btn-outline-primary-2"
+                        >
+                          <span>Submit</span>
+                          <i className="icon-long-arrow-right" />
+                        </button>
 
-                  {/* End .form-choice */}
+                        {/* End .custom-checkbox */}
+                      </div>
+                      {/* End .form-footer */}
+                    </form>
+
+                    {/* End .form-choice */}
+                  </div>
+                  {/* .End .tab-pane */}
                 </div>
-                {/* .End .tab-pane */}
+                {/* End .tab-content */}
               </div>
-              {/* End .tab-content */}
+              {/* End .form-tab */}
             </div>
-            {/* End .form-tab */}
+            {/* End .form-box */}
           </div>
-          {/* End .form-box */}
+          {/* End .container */}
         </div>
-        {/* End .container */}
-      </div>
-      {/* End .login-page section-bg */}
-    </main>
-</>
+        {/* End .login-page section-bg */}
+      </main>
+    </>
   );
 };
 

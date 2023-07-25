@@ -1,3 +1,4 @@
+import CustomHead from "@/components/CustomHead";
 import PageArticles from "@/components/elements/PageArticles";
 import Blog from "@/models/Blog";
 import SubBlog from "@/models/SubBlog";
@@ -7,63 +8,51 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
-const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
+const BlogCategory = ({ blogCategories, blogCats, slug, subBlog }) => {
   return (
-<>
-<Head>
-<title>Safefoods | Blogs | {subBlog?.title}</title>
-  <meta name="description" content={subBlog?.title}/>
-  <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  
-  <meta property="og:url" content={`https://safefoods.com.bd/blogs/category/${subBlog?.slug}`}/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content={`Safefoods | Blogs | ${subBlog?.title}`} />
-  <meta property="og:description" content={subBlog?.title}/>
-  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content={`https://safefoods.com.bd/blogs/category/${subBlog?.slug}`}/>
-  <meta name="twitter:title" content={`Safefoods | Blogs | ${subBlog?.title}`}/>
-  <meta name="twitter:description" content={subBlog?.title}/>
-  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-    </Head>
-<main className="main px-5">
-      <div
-        className="page-header text-center"
-        style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
-      >
-        <div className="container">
-          <h1 className="page-title">{subBlog?.title} Blogs</h1>
+    <>
+      <CustomHead
+        title={subBlog.title}
+        description={subBlog.title}
+        url={`https://safefoods.com.bd/blogs/category/${subBlog?.slug}`}
+      />
+      <main className="main px-5">
+        <div
+          className="page-header text-center"
+          style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
+        >
+          <div className="container">
+            <h1 className="page-title">{subBlog?.title} Blogs</h1>
+          </div>
+          {/* End .container */}
         </div>
-        {/* End .container */}
-      </div>
-      {/* End .page-header */}
-      <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
-        <div className="container">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link href="/">Home</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link href="/blogs">Blog</Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-            {subBlog?.title}
-            </li>
-          </ol>
-        </div>
-        {/* End .container */}
-      </nav>
-      {/* End .breadcrumb-nav */}
-      <div className="page-content">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-9">
-              {blogCats?.map((blog) => (
-                <PageArticles key={blog?._id} blog={blog} />
-              ))}
+        {/* End .page-header */}
+        <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
+          <div className="container">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link href="/">Home</Link>
+              </li>
+              <li className="breadcrumb-item">
+                <Link href="/blogs">Blog</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                {subBlog?.title}
+              </li>
+            </ol>
+          </div>
+          {/* End .container */}
+        </nav>
+        {/* End .breadcrumb-nav */}
+        <div className="page-content">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-9">
+                {blogCats?.map((blog) => (
+                  <PageArticles key={blog?._id} blog={blog} />
+                ))}
 
-              {/* <nav aria-label="Page navigation">
+                {/* <nav aria-label="Page navigation">
               <ul className="pagination">
                 <li className="page-item disabled">
                   <a
@@ -103,11 +92,11 @@ const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
                 </li>
               </ul>
             </nav> */}
-            </div>
-            {/* End .col-lg-9 */}
-            <aside className="col-lg-3">
-              <div className="sidebar">
-                {/* <div className="widget widget-search">
+              </div>
+              {/* End .col-lg-9 */}
+              <aside className="col-lg-3">
+                <div className="sidebar">
+                  {/* <div className="widget widget-search">
                   <h3 className="widget-title">Search</h3>
             
                   <form action="#">
@@ -128,32 +117,32 @@ const BlogCategory = ({ blogCategories, blogCats, slug,subBlog }) => {
                     </button>
                   </form>
                 </div> */}
-                {/* End .widget */}
-                <div className="widget widget-cats">
-                  <h3 className="widget-title">Categories</h3>
-                  {/* End .widget-title */}
-                  <ul>
-                    {blogCategories?.map((cat) => (
-                      <li key={cat?._id}>
-                        <a href={`/blogs/category/${cat?.slug}`}>
-                          {cat?.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* End .widget */}
+                  <div className="widget widget-cats">
+                    <h3 className="widget-title">Categories</h3>
+                    {/* End .widget-title */}
+                    <ul>
+                      {blogCategories?.map((cat) => (
+                        <li key={cat?._id}>
+                          <a href={`/blogs/category/${cat?.slug}`}>
+                            {cat?.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              {/* End .sidebar */}
-            </aside>
-            {/* End .col-lg-3 */}
+                {/* End .sidebar */}
+              </aside>
+              {/* End .col-lg-3 */}
+            </div>
+            {/* End .row */}
           </div>
-          {/* End .row */}
+          {/* End .container */}
         </div>
-        {/* End .container */}
-      </div>
-      {/* End .page-content */}
-    </main>
-</>
+        {/* End .page-content */}
+      </main>
+    </>
   );
 };
 
@@ -176,19 +165,22 @@ export async function getStaticPaths() {
 
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps({ params: { slug } }) {
-  const blogCategoriesData=  await SubBlog.find({}).sort({ updatedAt: -1 });
-  const subBlogData = await SubBlog.findOne({slug:slug});
-  const blogCatsData = await Blog.find({ subBlog: subBlogData._id  }).populate({path:"subBlog", model:SubBlog});
+  const blogCategoriesData = await SubBlog.find({}).sort({ updatedAt: -1 });
+  const subBlogData = await SubBlog.findOne({ slug: slug });
+  const blogCatsData = await Blog.find({ subBlog: subBlogData._id }).populate({
+    path: "subBlog",
+    model: SubBlog,
+  });
   db.disconnectDb();
   return {
     props: {
-      blogCategories:JSON.parse(JSON.stringify(blogCategoriesData)),
-      subBlog:JSON.parse(JSON.stringify(subBlogData)),
+      blogCategories: JSON.parse(JSON.stringify(blogCategoriesData)),
+      subBlog: JSON.parse(JSON.stringify(subBlogData)),
 
       slug,
-      blogCats: JSON.parse(JSON.stringify(blogCatsData))
+      blogCats: JSON.parse(JSON.stringify(blogCatsData)),
     },
-    revalidate:60
+    revalidate: 60,
   };
 }
 

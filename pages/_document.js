@@ -49,23 +49,6 @@ export default function Document() {
           src="assets/js/owl.carousel.min.js"
           strategy="beforeInteractive"
         ></Script>
-
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-6V8SNY080V"
-        ></Script>
-
-        <Script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-6V8SNY080V');
-              `,
-          }}
-        />
       </body>
     </Html>
   );

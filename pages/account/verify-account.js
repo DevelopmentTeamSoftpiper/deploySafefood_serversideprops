@@ -5,10 +5,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import jwt from 'jwt-decode';
+import jwt from "jwt-decode";
 import Timer from "@/components/auth/Timer";
 import axios from "axios";
 import Head from "next/head";
+import CustomHead from "@/components/CustomHead";
 
 const VerifyAccount = () => {
   const [number, setNumber] = useState("");
@@ -44,7 +45,6 @@ const VerifyAccount = () => {
     .toString()
     .padStart(2, "0")}`;
 
-    
   const submitHandler = (e) => {
     e.preventDefault();
     setButtonText("Wait...");
@@ -71,22 +71,11 @@ const VerifyAccount = () => {
 
   return (
     <>
-    <Head>
-    <title>Safefoods | Verify Account</title>
-  <meta name="description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  <meta property="og:url" content="https://safefoods.com.bd/account/verify-account"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Safefoods | Verify Account"/>
-  <meta property="og:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content="https://safefoods.com.bd/account/verify-account"/>
-  <meta name="twitter:title" content="Safefoods | Verify Account"/>
-  <meta name="twitter:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-    </Head>
+      <CustomHead
+        title="Verify Account"
+        url="https://safefoods.com.bd/account/verify-account"
+      />
+      
       <ToastContainer />
       {!token && <p>First signup and then activate your account</p>}
       {token && (
@@ -133,10 +122,7 @@ const VerifyAccount = () => {
           {!show && (
             <Link href="/login">
               {/* <button className="btn btn-sm btn-warning">Login</button> */}
-              <button 
-              className="btn btn-outline-primary-2">
-                Signin
-              </button>
+              <button className="btn btn-outline-primary-2">Signin</button>
             </Link>
           )}
           <div>

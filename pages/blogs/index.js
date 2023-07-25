@@ -1,74 +1,55 @@
-import PageArticles from '@/components/elements/PageArticles';
-import Blog from '@/models/Blog';
-import SubBlog from '@/models/SubBlog';
-import { fetchDataFromApi, getData } from '@/utils/api';
-import db from '@/utils/db';
-import Head from 'next/head';
-import Link from 'next/link';
-import React from 'react'
+import CustomHead from "@/components/CustomHead";
+import PageArticles from "@/components/elements/PageArticles";
+import Blog from "@/models/Blog";
+import SubBlog from "@/models/SubBlog";
+import { fetchDataFromApi, getData } from "@/utils/api";
+import db from "@/utils/db";
+import Head from "next/head";
+import Link from "next/link";
+import React from "react";
 
-const Blogs = ({blogs,blogCats}) => {
-  
+const Blogs = ({ blogs, blogCats }) => {
   return (
-<>
-<Head>
-      <title>Safefoods|Blogs</title>
-      <meta name="description" content = "Safefoods: For Your Family"/>
-      <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  
-  <meta property="og:url" content={`https://safefoods.com.bd/blogs`}/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content={`Safefoods | Blogs `} />
-  <meta property="og:description" content="Safefoods Blogs"/>
-  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content={`https://safefoods.com.bd/blogs`}/>
-  <meta name="twitter:title" content={`Safefoods | Blogs`}/>
-  <meta name="twitter:description" content="Safefoods Blogs"/>
-  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
+    <>
+      <CustomHead title="Blog" url="https://safefoods.com.bd/blogs" />
 
-</Head>
-<main className="main px-5">
-    <div
-      className="page-header text-center"
-      style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
-    >
-      <div className="container">
-        <h1 className="page-title">
-          Safefood Blogs
-        </h1>
-      </div>
-      {/* End .container */}
-    </div>
-    {/* End .page-header */}
-    <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
-      <div className="container">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link href="/">Home</Link>
-          </li>
-          <li className="breadcrumb-item">
-            <Link href="/">Blogs</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Listing
-          </li>
-        </ol>
-      </div>
-      {/* End .container */}
-    </nav>
-    {/* End .breadcrumb-nav */}
-    <div className="page-content">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-9">
-            {blogs?.map((blog)=>(
-         <PageArticles key={blog?._id} blog={blog}/>
+      <main className="main px-5">
+        <div
+          className="page-header text-center"
+          style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
+        >
+          <div className="container">
+            <h1 className="page-title">Safefood Blogs</h1>
+          </div>
+          {/* End .container */}
+        </div>
+        {/* End .page-header */}
+        <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
+          <div className="container">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link href="/">Home</Link>
+              </li>
+              <li className="breadcrumb-item">
+                <Link href="/">Blogs</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                Listing
+              </li>
+            </ol>
+          </div>
+          {/* End .container */}
+        </nav>
+        {/* End .breadcrumb-nav */}
+        <div className="page-content">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-9">
+                {blogs?.map((blog) => (
+                  <PageArticles key={blog?._id} blog={blog} />
+                ))}
 
-            ))}
-
-            {/* <nav aria-label="Page navigation">
+                {/* <nav aria-label="Page navigation">
               <ul className="pagination">
                 <li className="page-item disabled">
                   <a
@@ -108,11 +89,11 @@ const Blogs = ({blogs,blogCats}) => {
                 </li>
               </ul>
             </nav> */}
-          </div>
-          {/* End .col-lg-9 */}
-          <aside className="col-lg-3">
-            <div className="sidebar">
-              {/* <div className="widget widget-search">
+              </div>
+              {/* End .col-lg-9 */}
+              <aside className="col-lg-3">
+                <div className="sidebar">
+                  {/* <div className="widget widget-search">
                 <h3 className="widget-title">Search</h3>
         
                 <form action="#">
@@ -133,53 +114,50 @@ const Blogs = ({blogs,blogCats}) => {
                   </button>
                 </form>
               </div> */}
-              {/* End .widget */}
-              <div className="widget widget-cats">
-                <h3 className="widget-title">Categories</h3>
-                {/* End .widget-title */}
-                <ul>
-                {blogCats?.map((cat)=>(
-                      <li key={cat?._id}>
-                      <a href={`/blogs/category/${cat?.slug}`}>
-                        {cat?.title}
-                      </a>
-                    </li>
-                  ))}
- 
-                </ul>
-              </div>
-  
+                  {/* End .widget */}
+                  <div className="widget widget-cats">
+                    <h3 className="widget-title">Categories</h3>
+                    {/* End .widget-title */}
+                    <ul>
+                      {blogCats?.map((cat) => (
+                        <li key={cat?._id}>
+                          <a href={`/blogs/category/${cat?.slug}`}>
+                            {cat?.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                {/* End .sidebar */}
+              </aside>
+              {/* End .col-lg-3 */}
             </div>
-            {/* End .sidebar */}
-          </aside>
-          {/* End .col-lg-3 */}
+            {/* End .row */}
+          </div>
+          {/* End .container */}
         </div>
-        {/* End .row */}
-      </div>
-      {/* End .container */}
-    </div>
-    {/* End .page-content */}
-  </main>
-</>
-  )
-}
+        {/* End .page-content */}
+      </main>
+    </>
+  );
+};
 
-export default Blogs
-
+export default Blogs;
 
 export async function getStaticProps() {
   db.connectDb();
-  const blogsData = await Blog.find({}).populate({path:'subBlog', model:SubBlog})
-  .sort({ updatedAt: -1 });
-  const blogCatsData=  await SubBlog.find({}).sort({ updatedAt: -1 });
+  const blogsData = await Blog.find({})
+    .populate({ path: "subBlog", model: SubBlog })
+    .sort({ updatedAt: -1 });
+  const blogCatsData = await SubBlog.find({}).sort({ updatedAt: -1 });
   db.disconnectDb();
 
   return {
     props: {
-      blogs:JSON.parse(JSON.stringify(blogsData)),
-      blogCats:JSON.parse(JSON.stringify(blogCatsData)),
+      blogs: JSON.parse(JSON.stringify(blogsData)),
+      blogCats: JSON.parse(JSON.stringify(blogCatsData)),
     },
-    revalidate:60,
+    revalidate: 60,
   };
 }
-

@@ -10,10 +10,10 @@ import { signupSuccess } from "@/store/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
+import CustomHead from "@/components/CustomHead";
 const register = () => {
-
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] =useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -32,10 +32,11 @@ const register = () => {
   const signup = async () => {
     try {
       setValues({ ...values, buttonText: "Singing Up" });
-      const response = await axios.post(
-        "/api/auth/signup",
-        { username, email, password }
-      );
+      const response = await axios.post("/api/auth/signup", {
+        username,
+        email,
+        password,
+      });
       dispatch(signupSuccess(response.data.token));
       setValues({
         ...values,
@@ -44,9 +45,9 @@ const register = () => {
         password: "",
         buttonText: "sign up",
       });
-  
+
       router.push("/account/verify-account");
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
       toast.error(error.response.data.message, {
         position: "top-right",
@@ -63,122 +64,108 @@ const register = () => {
         response: error.response,
         buttonText: "sign up",
       });
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
-  
+
   const submitHandler = (e) => {
     setIsLoading(true);
     e.preventDefault();
     signup();
   };
   return (
-<>
+    <>
+      <CustomHead
+        title="Register"
+        url="https://safefoods.com.bd/account/register"
+      />
 
-<Head>
-<title>Safefoods | Register</title>
-  <meta name="description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  <meta property="og:url" content="https://safefoods.com.bd/account/register"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Safefoods | Register"/>
-  <meta property="og:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content="https://safefoods.com.bd/account/register"/>
-  <meta name="twitter:title" content="Safefoods | Register"/>
-  <meta name="twitter:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-    </Head>
-<main className="main">
-      <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
-        <div className="container">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link href="/">Home</Link>
-            </li>
-    
-            <li className="breadcrumb-item active" aria-current="page">
-              Register
-            </li>
-          </ol>
-        </div>
-        {/* End .container */}
-      </nav>
+      <main className="main">
+        <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
+          <div className="container">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link href="/">Home</Link>
+              </li>
 
-      <div
-        className="login-page bg-image pt-2 pb-2 pt-md-2 pb-md-2 pt-lg-2 pb-lg-2"
-        style={{
-          backgroundImage: `url("/assets/images/backgrounds/login-bg.jpg")`,
-        }}
-      >
-        <div className="container">
-          <div className="form-box">
-            <div className="form-tab">
-              <h6>Register</h6>
-              <div className="tab-content">
-                <div className="tab-pane fade show active">
-                  <form onSubmit={submitHandler}>
-                    <div className="form-group">
-                      <label htmlFor="username">Username</label>
-                      <input
-                        type="text"
-                        placeholder="Username"
-                        className="form-control"
-                        name="username"
-                        value={username}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
+              <li className="breadcrumb-item active" aria-current="page">
+                Register
+              </li>
+            </ol>
+          </div>
+          {/* End .container */}
+        </nav>
 
-                    <div className="form-group">
-                      <label htmlFor="email">Email Address</label>
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        className="form-control"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
+        <div
+          className="login-page bg-image pt-2 pb-2 pt-md-2 pb-md-2 pt-lg-2 pb-lg-2"
+          style={{
+            backgroundImage: `url("/assets/images/backgrounds/login-bg.jpg")`,
+          }}
+        >
+          <div className="container">
+            <div className="form-box">
+              <div className="form-tab">
+                <h6>Register</h6>
+                <div className="tab-content">
+                  <div className="tab-pane fade show active">
+                    <form onSubmit={submitHandler}>
+                      <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <input
+                          type="text"
+                          placeholder="Username"
+                          className="form-control"
+                          name="username"
+                          value={username}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="password">Password</label>
-                      <input
-                        type="password"
-                        placeholder="Password"
-                        className="form-control"
-                        name="password"
-                        value={password}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
+                      <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          className="form-control"
+                          name="email"
+                          value={email}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
 
-                    {isLoading && <Loader />}
+                      <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                          type="password"
+                          placeholder="Password"
+                          className="form-control"
+                          name="password"
+                          value={password}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
 
-                    <div className="form-footer">
-                      <button
-                        type="submit"
-                        className="btn btn-outline-primary-2"
-                      >
-                        <span>{buttonText}</span>
-                        <i className="icon-long-arrow-right" />
-                      </button>
-                      <div className="custom-control ">
-                      
-                        <Link href="/account/login">Already a User!</Link> 
+                      {isLoading && <Loader />}
 
-                    </div>
-                      {/* End .custom-checkbox */}
-                    </div>
-                    {/* End .form-footer */}
-                  </form>
-                  {/* <div className="form-choice">
+                      <div className="form-footer">
+                        <button
+                          type="submit"
+                          className="btn btn-outline-primary-2"
+                        >
+                          <span>{buttonText}</span>
+                          <i className="icon-long-arrow-right" />
+                        </button>
+                        <div className="custom-control ">
+                          <Link href="/account/login">Already a User!</Link>
+                        </div>
+                        {/* End .custom-checkbox */}
+                      </div>
+                      {/* End .form-footer */}
+                    </form>
+                    {/* <div className="form-choice">
                   <p className="text-center">or sign in with</p>
                   <div className="row">
                     <div className="col-sm-6">
@@ -198,21 +185,21 @@ const register = () => {
                   </div>
                
                 </div> */}
-                  {/* End .form-choice */}
+                    {/* End .form-choice */}
+                  </div>
+                  {/* .End .tab-pane */}
                 </div>
-                {/* .End .tab-pane */}
+                {/* End .tab-content */}
               </div>
-              {/* End .tab-content */}
+              {/* End .form-tab */}
             </div>
-            {/* End .form-tab */}
+            {/* End .form-box */}
           </div>
-          {/* End .form-box */}
+          {/* End .container */}
         </div>
-        {/* End .container */}
-      </div>
-      {/* End .login-page section-bg */}
-    </main>
-</>
+        {/* End .login-page section-bg */}
+      </main>
+    </>
   );
 };
 

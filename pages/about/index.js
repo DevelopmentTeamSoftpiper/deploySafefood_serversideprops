@@ -1,40 +1,11 @@
-import Head from "next/head";
+import CustomHead from "@/components/CustomHead";
 import React from "react";
 
 const About = () => {
   return (
     <>
-      <Head>
-        <title>Safefoods | About</title>
-        <meta
-          name="description"
-          content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"
-        />
-        <link rel="icon" href="/assets/images/logo-safefoods.png" />
-        <meta property="og:url" content="https://safefoods.com.bd/about" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Safefoods | About" />
-        <meta
-          property="og:description"
-          content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"
-        />
-        <meta
-          property="og:image"
-          content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="safefoods.com.bd" />
-        <meta property="twitter:url" content="https://safefoods.com.bd/about" />
-        <meta name="twitter:title" content="Safefoods | About" />
-        <meta
-          name="twitter:description"
-          content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"
-        />
-        <meta
-          name="twitter:image"
-          content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
-        />
-      </Head>
+      <CustomHead title="About " url="https://safefoods.com.bd/about" />
+
       <div className="container text-justify my-10 p-5">
         <h1 className="text-center"> About </h1>
         <div>

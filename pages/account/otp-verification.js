@@ -5,11 +5,17 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import jwt from 'jwt-decode';
+import jwt from "jwt-decode";
 import Timer from "@/components/auth/Timer";
 import axios from "axios";
-import { jwtSuccess, loginFailure, loginSuccess, providerSuccess } from "@/store/userSlice";
+import {
+  jwtSuccess,
+  loginFailure,
+  loginSuccess,
+  providerSuccess,
+} from "@/store/userSlice";
 import Head from "next/head";
+import CustomHead from "@/components/CustomHead";
 
 const OtpVerification = () => {
   const [number, setNumber] = useState("");
@@ -20,7 +26,7 @@ const OtpVerification = () => {
   const phone = token ? jwt(token).phone : "";
   // console.log(phone);
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
@@ -47,82 +53,64 @@ const dispatch = useDispatch();
     .toString()
     .padStart(2, "0")}`;
 
-    
-    const login = async () => {
+  const login = async () => {
+    try {
+      const res = await axios.post("/api/auth/otp-verification", {
+        token,
+        number,
+        mobile: phone,
+      });
 
-        try {
-          const res = await axios
-          .post("/api/auth/otp-verification", {
-            token,
-            number,
-            mobile: phone
-          })
-    
-          dispatch(loginSuccess(res.data.user));
-          dispatch(jwtSuccess(res.data.token));
-          dispatch(providerSuccess("otp"));
-    
-         await axios.post("/api/profile/store",
-          {
-            phone: res.data.user.phone ,
-            user_id_no: res.data.user._id,
+      dispatch(loginSuccess(res.data.user));
+      dispatch(jwtSuccess(res.data.token));
+      dispatch(providerSuccess("otp"));
+
+      await axios.post(
+        "/api/profile/store",
+        {
+          phone: res.data.user.phone,
+          user_id_no: res.data.user._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            token: `Bearer ${res.data.token}`,
           },
-           {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              token: `Bearer ${res.data.token}`,
-            },
-            
-          });
-    
-       
-          const redirectPath = router.query.redirect || "/account/details";
-          router.push(redirectPath);
-        
-    
-        } catch (error) {
-          // console.log(error.response.data.error);
-         
-          dispatch(loginFailure());
-          toast.error(error.response.data.error, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-    
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-      
         }
-      };
+      );
+
+      const redirectPath = router.query.redirect || "/account/details";
+      router.push(redirectPath);
+    } catch (error) {
+      // console.log(error.response.data.error);
+
+      dispatch(loginFailure());
+      toast.error(error.response.data.error, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
     login();
-   
   };
 
   return (
     <>
-      <Head>
-      <title>Safefoods | OTP Verification</title>
-  <meta name="description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <link rel="icon" href="/assets/images/logo-safefoods.png" />
-  <meta property="og:url" content="https://safefoods.com.bd/account/otp-verification"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Safefoods | OTP Verification"/>
-  <meta property="og:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta property="og:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:domain" content="safefoods.com.bd"/>
-  <meta property="twitter:url" content="https://safefoods.com.bd/account/otp-verification"/>
-  <meta name="twitter:title" content="Safefoods | OTP Verification"/>
-  <meta name="twitter:description" content="Apyz Safe Foods Agro Ltd. is an agriculture based private company which started from 2016.Safe Foods is a social movement against adulteration  & harmful effect of different food items what we consume daily"/>
-  <meta name="twitter:image" content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"/>
-    </Head>
+      <CustomHead
+        title="OTP Verification"
+        url="https://safefoods.com.bd/account/otp-verification"
+      />
+     
       <ToastContainer />
       {!token && <p>First Login with OTP and try again.</p>}
       {token && (
@@ -132,25 +120,25 @@ const dispatch = useDispatch();
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
-            padding:"20px"
+            padding: "20px",
           }}
         >
           <h3>Verify OTP</h3>
 
           <h6>
-            We sent a verification code to your Mobile No {" "}
-            . It may take a
-            few seconds for the code to arrive. Submit the code within 5 minutes to verify.{" "}
+            We sent a verification code to your Mobile No . It may take a few
+            seconds for the code to arrive. Submit the code within 5 minutes to
+            verify.{" "}
           </h6>
           <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-            padding:"20px"
-          }}
-        >
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "20px",
+            }}
+          >
             {/* <input value={number} onChange={(e)=>{setNumber(e.target.value)}} />  */}
 
             <input
@@ -158,7 +146,7 @@ const dispatch = useDispatch();
               className="form-control"
               value={number}
               size="small"
-              style={{ margin: "10px" , borderColor:"black"}}
+              style={{ margin: "10px", borderColor: "black" }}
               onChange={(e) => {
                 setNumber(e.target.value);
               }}
@@ -178,10 +166,7 @@ const dispatch = useDispatch();
           {!show && (
             <Link href="/login">
               {/* <button className="btn btn-sm btn-warning">Login</button> */}
-              <button 
-              className="btn btn-outline-primary-2">
-                Signin
-              </button>
+              <button className="btn btn-outline-primary-2">Signin</button>
             </Link>
           )}
           <div>
