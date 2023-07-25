@@ -6,10 +6,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* <meta
+        <meta
           name="google-site-verification"
-          content="google48924631d299e5ac.html"
-        /> */}
+          content="bbIuQ9huXa9pz-9j4O-oT2FietOhcTPvzHizWM8ji-s"
+        />
       </Head>
       <body>
         <Main />
