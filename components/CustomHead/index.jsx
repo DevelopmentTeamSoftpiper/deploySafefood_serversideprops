@@ -27,6 +27,7 @@ const CustomHead = ({
         name="news_keywords"
         content={`Safefood, Food, online e commerce bd ,${title} `}
       />
+      <meta name="google-site-verification" content="bbIuQ9huXa9pz-9j4O-oT2FietOhcTPvzHizWM8ji-s" />
 
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:site" content="@sajibahmed5282" />
