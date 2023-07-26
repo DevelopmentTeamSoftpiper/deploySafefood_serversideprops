@@ -10,6 +10,18 @@ export default function Document() {
           name="google-site-verification"
           content="bbIuQ9huXa9pz-9j4O-oT2FietOhcTPvzHizWM8ji-s"
         />
+        <meta property="og:title" content="Safefoods | For Your Family" />
+        <meta property="og:url" content="https://www.safefoods.com.bd/" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
+        />
+        <meta property="og:site_name" content="https://safefoods.com.bd" />
       </Head>
       <body>
         <Main />

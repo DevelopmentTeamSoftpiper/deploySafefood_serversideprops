@@ -12,8 +12,8 @@ const BlogCategory = ({ blogCategories, blogCats, slug, subBlog }) => {
   return (
     <>
       <CustomHead
-        title={subBlog.title}
-        description={subBlog.title}
+        title={subBlog?.title}
+        description={subBlog?.title}
         url={`https://safefoods.com.bd/blogs/category/${subBlog?.slug}`}
       />
       <main className="main px-5">

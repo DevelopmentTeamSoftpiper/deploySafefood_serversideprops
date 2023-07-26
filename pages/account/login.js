@@ -144,7 +144,7 @@ const Login = () => {
   return (
     <>
       <CustomHead
-        title="Account | Login"
+        title="Safefoods | Login"
         url="https://safefoods.com.bd/account/login"
       />
       <main className="main">

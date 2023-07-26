@@ -41,7 +41,7 @@ const ProductDetails = ({ product, products }) => {
   return (
     <>
       <CustomHead
-        title={`Product | ${p?.title}`}
+        title={p?.title}
         description={p?.shortDescription}
         url={`https://safefoods.com.bd/product/${p?.slug}`}
         image={p?.image}

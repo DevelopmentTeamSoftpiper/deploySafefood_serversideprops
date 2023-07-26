@@ -76,7 +76,7 @@ const register = () => {
   return (
     <>
       <CustomHead
-        title="Register"
+        title="Safefoods | Register"
         url="https://safefoods.com.bd/account/register"
       />
 

@@ -104,7 +104,7 @@ const Orders = () => {
   return (
     <>
       <CustomHead
-        title="Account | Orders"
+        title="Safefoods | Orders"
         url="https://safefoods.com.bd/account/orders"
       />
 

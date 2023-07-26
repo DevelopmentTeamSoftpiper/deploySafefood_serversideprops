@@ -6,7 +6,7 @@ const emailVerification = () => {
   return (
     <>
       <CustomHead
-        title="Shop"
+        title="Email Verification"
         url="https://safefoods.com.bd/email-verification"
       />
       <section className="entire-banner mt-5 pt-5">

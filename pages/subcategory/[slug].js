@@ -29,7 +29,7 @@ const SubCategoryProduct = ({ subCategory, products, categories }) => {
   return (
     <>
       <CustomHead
-        title={`Products | ${subCategory?.name}`}
+        title={subCategory?.name}
         url={`https://safefoods.com.bd/subcategory/${subCategory?.slug}`}
         description={subCategory?.name}
       />

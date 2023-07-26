@@ -40,7 +40,7 @@ export default function Home({
 
   return (
     <>
-      <CustomHead title="For Your Family" />
+      <CustomHead title="Safefoods | For Your Family" />
 
       <div className="page-wrapper" style={{ padding: "5px" }}>
         <ToastContainer />

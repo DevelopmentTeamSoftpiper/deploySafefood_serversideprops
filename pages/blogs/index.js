@@ -11,7 +11,7 @@ import React from "react";
 const Blogs = ({ blogs, blogCats }) => {
   return (
     <>
-      <CustomHead title="Blog" url="https://safefoods.com.bd/blogs" />
+      <CustomHead title="Safefoods | Blog" url="https://safefoods.com.bd/blogs" />
 
       <main className="main px-5">
         <div

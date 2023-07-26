@@ -7,7 +7,7 @@ const Hero = ({mainSlider, categories}) => {
   return (
     <div className="intro-section">
       <div className="container mt-2">
-        <div className="row">
+        <div className="row ">
           <div className="col-lg-3 d-none d-lg-block">
             <nav className="side-nav">
               <div className="sidenav-title letter-spacing-normal font-size-normal d-flex justify-content-xl-between align-items-center bg-primary justify-content-center text-truncate">
@@ -65,7 +65,7 @@ const Hero = ({mainSlider, categories}) => {
             </nav>
           </div>
 
-          <div className="col-lg-9 col-md-9 col-12 mb-md-0 mb-2">
+          <div className="col-lg-9 col-md-12 col-12 mb-md-0 mb-2" >
              <MainSwiper mainSlider={mainSlider} />
           </div>
         </div>

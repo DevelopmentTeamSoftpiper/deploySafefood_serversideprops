@@ -10,19 +10,20 @@ const CustomHead = ({
   return (
     <Head>
       <meta charset="UTF-8" />
-      <title> Safefoods | {title} </title>
+      <title> {title} </title>
       <meta name="description" content={description} />
       <link rel="icon" href="/assets/images/logo-safefoods.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <meta property="og:title" content={title} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={`Safefoods | ${title}`} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content="https://safefoods.com.bd" />
+
+
       <meta name="robots" content="index, follow" />
-      {/* <link rel="canonical" href="https://safefoods.com.bd" /> */}
-      {/* <meta http-equiv="refresh" content="5; url=https://safefoods.com.bd" /> */}
       <meta
         name="news_keywords"
         content={`Safefood, Food, online e commerce bd ,${title} `}
@@ -31,7 +32,7 @@ const CustomHead = ({
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:site" content="@sajibahmed5282" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={`Safefoods | ${title}`} />
+      <meta name="twitter:title" content={title} />
 
       <meta name="twitter:description" content={description} />
       <meta
@@ -39,6 +40,7 @@ const CustomHead = ({
         content="https://twitter.com/sajibahmed5282/"
       />
       <meta name="twitter:image" content={image} />
+
     </Head>
   );
 };
