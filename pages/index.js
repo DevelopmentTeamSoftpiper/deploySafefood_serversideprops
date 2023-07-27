@@ -79,7 +79,7 @@ export default function Home({
           content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
         />
 
-        <link rel="canonical" href="https://safefoods.com.bd" />
+        <link rel="canonical" href="https://www.safefoods.com.bd" />
         <meta name="robots" content="index, follow" />
         <meta
           name="keywords"

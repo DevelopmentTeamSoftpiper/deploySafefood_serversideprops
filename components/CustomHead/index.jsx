@@ -14,11 +14,11 @@ const CustomHead = ({
       <link rel="icon" href="/assets/images/logo-safefoods.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <meta property="og:title" content={title} />
+      <meta name="og:title" property="og:title" content={title} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta name="og:description" property="og:description" content={description} />
+      <meta name="og:image" content={image} />
       <meta property="og:site_name" content="https://safefoods.com.bd" />
 
       {/* Twitter Card Meta Tags */}
