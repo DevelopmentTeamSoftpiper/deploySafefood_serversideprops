@@ -11,6 +11,12 @@ import Product from "@/models/Products";
 import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
 import RelatedProducts from "@/components/product/RelatedProduct";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from "next-share";
 
 // import {
 //   FacebookIcon,
@@ -184,21 +190,25 @@ const ProductDetails = ({ product, products }) => {
                         </Link>
                       </div>
                     </div>
-                    {/* <div>
-                      <TwitterShareButton
-                        url={`https://safefoods.com.bd/product/${p?.slug}`}
-                        title={p?.title}
-                      >
-                        <TwitterIcon size={50} round />
-                      </TwitterShareButton>
-
+                    <div>
                       <FacebookShareButton
                         url={`https://safefoods.com.bd/product/${p?.slug}`}
-                        title={p?.title}
+                        title={`Safefoods | ${p?.title}`}
+                        media={p?.image}
+                        description={p?.shortDescription}
                       >
                         <FacebookIcon size={50} round />
                       </FacebookShareButton>
-                    </div> */}
+
+                      <TwitterShareButton
+                        url={`https://safefoods.com.bd/product/${p?.slug}`}
+                        title={`Safefoods | ${p?.title}`}
+                        media={p?.image}
+                        description={p?.shortDescription}
+                      >
+                        <TwitterIcon className="mx-3" size={50} round />
+                      </TwitterShareButton>
+                    </div>
                   </div>
                 </div>
               </div>
