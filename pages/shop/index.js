@@ -10,7 +10,7 @@ import Product from "@/models/Products";
 import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
 import db from "@/utils/db";
-import Head from "next/head";
+
 import CustomHead from "@/components/CustomHead";
 
 const Shop = ({ products, categories }) => {

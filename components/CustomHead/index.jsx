@@ -9,7 +9,6 @@ const CustomHead = ({
 }) => {
   return (
     <Head>
-      <meta charset="UTF-8" />
       <title> {title} </title>
       <meta name="description" content={description} />
       <link rel="icon" href="/assets/images/logo-safefoods.png" />
@@ -22,18 +21,10 @@ const CustomHead = ({
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content="https://safefoods.com.bd" />
 
-
-      <meta name="robots" content="index, follow" />
-      <meta
-        name="news_keywords"
-        content={`Safefood, Food, online e commerce bd ,${title} `}
-      />
-    
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:site" content="@sajibahmed5282" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
-
       <meta name="twitter:description" content={description} />
       <meta
         property="twitter:url"
@@ -41,6 +32,8 @@ const CustomHead = ({
       />
       <meta name="twitter:image" content={image} />
 
+      <link rel="canonical" href={url} />
+      <meta name="robots" content="index, follow" />
     </Head>
   );
 };
