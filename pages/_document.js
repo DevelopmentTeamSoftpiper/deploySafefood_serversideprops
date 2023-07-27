@@ -27,7 +27,7 @@ export default function Document() {
           property="og:description"
           content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
         />
-        <meta name="og:image" content={image} />
+      
         <meta property="og:site_name" content="https://safefoods.com.bd" />
 
         <meta name="twitter:site" content="@sajibahmed5282" />
