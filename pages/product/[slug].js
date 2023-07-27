@@ -11,9 +11,8 @@ import Product from "@/models/Products";
 import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
 import RelatedProducts from "@/components/product/RelatedProduct";
-
 import CustomHead from "@/components/CustomHead";
-import SocialButton from "@/components/product/SocialButton";
+
 
 const ProductDetails = ({ product, products }) => {
   const p = product;
@@ -179,14 +178,7 @@ const ProductDetails = ({ product, products }) => {
                         </Link>
                       </div>
                     </div>
-                    <div>
-                      <SocialButton
-                        url={`https://safefoods.com.bd/product/${p?.slug}`}
-                        title={p?.title}
-                        media={p?.image}
-                        description={p?.shortDescription}
-                      />
-                    </div>
+                   
                   </div>
                 </div>
               </div>
