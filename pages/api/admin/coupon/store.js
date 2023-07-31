@@ -9,7 +9,7 @@ const router = createRouter();
 
 router.post(async (req, res) => {
   try {
-    const { coupon, discount, startDate, endDate, isActive } = req.body;
+    const { coupon, discount, startDate, endDate, isActive, discountOption } = req.body;
     db.connectDb();
     const test = await Coupon.findOne({ coupon });
     if (test) {
@@ -17,7 +17,7 @@ router.post(async (req, res) => {
         .status(400)
         .json({ message: "Coupon already exist, Try a different coupon" });
     }
-    await new Coupon({ coupon, discount, startDate, endDate, isActive }).save();
+    await new Coupon({ coupon, discount, startDate, endDate, isActive, discountOption }).save();
 
     db.disconnectDb();
     res.json({

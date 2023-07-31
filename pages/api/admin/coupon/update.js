@@ -9,7 +9,7 @@ const router = createRouter();
 
 router.put(async (req, res) => {
   try {
-    const { id, coupon, discount, startDate, endDate, isActive } = req.body;
+    const { id, coupon, discount, startDate, endDate, isActive, discountOption } = req.body;
     db.connectDb();
     await Coupon.findByIdAndUpdate(id, {
       coupon,
@@ -17,6 +17,7 @@ router.put(async (req, res) => {
       startDate,
       endDate,
       isActive,
+      discountOption
     });
     db.disconnectDb();
     return res.json({

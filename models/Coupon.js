@@ -28,6 +28,10 @@ const couponSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    discountOption: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
