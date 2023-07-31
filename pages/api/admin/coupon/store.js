@@ -9,19 +9,31 @@ const router = createRouter();
 
 router.post(async (req, res) => {
   try {
-    const { coupon, discount, startDate, endDate, isActive, discountOption } = req.body;
+    const { coupon, discount, startDate, endDate, isActive, discountOption } =
+      req.body;
     db.connectDb();
     const test = await Coupon.findOne({ coupon });
     if (test) {
       return res
         .status(400)
-        .json({ message: "Coupon already exist, Try a different coupon" });
+        .json({
+          status: false,
+          message: "Coupon already exist, Try a different coupon",
+        });
     }
-    await new Coupon({ coupon, discount, startDate, endDate, isActive, discountOption }).save();
+    await new Coupon({
+      coupon,
+      discount,
+      startDate,
+      endDate,
+      isActive,
+      discountOption,
+    }).save();
 
     db.disconnectDb();
     res.json({
       message: `Coupon ${coupon} has been created successfully.`,
+      status: true,
       coupons: await Coupon.find({}).sort({ updatedAt: -1 }),
     });
   } catch (error) {

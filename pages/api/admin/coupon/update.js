@@ -9,7 +9,15 @@ const router = createRouter();
 
 router.put(async (req, res) => {
   try {
-    const { id, coupon, discount, startDate, endDate, isActive, discountOption } = req.body;
+    const {
+      id,
+      coupon,
+      discount,
+      startDate,
+      endDate,
+      isActive,
+      discountOption,
+    } = req.body;
     db.connectDb();
     await Coupon.findByIdAndUpdate(id, {
       coupon,
@@ -17,15 +25,16 @@ router.put(async (req, res) => {
       startDate,
       endDate,
       isActive,
-      discountOption
+      discountOption,
     });
     db.disconnectDb();
     return res.json({
       message: "Coupon has been updated successfully",
+      status: true,
       coupons: await Coupon.find({}).sort({ createdAt: -1 }),
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ status: false, message: error.message });
   }
 });
 
