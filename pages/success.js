@@ -161,6 +161,24 @@ const Success = () => {
                             <td></td>
                             <td>{order?.data?.order?.total} BDT</td>
                           </tr>
+                          {order?.data?.order?.afterDiscountTotal && (
+                            <tr className="summary-total">
+                              <td>After Discount Total </td>
+                              <td></td>
+                              <td></td>
+                              <td>
+                                {order?.data?.order?.afterDiscountTotal} BDT
+                              </td>
+                            </tr>
+                          )}
+                          {order?.data?.order?.coupon && (
+                            <tr className="summary-total">
+                              <td>Coupon Name :</td>
+                              <td></td>
+                              <td></td>
+                              <td>{order?.data?.order?.coupon}</td>
+                            </tr>
+                          )}
                           {/* End .summary-total */}
                         </tbody>
                       </table>

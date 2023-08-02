@@ -7,19 +7,25 @@ import Coupon from "@/models/Coupon";
 // const router = createRouter().use(verifyTokenAndAdmin);
 const router = createRouter();
 
-router.put(async (req, res) => {
+router.get(async (req, res) => {
   try {
-    const { id, isActive } = req.body;
     db.connectDb();
-    await Coupon.findByIdAndUpdate(id, {
-      isActive,
-    });
+    const { coupon } = req.query;
+
+    const existCoupon = await Coupon.findOne({ coupon: coupon });
     db.disconnectDb();
-    return res.json({
-      message: "Coupon has been updated successfully",
-      status: true,
-      coupons: await Coupon.find({}).sort({ createdAt: -1 }),
-    });
+
+    if (existCoupon?.isActive) {
+      return res.json({
+        status: true,
+        existCoupon,
+      });
+    } else {
+      return res.json({
+        status: false,
+        message: "Coupon not valid Try again!",
+      });
+    }
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }

@@ -5,8 +5,7 @@ const { ObjectId } = mongoose.Schema;
 const orderSchema = new mongoose.Schema(
   {
     name: {
-      type:String
-
+      type: String,
     },
     email: {
       type: String,
@@ -53,6 +52,15 @@ const orderSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    afterDiscountTotal: {
+      type: String,
+      trim: true,
+    },
+    coupon: {
+      type: String,
+      trim: true,
+    },
+
     products: [],
 
     payment_method: {
@@ -63,7 +71,6 @@ const orderSchema = new mongoose.Schema(
     shipping_cost: {
       type: String,
       required: true,
-   
     },
     order_notes: {
       type: String,
@@ -77,33 +84,20 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Not Processed",
-      enum: [
-        "Not Processed",
-        "Processing",
-        "Completed",
-        "Cancelled",
-      ],
+      enum: ["Not Processed", "Processing", "Completed", "Cancelled"],
     },
     payment_status: {
       type: String,
       default: "Not Verified",
-      enum: [
-        "Not Verified",
-        "Verified",
-      
-      ],
+      enum: ["Not Verified", "Verified"],
     },
     delivery_status: {
       type: String,
       default: "Pending",
-      enum: [
-        "Pending",
-        "Delivered",
-      
-      ],
+      enum: ["Pending", "Delivered"],
     },
   },
-  
+
   {
     timestamps: true,
   }

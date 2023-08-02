@@ -11,14 +11,6 @@ const couponSchema = new mongoose.Schema(
       minLength: 4,
       maxLength: 10,
     },
-    startDate: {
-      type: String,
-      required: true,
-    },
-    endDate: {
-      type: String,
-      required: true,
-    },
     discount: {
       type: Number,
       required: true,
@@ -28,7 +20,7 @@ const couponSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
-    discountOption: {
+    discountType: {
       type: String,
       required: true,
     },

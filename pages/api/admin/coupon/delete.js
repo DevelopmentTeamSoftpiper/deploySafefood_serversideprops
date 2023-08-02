@@ -7,19 +7,26 @@ import Coupon from "@/models/Coupon";
 // const router = createRouter().use(verifyTokenAndAdmin);
 const router = createRouter();
 
-router.delete(async (req, res) => {
+router.post(async (req, res) => {
   try {
     const { id } = req.body;
-    console.log(id);
-    db.connectDb();
-    await Coupon.findByIdAndRemove(id);
-    db.disconnectDb();
-    return res.json({
-      message: "Coupon has been deleted successfully",
-      coupons: await Coupon.find({}).sort({ updatedAt: -1 }),
-    });
+    if (id) {
+      db.connectDb();
+      await Coupon.findByIdAndRemove(id);
+      db.disconnectDb();
+      return res.json({
+        status: true,
+        message: "Coupon has been deleted successfully",
+        coupons: await Coupon.find({}).sort({ updatedAt: -1 }),
+      });
+    } else {
+      return res.json({
+        status: false,
+        message: "Coupon not found",
+      });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ status: false, message: error.message });
   }
 });
 

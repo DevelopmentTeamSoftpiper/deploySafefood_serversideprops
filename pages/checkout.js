@@ -26,6 +26,9 @@ const checkout = () => {
   const router = useRouter();
   const user = useSelector((state) => state.user.currentUser);
   const jwt = useSelector((state) => state.user.jwt);
+  const [applyCoupon, setApplyCoupon] = useState(null);
+  const [existCoupon, setExistCoupon] = useState(null);
+  const [beforeDiscountTotal, setBeforeDiscountTotal] = useState(null);
 
   const getUserInfo = async () => {
     setIsFetching(true);
@@ -78,7 +81,6 @@ const checkout = () => {
 
   const getShippings = async () => {
     const ships = await axios.get("/api/admin/shipping/getAll");
-
     setShippings(ships);
   };
 
@@ -90,7 +92,27 @@ const checkout = () => {
 
     setPaymentMethods(pMethods);
   };
-  const total = parseInt(subTotal) + parseInt(shippingCost);
+
+  // COUPON DISCOUNT LOGIN START
+  let total = parseInt(subTotal) + parseInt(shippingCost);
+  let afterDiscountTotal = null;
+
+  if (existCoupon) {
+    if (existCoupon.discountType === "Taka") {
+      afterDiscountTotal =
+        parseInt(subTotal) +
+        parseInt(shippingCost) -
+        parseInt(existCoupon?.discount);
+    } else if (existCoupon.discountType === "Percent") {
+      const demoTotal = parseInt(subTotal) + parseInt(shippingCost);
+      const discountValue = parseInt(existCoupon?.discount);
+      const discountAmount = parseInt((discountValue / 100) * demoTotal);
+      afterDiscountTotal =
+        parseInt(subTotal) + parseInt(shippingCost) - discountAmount;
+    }
+  }
+  // COUPON DISCOUNT LOGIN END
+
   useEffect(() => {
     getUserInfo();
     getShippings();
@@ -120,6 +142,8 @@ const checkout = () => {
           transaction_id: transactionId,
           subtotal: subTotal,
           total: total,
+          afterDiscountTotal,
+          coupon: existCoupon?.coupon,
           status: "Not Processed",
           payment_status: "Not Verified",
           delivery_status: "Pending",
@@ -168,13 +192,50 @@ const checkout = () => {
     }
   }, []);
 
+  //COUPON HANDLE
+  const handleCouponApply = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios(
+        `/api/admin/coupon/find?coupon=${applyCoupon}`
+      );
+      if (data.status) {
+        setExistCoupon(data.existCoupon);
+        toast.success("Coupon Available", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setApplyCoupon("");
+      } else {
+        toast.error(`${data.message}`, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setExistCoupon(null);
+      }
+    } catch (error) {
+      console.log("Coupon Error", error.message);
+    }
+  };
+
   return (
     <>
-    <CustomHead
+      <CustomHead
         title="Checkout"
         url="https://safefoods.com.bd/account/checkout"
       />
-     
+
       <div className="page-wrapper p-5">
         <ToastContainer />
 
@@ -388,10 +449,12 @@ const checkout = () => {
                               <td></td>
                               <td>${subTotal}</td>
                             </tr>
+
                             <tr className="summary-shipping">
                               <td>Shipping:</td>
                               <td>&nbsp;</td>
                             </tr>
+
                             {/* End .summary-subtotal */}
                             {shippings?.data?.shippings?.map((ship) => (
                               <tr
@@ -421,15 +484,64 @@ const checkout = () => {
                                 <td>BDT {ship?.cost}</td>
                               </tr>
                             ))}
+
                             <tr className="summary-total">
                               <td>Total:</td>
                               <td></td>
                               <td></td>
                               <td>BDT {total}</td>
                             </tr>
+                            {existCoupon && (
+                              <tr className="summary-total">
+                                <td>Discount </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                  {existCoupon.discountType === "Taka"
+                                    ? `BDT : ${existCoupon.discount}`
+                                    : `${existCoupon.discount} %`}
+                                </td>
+                              </tr>
+                            )}
+                            {existCoupon && (
+                              <tr className="summary-total">
+                                <td>After Discount Total :</td>
+                                <td></td>
+                                <td></td>
+                                <td>BDT {afterDiscountTotal}</td>
+                              </tr>
+                            )}
+
                             {/* End .summary-total */}
                           </tbody>
                         </table>
+
+                        {/* COUPON ADDED */}
+                        <div className="row mb-2 ">
+                          <div className="col-12  rounded-md shadow-2xl">
+                            <div className="flex items-center gap-1 justify-center ">
+                              <input
+                                type="text"
+                                name="coupon"
+                                value={applyCoupon}
+                                className="w-full focus:outline-[#61AB00]  rounded py-[8px] text-center"
+                                placeholder="Enter Your Coupon Code"
+                                onChange={(e) => setApplyCoupon(e.target.value)}
+                              />
+                              {applyCoupon && (
+                                <button
+                                  onClick={handleCouponApply}
+                                  className="border px-2 py-[8px] bg-primary text-white rounded"
+                                >
+                                  Apply
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* COUPON END */}
+
                         <tr className="summary-shipping">
                           <td style={{ fontSize: "1.5rem", fontWeight: 600 }}>
                             Payment Method:
