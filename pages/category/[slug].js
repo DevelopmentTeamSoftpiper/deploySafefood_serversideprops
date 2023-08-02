@@ -4,7 +4,6 @@ import ProductCard from "@/components/product/ProductCard";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import Image from "next/image";
 import Category from "@/models/Category";
 import SubCategory from "@/models/SubCategory";
@@ -14,7 +13,6 @@ import Head from "next/head";
 import CustomHead from "@/components/CustomHead";
 
 const CategoryProduct = ({ category, products, categories }) => {
-  console.log(category);
   const showToastMsg = (data) => {
     toast.success(data.msg, {
       position: "top-right",
@@ -30,10 +28,8 @@ const CategoryProduct = ({ category, products, categories }) => {
   return (
     <>
       <CustomHead
-        title={category?.name}
-        // description={category?.name}
+        title={`${category?.name} | Safefoods`}
         url={`https://safefoods.com.bd/category/${category?.slug}}`}
-        image={category?.image}
       />
 
       <main className="main">

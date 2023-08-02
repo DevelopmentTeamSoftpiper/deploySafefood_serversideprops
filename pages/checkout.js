@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import Loader from "@/components/Loader";
-import CustomHead from "@/components/CustomHead";
+import Head from "next/head";
 const checkout = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +28,7 @@ const checkout = () => {
   const jwt = useSelector((state) => state.user.jwt);
   const [applyCoupon, setApplyCoupon] = useState(null);
   const [existCoupon, setExistCoupon] = useState(null);
-  const [beforeDiscountTotal, setBeforeDiscountTotal] = useState(null);
+
 
   const getUserInfo = async () => {
     setIsFetching(true);
@@ -231,10 +231,15 @@ const checkout = () => {
 
   return (
     <>
-      <CustomHead
-        title="Checkout"
-        url="https://safefoods.com.bd/account/checkout"
-      />
+      <Head>
+        <title> Safefoods | Checkout </title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
       <div className="page-wrapper p-5">
         <ToastContainer />
@@ -274,24 +279,6 @@ const checkout = () => {
           <div className="page-content">
             <div className="checkout">
               <div className="container">
-                {/* <div className="checkout-discount">
-          <form >
-            <input
-              type="text"
-              className="form-control"
-              required=""
-              id="checkout-discount-input"
-            />
-            <label
-              htmlFor="checkout-discount-input"
-              className="text-truncate"
-            >
-              Have a coupon? <span>Click here to enter your code</span>
-            </label>
-          </form>
-        </div> */}
-                {/* End .checkout-discount */}
-
                 <form onSubmit={orderSubmitHandler}>
                   <div className="row">
                     <div className="col-lg-7">

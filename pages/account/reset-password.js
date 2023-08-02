@@ -1,6 +1,3 @@
-import CustomHead from "@/components/CustomHead";
-import AlertBox from "@/components/elements/AlertBox";
-import { API_URL } from "@/utils/urls";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
@@ -48,10 +45,16 @@ const ResetPassword = () => {
 
   return (
     <>
-      <CustomHead
-        title="Reset Password"
-        url="https://safefoods.com.bd/account/reset-password"
-      />
+      <Head>
+        <title> Safefoods | Rest Password </title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
 
       <main className="main">
         <ToastContainer />

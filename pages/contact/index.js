@@ -14,7 +14,7 @@ const Contact = () => {
   }, []);
   return (
     <>
-      <CustomHead title="Contact" url="https://safefoods.com.bd/contact" />
+      <CustomHead title="Safefoods | Contact" url="https://safefoods.com.bd/contact" />
 
       <main className="main">
         <div

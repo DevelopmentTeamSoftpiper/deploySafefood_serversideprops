@@ -1,5 +1,4 @@
 /*eslint-disable */
-import CustomHead from "@/components/CustomHead";
 import CartItem from "@/components/product/CartItem";
 import { fetchDataFromApi } from "@/utils/api";
 import Head from "next/head";
@@ -29,7 +28,15 @@ const cart = () => {
 
   return (
     <>
-      <CustomHead title="Cart" url="https://safefoods.com.bd/account/cart" />
+      <Head>
+        <title> Safefoods | Cart Page </title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
       <main className="main">
         <div

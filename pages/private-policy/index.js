@@ -5,7 +5,7 @@ const Policy = () => {
   return (
     <>
       <CustomHead
-        title="Private Policy"
+        title="Private Policy | Safefoods"
         url="https://safefoods.com.bd/private-policy"
       />
 

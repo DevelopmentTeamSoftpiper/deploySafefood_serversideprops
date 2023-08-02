@@ -1,4 +1,3 @@
-import CustomHead from "@/components/CustomHead";
 import { forgotPasswordSuccess } from "@/store/userSlice";
 import axios from "axios";
 import Head from "next/head";
@@ -44,10 +43,16 @@ const ForgetPassword = () => {
   // console.log(email);
   return (
     <>
-      <CustomHead
-        title="Forgot Password"
-        url="https://safefoods.com.bd/forget-password"
-      />
+      <Head>
+        <title> Safefoods | Forget Password</title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
 
       <main className="main">
         <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">

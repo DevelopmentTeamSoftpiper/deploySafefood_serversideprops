@@ -1,14 +1,20 @@
-import CustomHead from "@/components/CustomHead";
+
 import Head from "next/head";
 import React from "react";
 
 const emailVerification = () => {
   return (
     <>
-      <CustomHead
-        title="Email Verification"
-        url="https://safefoods.com.bd/email-verification"
-      />
+      <Head>
+        <title> Safefoods | Email Verification</title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <section className="entire-banner mt-5 pt-5">
         <h3 className="text-center">
           Welcome to Safefood! please verify your email.{" "}

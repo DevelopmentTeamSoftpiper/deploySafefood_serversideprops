@@ -19,7 +19,7 @@ const Blogs = ({ blogs, blogCats }) => {
           style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
         >
           <div className="container">
-            <h1 className="page-title">Safefood Blogs</h1>
+            <h1 className="page-title">Safefoods Blogs</h1>
           </div>
           {/* End .container */}
         </div>

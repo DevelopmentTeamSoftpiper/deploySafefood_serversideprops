@@ -4,7 +4,10 @@ import React from "react";
 const About = () => {
   return (
     <>
-      <CustomHead title=" Safefoods | About " url="https://safefoods.com.bd/about" />
+      <CustomHead
+        title=" Safefoods | About "
+        url="https://safefoods.com.bd/about"
+      />
 
       <div className="container text-justify my-10 p-5">
         <h1 className="text-center"> About </h1>

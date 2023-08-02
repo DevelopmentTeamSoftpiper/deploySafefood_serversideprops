@@ -59,10 +59,16 @@ const index = () => {
 
   return (
     <>
-      <CustomHead
-        title="My Account"
-        url="https://safefoods.com.bd/account/account"
-      />
+      <Head>
+        <title> Safefoods | Account</title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
 
       <main className="main">
         <ToastContainer />

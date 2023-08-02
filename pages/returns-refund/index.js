@@ -5,7 +5,7 @@ const Return = () => {
   return (
     <>
       <CustomHead
-        title="Return and Refund"
+        title="Return and Refund | Safefoods"
         url="https://safefoods.com.bd/returns-refund"
       />
 

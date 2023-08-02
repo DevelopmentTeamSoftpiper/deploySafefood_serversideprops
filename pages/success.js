@@ -1,4 +1,3 @@
-import CustomHead from "@/components/CustomHead";
 import SuccessProduct from "@/components/checkout/SuccessProduct";
 import withAuth from "@/utils/restrict";
 import axios from "axios";
@@ -39,10 +38,15 @@ const Success = () => {
 
   return (
     <>
-      <CustomHead
-        title="Order Summery"
-        url="https://safefoods.com.bd/account/success"
-      />
+      <Head>
+        <title> Safefoods | Order Summery </title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
       <div className="page-wrapper p-5">
         <main className="main">

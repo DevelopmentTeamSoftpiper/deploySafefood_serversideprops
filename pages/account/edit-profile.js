@@ -1,5 +1,4 @@
 /*eslint-disable */
-import CustomHead from "@/components/CustomHead";
 import Loader from "@/components/Loader";
 import { logout } from "@/store/userSlice";
 import withAuth from "@/utils/restrict";
@@ -172,11 +171,16 @@ const EditProfile = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <CustomHead
-        title="Account | Edit Profile"
-        url="https://safefoods.com.bd/edit-profile"
-      />
-
+      <Head>
+        <title> Safefoods | Edit Profile</title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <main className="main">
         <ToastContainer />
 

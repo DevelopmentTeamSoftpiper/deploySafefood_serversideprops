@@ -39,7 +39,7 @@ const Shop = ({ products, categories }) => {
   };
   return (
     <>
-      <CustomHead title="Shop" url="https://safefoods.com.bd/shop" />
+      <CustomHead title="Safefoods | Shop" url="https://safefoods.com.bd/shop" />
       <main className="main">
         <ToastContainer />
 

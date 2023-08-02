@@ -5,7 +5,7 @@ const TermsCondition = () => {
   return (
     <>
       <CustomHead
-        title="Terms and Conditions"
+        title=" Safefoods | Terms and Conditions"
         url="https://safefoods.com.bd/terms-and-conditions"
       />
       <div className="container text-justify p-5 my-10">

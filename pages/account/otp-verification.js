@@ -15,7 +15,6 @@ import {
   providerSuccess,
 } from "@/store/userSlice";
 import Head from "next/head";
-import CustomHead from "@/components/CustomHead";
 
 const OtpVerification = () => {
   const [number, setNumber] = useState("");
@@ -106,11 +105,16 @@ const OtpVerification = () => {
 
   return (
     <>
-      <CustomHead
-        title="OTP Verification"
-        url="https://safefoods.com.bd/account/otp-verification"
-      />
-     
+       <Head>
+        <title> Safefoods | OTP Verification </title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <ToastContainer />
       {!token && <p>First Login with OTP and try again.</p>}
       {token && (

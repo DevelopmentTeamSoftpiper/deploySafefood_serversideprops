@@ -1,14 +1,19 @@
-import CustomHead from "@/components/CustomHead";
+import Head from "next/head";
 import React from "react";
 import { BsFillCartXFill } from "react-icons/bs";
 
 const emptyCart = () => {
   return (
     <>
-      <CustomHead
-        title="Empty Cart"
-        url="https://safefoods.com.bd/account/emptyCart"
-      />
+      <Head>
+        <title> Safefoods | Empty Cart </title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
       <main className="main">
         {/* End .breadcrumb-nav */}

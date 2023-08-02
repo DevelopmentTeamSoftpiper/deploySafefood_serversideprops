@@ -5,47 +5,7 @@ import Script from "next/script";
 export default function Document() {
   return (
     <Html lang="en">
-      <Head>
-        <meta
-          name="google-site-verification"
-          content="bbIuQ9huXa9pz-9j4O-oT2FietOhcTPvzHizWM8ji-s"
-        />
-        <meta
-          property="og:image"
-          content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
-        />
-
-        <meta
-          name="og:title"
-          property="og:title"
-          content="SafeFoods | Your Family"
-        />
-        <meta property="og:url" content="https://safefoods.com.bd" />
-        <meta property="og:type" content="website" />
-        <meta
-          name="og:description"
-          property="og:description"
-          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
-        />
-      
-        <meta property="og:site_name" content="https://safefoods.com.bd" />
-
-        <meta name="twitter:site" content="@sajibahmed5282" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="https://safefoods.com.bd" />
-        <meta
-          name="twitter:description"
-          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
-        />
-        <meta
-          property="twitter:url"
-          content="https://twitter.com/sajibahmed5282/"
-        />
-        <meta
-          name="twitter:image"
-          content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
-        />
-      </Head>
+      <Head></Head>
 
       <body>
         <Main />

@@ -17,7 +17,11 @@ const CustomHead = ({
       <meta name="og:title" property="og:title" content={title} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
-      <meta name="og:description" property="og:description" content={description} />
+      <meta
+        name="og:description"
+        property="og:description"
+        content={description}
+      />
       <meta name="og:image" content={image} />
       <meta property="og:site_name" content="https://safefoods.com.bd" />
 
@@ -32,8 +36,11 @@ const CustomHead = ({
       />
       <meta name="twitter:image" content={image} />
 
-      <link rel="canonical" href={url} />
       <meta name="robots" content="index, follow" />
+      <meta
+        name="keywords"
+        content="safefoods, safefood, safekhabar, foods, food, pure food, pure honey, modhu, dhaka safefoods, proteins safefoods, Safe egg,Safe Broiler, Desi Liquid Milk, Safe Omega safe honey, safe Chia Seed"
+      />
     </Head>
   );
 };

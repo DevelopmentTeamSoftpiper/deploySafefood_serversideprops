@@ -15,7 +15,7 @@ import SubBlog from "@/models/SubBlog";
 import Blog from "@/models/Blog";
 import Slider from "@/models/Slider";
 import Product from "@/models/Products";
-import Head from "next/head";
+
 
 export default function Home({
   blogs,
@@ -40,53 +40,7 @@ export default function Home({
 
   return (
     <>
-      <Head>
-        <title> Safefoods | For Your Family </title>
-        <meta
-          name="description"
-          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
-        />
-        <link rel="icon" href="/assets/images/logo-safefoods.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <meta property="og:title" content="Safefoods | For Your Family" />
-        <meta property="og:url" content="https://safefoods.com.bd" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:description"
-          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
-        />
-        <meta
-          property="og:image"
-          content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
-        />
-        <meta property="og:site_name" content="https://safefoods.com.bd" />
-
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:site" content="@sajibahmed5282" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="https://safefoods.com.bd" />
-        <meta
-          name="twitter:description"
-          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
-        />
-        <meta
-          property="twitter:url"
-          content="https://twitter.com/sajibahmed5282/"
-        />
-        <meta
-          name="twitter:image"
-          content="https://res.cloudinary.com/dymnymsph/image/upload/v1687017637/safefoods/logo-safefoods_drdvz8.png"
-        />
-
-        <link rel="canonical" href="https://safefoods.com.bd" />
-        <meta name="robots" content="index, follow" />
-        <meta
-          name="keywords"
-          content="grocery, safefood, safefoods, purer khabar, best online shop, deshi food, online grocery, online grocery shop, online grocery shopping, online grocery shop in Dhaka, online grocery shop in Bangladesh, online shop, online shopping, online shopping bd, daily bazaar, bd shopping, Best online grocery shopping in dhaka, Best online grocery in bangladesh, ecommerce grocery in bangladesh, Top ecommerce site in Dhaka,organic dry fish,pure honey bangladesh,buy foods in bangladesh, sutki fish price,dry fish or organic dry fish,grocery bd,organic dry fish,food and grocery shop in dhaka,green tea price in bangladesh,green tea price in bd,online grocery shop bd,grocery bangladesh,online grocery shopping in dhaka,organic tea in bangladesh, dry fish,shutki maach,buy mango online bangladesh, online shopping in bangladesh chittagong, online shopping in chittagong, buy online bangladesh,buy mango inline bangladesh, online shopping in chittagong bangladesh, buy online in bangladesh,healthy food in bangladesh,bd online shopping home delivery,online dhaka,best online in dhaka,online shop in bd,onlinee shop in bd,online shop in bangladesh, bd online shop,online shopping in bangladesh, online shop bd,online shob bd, online shop in dhaka, safe meat, online shopping in bangladesh rajshahi, online shopping in bd, bd online, online shopping in dhaka,online shop bangladesh, food in bangladesh, trifola, bengladesh food near me, buy honey online,dhaka food offer, online shopping at bangladesh, shopping bd online, dairy milk price in bangladesh,online food delivery bd,bd food,online shopping bangladesh home delivery,online in bd,dhaka online shop,online shopping banglaedesh,online shopping bangladesh,bd online shopping,online shoping bangladesh,raw honey online,shutki bazar, best safe foods, safe"
-        />
-      </Head>
-
+      
       <div className="page-wrapper" style={{ padding: "5px" }}>
         <ToastContainer />
 

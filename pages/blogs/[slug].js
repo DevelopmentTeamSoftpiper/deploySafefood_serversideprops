@@ -16,8 +16,7 @@ const SingleBlog = ({ blog, relatedBlogs, blogCats }) => {
   return (
     <>
       <CustomHead
-        title={bl.title}
-        description={bl.title}
+        title={bl?.title}
         url={`https://safefoods.com.bd/blogs/${bl?.slug}`}
         image={bl.image}
       />

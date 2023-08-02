@@ -9,7 +9,6 @@ import jwt from "jwt-decode";
 import Timer from "@/components/auth/Timer";
 import axios from "axios";
 import Head from "next/head";
-import CustomHead from "@/components/CustomHead";
 
 const VerifyAccount = () => {
   const [number, setNumber] = useState("");
@@ -71,10 +70,16 @@ const VerifyAccount = () => {
 
   return (
     <>
-      <CustomHead
-        title="Verify Account"
-        url="https://safefoods.com.bd/account/verify-account"
-      />
+       <Head>
+        <title> Safefoods | Verify Account </title>
+        <meta
+          name="description"
+          content="Safe Foods Agro Ltd. fights food adulteration & harmful effects. Founded in 2016, it's a social movement for safer daily consumption."
+        />
+        <link rel="icon" href="/assets/images/logo-safefoods.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       
       <ToastContainer />
       {!token && <p>First signup and then activate your account</p>}
