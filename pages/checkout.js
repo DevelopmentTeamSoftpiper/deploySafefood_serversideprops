@@ -73,7 +73,7 @@ const checkout = () => {
   }));
 
   const [shippings, setShippings] = useState(null);
-  const [shippingCost, setShippingCost] = useState("60");
+  const [shippingCost, setShippingCost] = useState("70");
 
   const shippingCostChangeHandler = (e) => {
     setShippingCost(e.target.value);
