@@ -506,19 +506,19 @@ const checkout = () => {
                         {/* COUPON ADDED */}
                         <div className="row mb-2 ">
                           <div className="col-12  rounded-md shadow-2xl">
-                            <div className="flex items-center gap-1 justify-center ">
+                            <div className="flex items-center gap-1 justify-center" style={{border:"1px solid #61AB00"}}>
                               <input
                                 type="text"
                                 name="coupon"
                                 value={applyCoupon}
-                                className="w-full focus:outline-[#61AB00]  rounded py-[8px] text-center"
+                                className="w-full focus:outline-[#61AB00] rounded py-[8px] text-center"
                                 placeholder="Enter Your Coupon Code"
                                 onChange={(e) => setApplyCoupon(e.target.value)}
                               />
                               {applyCoupon && (
                                 <button
                                   onClick={handleCouponApply}
-                                  className="border px-2 py-[8px] bg-primary text-white rounded"
+                                  className="px-2 py-[8px] bg-primary text-white"
                                 >
                                   Apply
                                 </button>

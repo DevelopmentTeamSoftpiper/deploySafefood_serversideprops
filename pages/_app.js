@@ -12,12 +12,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/store/store";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import CustomHead from "@/components/CustomHead";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <CustomHead title="Safefoods | For Your Family" />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Header />
