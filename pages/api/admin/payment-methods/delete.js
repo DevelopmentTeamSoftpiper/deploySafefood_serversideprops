@@ -14,10 +14,12 @@ router.post(async (req, res) => {
     db.disconnectDb();
     if (deleted) {
       return res.json({
+        status: true,
         message: "Payment Method has been deleted successfully",
       });
     } else {
       return res.json({
+        status: false,
         message: "Payment Method not found with this id",
       });
     }
