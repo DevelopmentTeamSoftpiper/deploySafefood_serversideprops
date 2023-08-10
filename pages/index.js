@@ -15,7 +15,7 @@ import SubBlog from "@/models/SubBlog";
 import Blog from "@/models/Blog";
 import Slider from "@/models/Slider";
 import Product from "@/models/Products";
-
+import CustomHead from "@/components/CustomHead";
 
 export default function Home({
   blogs,
@@ -40,7 +40,7 @@ export default function Home({
 
   return (
     <>
-      
+      <CustomHead title=" Safefoods | For Your Family" />
       <div className="page-wrapper" style={{ padding: "5px" }}>
         <ToastContainer />
 
