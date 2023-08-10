@@ -54,7 +54,7 @@ export default function Home({
             products={latestProducts}
             showToastMessage={showToastMessage}
           />
-          <Banner1 />
+          {/* <Banner1 /> */}
           <ProductCarousel
             title="Discounted Sales"
             products={discountedProducts}
