@@ -26,7 +26,7 @@ router.post(async(req, res)=>{
         error: 'Password is incorrect. Please try again'
       })
     }
-    const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: '7d'});
+    const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET);
     const {_id, name, email, role} = user;
     return res.json({
       'token': token, 
