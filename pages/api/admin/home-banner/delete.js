@@ -4,8 +4,8 @@ import db from "@/utils/db";
 import applyCors from "@/middleware/cors";
 import HomeBanner from "@/models/HomeBanner";
 
-// const router = createRouter().use(verifyTokenAndAdmin);
-const router = createRouter();
+const router = createRouter().use(verifyTokenAndAdmin);
+// const router = createRouter();
 
 router.post(async (req, res) => {
   try {
