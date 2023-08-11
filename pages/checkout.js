@@ -199,7 +199,6 @@ const checkout = () => {
       const { data } = await axios.get(
         `/api/admin/coupon/find?coupon=${applyCoupon}`
       );
-      console.log(data);
       if (data.status) {
         setExistCoupon(data.existCoupon);
         toast.success("Coupon Available", {
