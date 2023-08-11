@@ -4,8 +4,7 @@ import db from "@/utils/db";
 import applyCors from "@/middleware/cors";
 import Coupon from "@/models/Coupon";
 
-// const router = createRouter().use(verifyTokenAndAdmin);
-const router = createRouter();
+const router = createRouter().use(verifyTokenAndAdmin);
 
 router.put(async (req, res) => {
   try {
