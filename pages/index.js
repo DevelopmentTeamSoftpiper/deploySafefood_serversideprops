@@ -16,6 +16,8 @@ import Blog from "@/models/Blog";
 import Slider from "@/models/Slider";
 import Product from "@/models/Products";
 import CustomHead from "@/components/CustomHead";
+import DiscountBanner from "@/components/home/DiscountBanner";
+import HomeBanner from "@/models/HomeBanner";
 
 export default function Home({
   blogs,
@@ -24,6 +26,7 @@ export default function Home({
   discountedProducts,
   bestDealProducts,
   categories,
+  dBanners,
 }) {
   const showToastMessage = (data) => {
     toast.success(data.msg, {
@@ -55,11 +58,15 @@ export default function Home({
             showToastMessage={showToastMessage}
           />
           {/* <Banner1 /> */}
+
           <ProductCarousel
             title="Discounted Sales"
             products={discountedProducts}
             showToastMessage={showToastMessage}
           />
+
+          <DiscountBanner dBanners={dBanners} />
+
           <ProductCarousel
             title="Best Deals"
             products={bestDealProducts}
@@ -88,6 +95,11 @@ export async function getStaticProps() {
   const latestProductsData = await Product.find({})
     .sort({ createdAt: -1 })
     .limit(10);
+
+  const dBanners = await HomeBanner.find({})
+    .populate({ path: "product", model: Product })
+    .sort({ updatedAt: -1 });
+
   db.disconnectDb();
   return {
     props: {
@@ -97,6 +109,7 @@ export async function getStaticProps() {
       latestProducts: JSON.parse(JSON.stringify(latestProductsData)),
       discountedProducts: JSON.parse(JSON.stringify(discountedProductsData)),
       bestDealProducts: JSON.parse(JSON.stringify(bestDealProductsData)),
+      dBanners: JSON.parse(JSON.stringify(dBanners)),
     },
     revalidate: 60,
   };
