@@ -11,7 +11,8 @@ const DiscountBanner = ({ dBanners }) => {
   
   return (
     <div className="container deal-section">
-      <h3 className="title text-center mt-1 font-weight-bold"> Discount Product </h3>
+      {dBanners.length > 0 && <h3 className="title text-center mt-1 font-weight-bold"> Discounted Products </h3>}
+      
 
       <Swiper
         breakpoints={{

@@ -31,7 +31,7 @@ const HomeService = () => {
                             </span>
                             <div className="icon-box-content">
                                 <h3 className="icon-box-title font-size-normal mb-0 font-weight-bold text-uppercase second-primary-color">Payment &amp; Delivery</h3>
-                                <p className="font-weight-light second-primary-color">Free shipping for orders over $50</p>
+                                <p className="font-weight-light second-primary-color">Pay Cash on Delivery and Online</p>
                             </div>
                         </div>
                         <div className="icon-box mb-0 d-md-flex align-items-md-center text-center text-md-left mx-md-0 mx-auto">
@@ -40,7 +40,7 @@ const HomeService = () => {
                             </span>
                             <div className="icon-box-content">
                                 <h3 className="icon-box-title font-size-normal mb-0 font-weight-bold text-uppercase second-primary-color">Return &amp; Refund</h3>
-                                <p className="font-weight-light second-primary-color">Free 100% money back guarantee</p>
+                                <p className="font-weight-light second-primary-color">100% money back guarantee</p>
                             </div>
                         </div>
                         <div className="icon-box mb-0 d-md-flex align-items-md-center text-center text-md-left mx-md-0 mx-auto">
@@ -58,7 +58,7 @@ const HomeService = () => {
                             </span>
                             <div className="icon-box-content">
                                 <h3 className="icon-box-title font-size-normal mb-0 font-weight-bold text-uppercase second-primary-color">JOIN OUR NEWSLETTER</h3>
-                                <p className="font-weight-light second-primary-color">10% off by subscribing to our newsletter</p>
+                                <p className="font-weight-light second-primary-color">Get notified for offers & discounts</p>
                             </div>
                         </div>
                     </div>
