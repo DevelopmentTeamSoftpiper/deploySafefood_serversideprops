@@ -5,7 +5,14 @@ import Script from "next/script";
 export default function Document() {
   return (
     <Html lang="en">
-      <Head></Head>
+      
+      <Head>
+        {/* GOOGLE SEARCH CONSOLE */}
+        <meta
+          name="google-site-verification"
+          content="bbIuQ9huXa9pz-9j4O-oT2FietOhcTPvzHizWM8ji-s"
+        />
+      </Head>
 
       <body>
         <Main />
