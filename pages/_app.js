@@ -12,8 +12,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/store/store";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import useFacebookPixel from "@/components/hooks/useFacebookFixel";
 
 export default function App({ Component, pageProps }) {
+  useFacebookPixel("1371704676802228");
   return (
     <>
       <Provider store={store}>
