@@ -8,13 +8,26 @@ import Category from "@/models/Category";
 import User from "@/models/User";
 import { sendEmailWithNodemailer } from "@/helpers/emails";
 import applyCors from "@/middleware/cors";
+import { IP_ADDRESS_URL, RATE_LIMIT_TIME_MIN } from "@/utils/constants";
+import axios from "axios";
+import { rateLimiterMiddleware } from "@/utils/helper";
 
 const router = createRouter();
 
 router.post(async (req, res) => {
   try {
     const { token, number } = req.body;
-    // console.log(token, number);
+
+    const ipAddress = await axios(IP_ADDRESS_URL);
+    const ip = ipAddress.data.userPrivateIpAddress;
+    if (ip !== null) {
+      if (!rateLimiterMiddleware(ip)) {
+        return res.status(400).json({
+          error: `Too Many Requests. Try again ${RATE_LIMIT_TIME_MIN} after  minutes.`,
+        });
+      }
+    }
+
     if (token) {
       jwt.verify(
         token,
@@ -33,15 +46,15 @@ router.post(async (req, res) => {
               db.connectDb();
               const user = new User({ name, email, password });
 
-             const savedUser = await user.save();
-             if(!savedUser){
-              return res.status(400).json({
-                error: "Something went wrong",
+              const savedUser = await user.save();
+              if (!savedUser) {
+                return res.status(400).json({
+                  error: "Something went wrong",
+                });
+              }
+              return res.status(200).json({
+                message: "Success!",
               });
-            }
-            return res.status(200).json({
-              message: "Success!",
-            });
             } else {
               return res.status(401).json({
                 error: "Verification Number is incorrect",

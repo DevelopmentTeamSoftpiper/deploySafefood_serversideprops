@@ -4,12 +4,28 @@ import jwt from "jsonwebtoken";
 import User from '@/models/User';
 import { sendEmailWithNodemailer } from '@/helpers/emails';
 import applyCors from '@/middleware/cors';
+import axios from 'axios';
+import { IP_ADDRESS_URL, RATE_LIMIT_TIME_MIN } from '@/utils/constants';
+import { rateLimiterMiddleware } from '@/utils/helper';
 
 
 const router = createRouter();
 
 router.post(async(req, res)=>{
     try{
+
+      const ipAddress = await axios(IP_ADDRESS_URL);
+      const ip = ipAddress.data.userPrivateIpAddress;
+      if (ip !== null) {
+        if (!rateLimiterMiddleware(ip)) {
+          return res.status(400).json({
+            error: `Too Many Requests. Try again ${RATE_LIMIT_TIME_MIN} after minutes.`,
+          });
+        }
+      }
+
+
+
        const {email} = req.body;
        db.connectDb();
        const user = await User.findOne({email});

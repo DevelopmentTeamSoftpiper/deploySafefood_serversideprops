@@ -1,15 +1,27 @@
 import { createRouter } from "next-connect";
-import { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } from "@/helpers/verityToken";
+import { verifyToken } from "@/helpers/verityToken";
 import db from "@/utils/db";
-import Category from "@/models/Category";
-import slugify from "slugify";
 import applyCors from "@/middleware/cors";
 import User from "@/models/User";
 import _ from "lodash";
+import { IP_ADDRESS_URL, RATE_LIMIT_TIME_MIN } from "@/utils/constants";
+import { rateLimiterMiddleware } from "@/utils/helper";
 const router = createRouter().use(verifyToken);
 
 router.post(async (req, res) => {
   try {
+
+
+    const ipAddress = await axios(IP_ADDRESS_URL);
+    const ip = ipAddress.data.userPrivateIpAddress;
+    if (ip !== null) {
+      if (!rateLimiterMiddleware(ip)) {
+        return res.status(400).json({
+          error: `Too Many Requests. Try again ${RATE_LIMIT_TIME_MIN} after  minutes.`,
+        });
+      }
+    }
+
     const { id , updatedPassword,password} = req.body;
     db.connectDb();
     const findUser = await User.findOne({_id:id});
