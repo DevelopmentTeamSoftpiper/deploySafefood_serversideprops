@@ -1,6 +1,7 @@
 /* eslint-disable */
 import CustomHead from "@/components/CustomHead";
 import Loader from "@/components/Loader";
+import GoogleReCaptcha from "@/helpers/GoogleReCaptcha";
 import {
   jwtSuccess,
   loginFailure,
@@ -23,6 +24,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [phone, setPhone] = useState("");
   const [valid, setValid] = useState(false);
+  const [captcha, setCaptcha] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const [values, setValues] = useState({
@@ -44,6 +46,7 @@ const Login = () => {
       const res = await axios.post("/api/auth/signin", {
         emailId,
         password,
+        captcha,
       });
 
       dispatch(loginSuccess(res.data.user));
@@ -68,6 +71,7 @@ const Login = () => {
       const redirectPath = router.query.redirect || "/account";
       router.push(redirectPath);
       setIsLoading(false);
+      setCaptcha(null);
     } catch (error) {
       setValues({
         ...values,
@@ -90,6 +94,7 @@ const Login = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!captcha) return;
     login();
   };
 
@@ -117,9 +122,11 @@ const Login = () => {
 
       const res = await axios.post("/api/auth/otp-login", {
         phone,
+        captcha,
       });
       dispatch(signupSuccess(res?.data?.token));
 
+      setCaptcha(null);
       router.push("/account/otp-verification");
       setIsLoading(false);
     } catch (error) {
@@ -139,6 +146,7 @@ const Login = () => {
 
   const otpSubmitHandler = (e) => {
     e.preventDefault();
+    if (!captcha) return;
     otpLogin();
   };
   return (
@@ -221,9 +229,12 @@ const Login = () => {
 
                         {isLoading && <Loader />}
 
+                        <GoogleReCaptcha setValue={setCaptcha} />
+
                         <div className="form-footer">
                           <button
                             type="submit"
+                            disabled={!captcha || !emailId || !password}
                             className="btn btn-outline-primary-2"
                           >
                             <span>{buttonText}</span>
@@ -268,12 +279,16 @@ const Login = () => {
                         </div>
 
                         {isLoading && <Loader />}
+                        <div style={{ marginLeft:"70px"}}>
+                          <GoogleReCaptcha setValue={setCaptcha} />
+                        </div>
 
                         <div
                           className="form-footer"
                           style={{ justifyContent: "center" }}
                         >
                           <button
+                            disabled={!captcha || !phone}
                             type="submit"
                             className="btn btn-outline-primary-2"
                           >

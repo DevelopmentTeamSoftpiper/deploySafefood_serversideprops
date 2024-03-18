@@ -11,9 +11,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import CustomHead from "@/components/CustomHead";
+import GoogleReCaptcha from "@/helpers/GoogleReCaptcha";
 const register = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [captcha, setCaptcha] = useState();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -24,6 +26,7 @@ const register = () => {
     response: "",
     buttonText: "sign up",
   });
+
 
   const { username, email, password, response, buttonText } = values;
   const handleChange = (e) => {
@@ -36,6 +39,7 @@ const register = () => {
         username,
         email,
         password,
+        captcha,
       });
       dispatch(signupSuccess(response.data.token));
       setValues({
@@ -48,6 +52,7 @@ const register = () => {
 
       router.push("/account/verify-account");
       setIsLoading(false);
+      setCaptcha(null);
     } catch (error) {
       toast.error(error.response.data.message, {
         position: "top-right",
@@ -71,6 +76,7 @@ const register = () => {
   const submitHandler = (e) => {
     setIsLoading(true);
     e.preventDefault();
+    if (!captcha) return;
     signup();
   };
   return (
@@ -150,8 +156,11 @@ const register = () => {
 
                       {isLoading && <Loader />}
 
+                      <GoogleReCaptcha setValue={setCaptcha} />
+
                       <div className="form-footer">
                         <button
+                          disabled={!captcha || !username || !email || !password}
                           type="submit"
                           className="btn btn-outline-primary-2"
                         >

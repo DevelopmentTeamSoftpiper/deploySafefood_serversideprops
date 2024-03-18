@@ -2,17 +2,24 @@ import { createRouter } from "next-connect";
 import db from "../../../utils/db";
 import jwt from "jsonwebtoken";
 import User from "@/models/User";
-
 import applyCors from "@/middleware/cors";
-import { IP_ADDRESS_URL, RATE_LIMIT_TIME_MIN } from "@/utils/constants";
-import axios from "axios";
-import { rateLimiterMiddleware } from "@/utils/helper";
+import { RATE_LIMIT_TIME_MIN } from "@/utils/constants";
+import { verifyCaptcha } from "@/utils/helper";
+import { getIpAddress, rateLimiterMiddleware } from "@/utils/rate-limiter";
 const router = createRouter();
 
 router.post(async (req, res) => {
+  const { emailId, password, captcha } = req.body;
+
   try {
-    const ipAddress = await axios(IP_ADDRESS_URL);
-    const ip = ipAddress.data.userPrivateIpAddress;
+    const verify = await verifyCaptcha(captcha);
+
+    if (!verify)
+      return res.status(400).json({
+        error: "Your are not verified user",
+      });
+
+      const ip = await getIpAddress();
     if (ip !== null) {
       if (!rateLimiterMiddleware(ip)) {
         return res.status(400).json({
@@ -21,7 +28,6 @@ router.post(async (req, res) => {
       }
     }
 
-    const { emailId, password } = req.body;
     db.connectDb();
     const user = await User.findOne({ email: emailId });
     if (!user) {
