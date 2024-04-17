@@ -55,6 +55,7 @@ const ProductCard = ({ data, showToastMsg }) => {
       <div className="product-action position-relative visible">
         <button
           className="btn-product btn-cart text-uppercase text-dark text-decoration-none"
+          disabled={Number(data?.stock) === 0 }
           onClick={() => {
             dispatch(
               addToCart({
@@ -68,7 +69,9 @@ const ProductCard = ({ data, showToastMsg }) => {
             });
           }}
         >
-          <span className="text-dark shadow-none">add to cart</span>
+          <span className={`shadow-none ${Number(data?.stock) === 0 ? "text-danger" :"text-dark" } `}>
+            {Number(data?.stock) === 0 ? "Out of stock" : "add to cart"}
+          </span>
         </button>
       </div>
     </div>

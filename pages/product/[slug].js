@@ -124,6 +124,7 @@ const ProductDetails = ({ product, products }) => {
                           step={1}
                           data-decimals={0}
                           required=""
+                          disabled={Number(p.stock) === 0}
                           value={quantity}
                           onChange={(e) => {
                             setQuantity(e.target.value);
@@ -134,6 +135,7 @@ const ProductDetails = ({ product, products }) => {
                     <div className="product-details-action">
                       <button
                         className="btn-product btn-cart"
+                        disabled={Number(p.stock) === 0}
                         onClick={() => {
                           dispatch(
                             addToCart({
@@ -153,7 +155,12 @@ const ProductDetails = ({ product, products }) => {
                           });
                         }}
                       >
-                        <span id="btn-add-to-cart">add to cart</span>
+                        <span id="btn-add-to-cart" className={`${Number(p?.stock) === 0 ? "text-danger" :"text-green" } `}>
+                          {Number(p.stock) === 0
+                            ? "Out of Stock"
+                            : "Add to card"
+                            }
+                        </span>
                       </button>
                     </div>
                     <div className="product-details-footer">
